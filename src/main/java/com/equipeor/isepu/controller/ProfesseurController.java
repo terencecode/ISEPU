@@ -20,6 +20,7 @@ public class ProfesseurController {
 
     @Autowired
     private ProfessorDao professorDao;
+
     @GetMapping(value = "/Professors")
     public List<Professor> ListeProfessor(){return professorDao.findAll();}
     @PostMapping(value = "/Professors")

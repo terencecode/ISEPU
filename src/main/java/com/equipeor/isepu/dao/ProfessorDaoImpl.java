@@ -2,10 +2,11 @@ package com.equipeor.isepu.dao;
 
 import com.equipeor.isepu.model.Professor;
 import com.equipeor.isepu.model.Professor;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Repository
 public class ProfessorDaoImpl implements ProfessorDao {
     public static List<Professor> professors = new ArrayList<>();
     static {
