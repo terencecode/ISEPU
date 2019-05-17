@@ -39,7 +39,7 @@ public class EleveController {
                 .buildAndExpand(eleveAdded.getId())
                 .toUri();
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.created(location).build();
     }
 
 

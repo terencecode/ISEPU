@@ -35,6 +35,6 @@ public class ProfesseurController {
                 .buildAndExpand(teacherAdded.getId())
                 .toUri();
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.created(location).build();
     }
 }
