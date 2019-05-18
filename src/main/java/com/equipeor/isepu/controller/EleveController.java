@@ -4,10 +4,7 @@ import com.equipeor.isepu.dao.EleveDao;
 import com.equipeor.isepu.model.Eleve;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -23,8 +20,17 @@ public class EleveController {
     public List<Eleve> listeEleves() {
         return eleveDao.findAll();
     }
+    //Récupérer un eleve par son Id
+    @GetMapping(value = "/Eleves/{id}")
+    public Eleve afficherUnEleve(@PathVariable int id) {
+        return eleveDao.findById(id);
+    }
 
-    //ajouter un produit
+    @GetMapping(value = "/Eleves/{promo}")
+    public List<Eleve> afficherPromo(@PathVariable String promo){
+        return eleveDao.findByPromo(promo);
+    }
+    //ajouter un Eleve
     @PostMapping(value = "/Eleves")
     public ResponseEntity<Void> ajouterProduit(@RequestBody Eleve product) {
 

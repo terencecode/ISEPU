@@ -17,12 +17,17 @@ public class Eleve {
     private String prenom;
     private String nom;
     private int age;
+    private String promo;
 
-    public Eleve(int id, String prenom, String nom, int age) {
+
+public Eleve(){}
+
+    public Eleve(int id, String prenom, String nom, int age, String promo) {
         this.id = id;
         this.prenom = prenom;
         this.nom = nom;
         this.age = age;
+        this.promo=promo;
     }
 
     public void setPrenom(String prenom) {
@@ -47,6 +52,14 @@ public class Eleve {
 
     public String getPrenom() {
         return prenom;
+    }
+
+    public String getPromo() {
+        return promo;
+    }
+
+    public void setPromo(String promo) {
+        this.promo = promo;
     }
 
     public int getId() {
