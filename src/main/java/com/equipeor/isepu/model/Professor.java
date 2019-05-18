@@ -1,11 +1,24 @@
 package com.equipeor.isepu.model;
 
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Professor {
+
+    @Id
+    @GeneratedValue
     private int id;
+
+
     private String Firstname;
     private String Lastname;
     private int[] idcourses;
     private String matiere;
+
+    public Professor(){}
 
     public Professor(int id, String firstname, String lastname, int[] idcourses, String matiere) {
         this.id = id;

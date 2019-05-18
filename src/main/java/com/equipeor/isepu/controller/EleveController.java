@@ -1,6 +1,7 @@
 package com.equipeor.isepu.controller;
 
 import com.equipeor.isepu.dao.EleveDao;
+import com.equipeor.isepu.exception.EleveIntrouvableException;
 import com.equipeor.isepu.model.Eleve;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,15 @@ public class EleveController {
     //Récupérer un eleve par son Id
     @GetMapping(value = "/Eleves/{id}")
     public Eleve afficherUnEleve(@PathVariable int id) {
-        return eleveDao.findById(id);
+        Eleve eleve=eleveDao.findById(id);
+
+        if(eleve==null)throw new EleveIntrouvableException("L'élève avec l'id" + id +" est introuvable.");
+        return eleve;
+    }
+
+    @DeleteMapping(value = "Eleves/{id}")
+    public void supprimerEleve(@PathVariable int id){
+        eleveDao.deleteById(id);
     }
 
     @GetMapping(value = "/Eleves/{promo}")
@@ -46,6 +55,11 @@ public class EleveController {
                 .toUri();
 
         return ResponseEntity.created(location).build();
+    }
+
+    @PutMapping(value = "/Eleves")
+    public void updateEleve(@RequestBody Eleve eleve){
+        eleveDao.save(eleve);
     }
 
 
