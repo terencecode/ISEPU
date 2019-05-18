@@ -25,7 +25,7 @@ public class ProfesseurController {
 
     @GetMapping(value = "/Professors/{id}")
     public Professor afficherProfessor(@PathVariable int id){
-        Professor professeur =professorDao.FindById(id);
+        Professor professeur =professorDao.findById(id);
 
         if(professeur==null)throw new ProfessorIntrouvableException("Le professeur avec l'id" + id + " est introuvable.");
 
@@ -33,14 +33,11 @@ public class ProfesseurController {
     }
 
     @GetMapping(value = "/Professors/Matiere/{matiere}")
-    public List<Professor> afficherProfParPromo(@PathVariable String matiere){
-        return professorDao.FindByMatiere(matiere);
+    public List<Professor> afficherProfParMatiere(@PathVariable String matiere){
+        return professorDao.findByMatiere(matiere);
     }
 
-    @GetMapping(value = "/Professors/Cours/{id}")
-    public Professor afficherProfParCours(@PathVariable int idcours){
-        return professorDao.FindByIdcourses(idcours);
-    }
+
 
     @PostMapping(value = "/Professors")
     public ResponseEntity<Void> AddProfessor(@RequestBody Professor teacher){

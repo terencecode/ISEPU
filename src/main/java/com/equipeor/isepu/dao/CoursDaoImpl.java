@@ -13,7 +13,7 @@ import java.util.List;
 public class CoursDaoImpl implements CoursDao {
     public static List<Cours> coursList= new ArrayList<>();
     static{
-        coursList.add(new Cours(1,"Math","Cours de maths",new Eleve[]{},new Professor(1,"Clement","Phu",new int[]{1},"Math")));
+        coursList.add(new Cours(1,"Math","Cours de maths",new Eleve[]{},new Professor(1,"Clement","Phu","Math")));
     }
 
 

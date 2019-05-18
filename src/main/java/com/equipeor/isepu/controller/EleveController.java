@@ -41,7 +41,7 @@ public class EleveController {
     }
     //ajouter un Eleve
     @PostMapping(value = "/Eleves")
-    public ResponseEntity<Void> ajouterProduit(@RequestBody Eleve product) {
+    public ResponseEntity<Void> ajouterEleve(@RequestBody Eleve product) {
 
         Eleve eleveAdded =  eleveDao.save(product);
 

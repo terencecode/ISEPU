@@ -15,16 +15,14 @@ public class Professor {
 
     private String Firstname;
     private String Lastname;
-    private int[] idcourses;
     private String matiere;
 
     public Professor(){}
 
-    public Professor(int id, String firstname, String lastname, int[] idcourses, String matiere) {
+    public Professor(int id, String firstname, String lastname, String matiere) {
         this.id = id;
         Firstname = firstname;
         Lastname = lastname;
-        this.idcourses = idcourses;
         this.matiere = matiere;
     }
 
@@ -52,13 +50,6 @@ public class Professor {
         Lastname = lastname;
     }
 
-    public int[] getIdcourses() {
-        return idcourses;
-    }
-
-    public void setIdcourses(int[] idcourses) {
-        this.idcourses = idcourses;
-    }
 
     public String getMatiere() {
         return matiere;

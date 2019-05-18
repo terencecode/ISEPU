@@ -7,9 +7,8 @@ import java.util.List;
 
 public interface ProfessorDao extends JpaRepository<Professor,Integer> {
 
-     Professor FindById(int id);
-     List<Professor> FindByMatiere(String matiere);
-     Professor FindByIdcourses(int id);
+     Professor findById(int id);
+     List<Professor> findByMatiere(String matiere);
 
 
 }

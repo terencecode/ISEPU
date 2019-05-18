@@ -4,4 +4,4 @@ INSERT INTO eleve VALUES(2,21,'Nouna','Amele','A1');
 INSERT INTO eleve VALUES (3,22,'Phu','Clément','A3');
 
 
-INSERT INTO professor VALUES (1,'William', 'Trojanowski',{21,22},'physique');
+INSERT INTO professor VALUES (1,'William', 'Trojanowski','physique');
