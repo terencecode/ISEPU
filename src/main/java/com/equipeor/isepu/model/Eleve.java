@@ -1,7 +1,19 @@
 package com.equipeor.isepu.model;
 
+
+
+import javax.persistence.Id;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+
+@Entity
 public class Eleve {
+
+    @Id
+    @GeneratedValue
     private int id;
+
     private String prenom;
     private String nom;
     private int age;
