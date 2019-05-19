@@ -1,21 +1,30 @@
 package com.equipeor.isepu.model;
 
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Cours {
 
-
+    @Id
+    @GeneratedValue
     private int id;
+
+
     private String name;
     private String Description;
-    private Eleve[] students;
-    private Professor teacher;
+    private int idstudent;
+    private int idteacher;
 
-    public Cours(int id, String name, String description, Eleve[] students, Professor teacher) {
+    public Cours(int id, String name, String description, int students, int teacher) {
         this.id = id;
         this.name = name;
         Description = description;
-        this.students = students;
-        this.teacher = teacher;
-    }
+        this.idstudent = students;
+        this.idteacher = teacher;
+}
 
     public int getId() {
         return id;
@@ -41,19 +50,19 @@ public class Cours {
         Description = description;
     }
 
-    public Eleve[] getStudents() {
-        return students;
+    public int getStudents() {
+        return idstudent;
     }
 
-    public void setStudents(Eleve[] students) {
-        this.students = students;
+    public void setStudents(int students) {
+        this.idstudent = students;
     }
 
-    public Professor getTeacher() {
-        return teacher;
+    public int getTeacher() {
+        return idteacher;
     }
 
-    public void setTeacher(Professor teacher) {
-        this.teacher = teacher;
+    public void setTeacher(int teacher) {
+        this.idteacher = teacher;
     }
 }
