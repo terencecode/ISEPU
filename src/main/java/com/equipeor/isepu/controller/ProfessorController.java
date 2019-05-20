@@ -31,9 +31,9 @@ public class ProfessorController {
         return professeur;
     }
 
-    @GetMapping(value = "/Professors/Matiere/{matiere}")
-    public List<Professor> afficherProfParMatiere(@PathVariable String matiere){
-        return professorRepository.findByMatiere(matiere);
+    @GetMapping(value = "/Professors/Subjects/{subjectName}")
+    public List<Professor> afficherProfParMatiere(@PathVariable String subjectName){
+        return professorRepository.findByCoursesSubjectName(subjectName);
     }
 
 

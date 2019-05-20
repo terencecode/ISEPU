@@ -25,7 +25,7 @@ public class CourseController {
 
     @GetMapping(value = "/Cours/{Prof}")
     public Course afficherCours(@PathVariable int prof){
-        return courseRepository.findDistinctByIdteacher(prof);
+        return courseRepository.findDistinctByProfessorId(prof);
     }
 
 

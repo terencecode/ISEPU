@@ -1,9 +1,7 @@
 package com.equipeor.isepu.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class Subject {
@@ -15,6 +13,9 @@ public class Subject {
 
     @Column(name = "subject_name")
     private String name;
+
+    @OneToMany(mappedBy = "subject")
+    private Collection<Course> courses;
 
     public Subject() {}
 
