@@ -1,9 +1,6 @@
 package com.equipeor.isepu.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Message {
@@ -12,24 +9,22 @@ public class Message {
     @GeneratedValue
     private int id;
 
-    @Column(name = "body", length = 40000)
+    @Column(name = "body", length = 5000)
     private String body;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private User sender;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private User receiver;
 
     public Message(){}
 
-    public Message(String body) {
+    public Message(String body, User sender, User receiver) {
         this.body = body;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
+        this.sender = sender;
+        this.receiver = receiver;
     }
 }

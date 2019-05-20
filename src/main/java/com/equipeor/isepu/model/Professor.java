@@ -15,12 +15,4 @@ public class Professor extends User {
         super(firstName, lastName);
         this.courses = courses;
     }
-
-    public Collection<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(Collection<Course> courses) {
-        this.courses = courses;
-    }
 }

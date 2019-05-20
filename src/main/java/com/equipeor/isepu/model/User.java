@@ -1,9 +1,7 @@
 package com.equipeor.isepu.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class User {
@@ -18,6 +16,11 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
+    @OneToMany(mappedBy = "sender")
+    Collection<Message> sent;
+
+    @OneToMany(mappedBy = "receiver")
+    Collection<Message> receiver;
 
     public User(){}
     public User(String firstName, String lastName) {
@@ -27,25 +30,5 @@ public class User {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 }
