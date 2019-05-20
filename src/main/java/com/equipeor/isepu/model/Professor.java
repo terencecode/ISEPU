@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-public class Professor extends Person {
+public class Professor extends User {
 
     @OneToMany(mappedBy = "professor")
     private Collection<Course> courses;

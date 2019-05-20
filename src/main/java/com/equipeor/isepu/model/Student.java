@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Student extends Person{
+public class Student extends User {
 
     @Column(name = "age")
     private int age;

@@ -19,10 +19,10 @@ public class ProfessorController {
     @Autowired
     private ProfessorRepository professorRepository;
 
-    @GetMapping(value = "/Professors")
+    @GetMapping(value = "/professors")
     public List<Professor> ListeProfessor(){return professorRepository.findAll();}
 
-    @GetMapping(value = "/Professors/{id}")
+    @GetMapping(value = "/professors/{id}")
     public Professor afficherProfessor(@PathVariable int id){
         Professor professeur = professorRepository.findById(id);
 
@@ -31,7 +31,7 @@ public class ProfessorController {
         return professeur;
     }
 
-    @GetMapping(value = "/Professors/Subjects/{subjectName}")
+    @GetMapping(value = "/professors/subjects/{subjectName}")
     public List<Professor> afficherProfParMatiere(@PathVariable String subjectName){
         return professorRepository.findByCoursesSubjectName(subjectName);
     }
@@ -53,12 +53,12 @@ public class ProfessorController {
         return ResponseEntity.created(location).build();
     }
 
-    @DeleteMapping(value = "/Professors/{id}")
+    @DeleteMapping(value = "/professors/{id}")
     public void deleteProfesseur(@PathVariable int id){
          professorRepository.deleteById(id);
     }
 
-    @PutMapping(value = "/Professors")
+    @PutMapping(value = "/professors")
     public void updateProfessor(@RequestBody Professor professor){
         professorRepository.save(professor);
     }
