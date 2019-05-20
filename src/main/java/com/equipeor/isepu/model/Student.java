@@ -2,6 +2,7 @@ package com.equipeor.isepu.model;
 
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -16,7 +17,7 @@ public class Student extends User {
     @ManyToMany
     @JoinTable(joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))
-    Set<Course> courses;
+    Collection<Course> courses;
 
     public Student(){}
     public Student(String firstName, String lastName, int age, String promo) {

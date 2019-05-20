@@ -32,6 +32,8 @@ public class StudentController {
 
     @DeleteMapping(value = "Eleves/{id}")
     public void supprimerEleve(@PathVariable int id){
+
+
         studentRepository.deleteById(id);
     }
 
