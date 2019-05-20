@@ -10,23 +10,14 @@ public class Course {
 
     @Id
     @GeneratedValue
-    @Column(name = "course_id")
+    @Column(name = "id")
     private int id;
 
-    @Column(name = "course_name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "course_description")
+    @Column(name = "description")
     private String description;
-
-    @ManyToMany(mappedBy = "courses")
-    private Set<Student> students;
-
-    @ManyToOne
-    private Subject subject;
-
-    @ManyToOne
-    private Professor professor;
 
     @Column(name = "starting_time")
     private Instant startingTime;
@@ -34,16 +25,24 @@ public class Course {
     @Column(name = "finishing_time")
     private Instant finishingTime;
 
-    public Course() {}
+    @ManyToMany(mappedBy = "courses")
+    private Set<Student> students;
 
-    public Course(String name, String description, Set<Student> students, Subject subject, Professor professor, Instant startingTime, Instant finishingTime) {
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Subject subject;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Professor professor;
+
+    public Course(String name, String description, Instant startingTime, Instant finishingTime, Subject subject, Professor professor) {
         this.name = name;
         this.description = description;
-        this.students = students;
-        this.subject = subject;
-        this.professor = professor;
         this.startingTime = startingTime;
         this.finishingTime = finishingTime;
+        this.subject = subject;
+        this.professor = professor;
     }
 
     public int getId() {
@@ -70,6 +69,22 @@ public class Course {
         this.description = description;
     }
 
+    public Instant getStartingTime() {
+        return startingTime;
+    }
+
+    public void setStartingTime(Instant startingTime) {
+        this.startingTime = startingTime;
+    }
+
+    public Instant getFinishingTime() {
+        return finishingTime;
+    }
+
+    public void setFinishingTime(Instant finishingTime) {
+        this.finishingTime = finishingTime;
+    }
+
     public Set<Student> getStudents() {
         return students;
     }
@@ -92,21 +107,5 @@ public class Course {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
-    }
-
-    public Instant getStartingTime() {
-        return startingTime;
-    }
-
-    public void setStartingTime(Instant startingTime) {
-        this.startingTime = startingTime;
-    }
-
-    public Instant getFinishingTime() {
-        return finishingTime;
-    }
-
-    public void setFinishingTime(Instant finishingTime) {
-        this.finishingTime = finishingTime;
     }
 }

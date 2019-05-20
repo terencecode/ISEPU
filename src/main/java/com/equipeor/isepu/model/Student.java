@@ -5,49 +5,24 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Student {
+public class Student extends Person{
 
-    @Id
-    @GeneratedValue
-    @Column(name = "student_id")
-    private int id;
-
-    @Column(name = "student_first_name")
-    private String firstName;
-
-    @Column(name = "student_last_name")
-    private String lastName;
-
-    @Column(name = "student_age")
+    @Column(name = "age")
     private int age;
 
-    @Column(name = "student_promo")
+    @Column(name = "promo")
     private String promo;
 
     @ManyToMany
+    @JoinTable(joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id"))
     Set<Course> courses;
 
-
-public Student(){}
-
-    public Student(int id, String firstName, String lastName, int age, String promo) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Student(String firstName, String lastName, int age, String promo) {
+        super(firstName, lastName);
         this.age = age;
-        this.promo=promo;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.promo = promo;
+        this.courses = courses;
     }
 
     public int getAge() {
@@ -58,10 +33,6 @@ public Student(){}
         this.age = age;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
     public String getPromo() {
         return promo;
     }
@@ -70,11 +41,11 @@ public Student(){}
         this.promo = promo;
     }
 
-    public int getId() {
-        return id;
+    public Set<Course> getCourses() {
+        return courses;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
     }
 }

@@ -8,16 +8,14 @@ public class Subject {
 
     @Id
     @GeneratedValue
-    @Column(name = "subject_id")
+    @Column(name = "id")
     private int id;
 
-    @Column(name = "subject_name")
+    @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "subject")
     private Collection<Course> courses;
-
-    public Subject() {}
 
     public Subject(String name) {
         this.name = name;
