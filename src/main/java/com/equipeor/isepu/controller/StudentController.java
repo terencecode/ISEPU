@@ -1,8 +1,8 @@
 package com.equipeor.isepu.controller;
 
-import com.equipeor.isepu.dao.EleveDao;
+import com.equipeor.isepu.repository.StudentRepository;
 import com.equipeor.isepu.exception.EleveIntrouvableException;
-import com.equipeor.isepu.model.Eleve;
+import com.equipeor.isepu.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,19 +12,19 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-public class EleveController {
+public class StudentController {
 
     @Autowired
-    private EleveDao eleveDao;
+    private StudentRepository studentRepository;
 
     @GetMapping(value="/Eleves")
-    public List<Eleve> listeEleves() {
-        return eleveDao.findAll();
+    public List<Student> listeEleves() {
+        return studentRepository.findAll();
     }
     //Récupérer un eleve par son Id
     @GetMapping(value = "/Eleves/{id}")
-    public Eleve afficherUnEleve(@PathVariable int id) {
-        Eleve eleve=eleveDao.findById(id);
+    public Student afficherUnEleve(@PathVariable int id) {
+        Student eleve= studentRepository.findById(id);
 
         if(eleve==null)throw new EleveIntrouvableException("L'élève avec l'id" + id +" est introuvable.");
         return eleve;
@@ -32,18 +32,18 @@ public class EleveController {
 
     @DeleteMapping(value = "Eleves/{id}")
     public void supprimerEleve(@PathVariable int id){
-        eleveDao.deleteById(id);
+        studentRepository.deleteById(id);
     }
 
     @GetMapping(value = "/Eleves/{promo}")
-    public List<Eleve> afficherPromo(@PathVariable String promo){
-        return eleveDao.findByPromo(promo);
+    public List<Student> afficherPromo(@PathVariable String promo){
+        return studentRepository.findByPromo(promo);
     }
     //ajouter un Eleve
     @PostMapping(value = "/Eleves")
-    public ResponseEntity<Void> ajouterEleve(@RequestBody Eleve product) {
+    public ResponseEntity<Void> ajouterEleve(@RequestBody Student product) {
 
-        Eleve eleveAdded =  eleveDao.save(product);
+        Student eleveAdded =  studentRepository.save(product);
 
         if (eleveAdded == null)
             return ResponseEntity.noContent().build();
@@ -58,8 +58,8 @@ public class EleveController {
     }
 
     @PutMapping(value = "/Eleves")
-    public void updateEleve(@RequestBody Eleve eleve){
-        eleveDao.save(eleve);
+    public void updateEleve(@RequestBody Student eleve){
+        studentRepository.save(eleve);
     }
 
 

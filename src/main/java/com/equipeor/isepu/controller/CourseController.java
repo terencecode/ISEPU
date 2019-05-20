@@ -1,10 +1,9 @@
 package com.equipeor.isepu.controller;
 
 
-import com.equipeor.isepu.dao.CoursDao;
-import com.equipeor.isepu.model.Cours;
+import com.equipeor.isepu.repository.CourseRepository;
+import com.equipeor.isepu.model.Course;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -13,20 +12,20 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-public class CoursController {
+public class CourseController {
 
     @Autowired
-    private CoursDao coursDao;
+    private CourseRepository courseRepository;
 
 
     @GetMapping(value="/Cours")
-    public List<Cours> listCours() {
-        return coursDao.findAll();
+    public List<Course> listCours() {
+        return courseRepository.findAll();
     }
 
     @GetMapping(value = "/Cours/{Prof}")
-    public Cours afficherCours(@PathVariable int prof){
-        return coursDao.findDistinctByIdteacher(prof);
+    public Course afficherCours(@PathVariable int prof){
+        return courseRepository.findDistinctByIdteacher(prof);
     }
 
 
@@ -34,8 +33,8 @@ public class CoursController {
 
     //ajouter un cours
     @PostMapping(value="/Cours")
-    public ResponseEntity<Void> ajouterCours(@RequestBody Cours coursname){
-        Cours coursAdded = coursDao.save(coursname);
+    public ResponseEntity<Void> ajouterCours(@RequestBody Course coursname){
+        Course coursAdded = courseRepository.save(coursname);
         if (coursAdded == null)
             return ResponseEntity.noContent().build();
 

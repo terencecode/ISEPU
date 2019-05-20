@@ -1,29 +1,32 @@
 package com.equipeor.isepu.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class Professor {
 
     @Id
     @GeneratedValue
+    @Column(name = "professor_id")
     private int id;
 
+    @Column(name = "professor_first_name")
+    private String firstName;
+    
+    @Column(name = "professor_last_name")
+    private String lastName;
 
-    private String Firstname;
-    private String Lastname;
-    private String matiere;
+    @OneToMany(mappedBy = "professor")
+    private Collection<Course> courses;
 
     public Professor(){}
 
-    public Professor(int id, String firstname, String lastname, String matiere) {
-        this.id = id;
-        Firstname = firstname;
-        Lastname = lastname;
-        this.matiere = matiere;
+    public Professor(String firstName, String lastName, Collection<Course> courses) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.courses = courses;
     }
 
     public int getId() {
@@ -34,28 +37,27 @@ public class Professor {
         this.id = id;
     }
 
-    public String getFirstname() {
-        return Firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        Firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return Lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        Lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-
-    public String getMatiere() {
-        return matiere;
+    public Collection<Course> getCourses() {
+        return courses;
     }
 
-    public void setMatiere(String matiere) {
-        this.matiere = matiere;
+    public void setCourses(Collection<Course> courses) {
+        this.courses = courses;
     }
 }

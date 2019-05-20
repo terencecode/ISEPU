@@ -2,11 +2,10 @@ package com.equipeor.isepu.controller;
 
 
 
-import com.equipeor.isepu.dao.ProfessorDao;
+import com.equipeor.isepu.repository.ProfessorRepository;
 import com.equipeor.isepu.exception.ProfessorIntrouvableException;
 import com.equipeor.isepu.model.Professor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -15,17 +14,17 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-public class ProfesseurController {
+public class ProfessorController {
 
     @Autowired
-    private ProfessorDao professorDao;
+    private ProfessorRepository professorRepository;
 
     @GetMapping(value = "/Professors")
-    public List<Professor> ListeProfessor(){return professorDao.findAll();}
+    public List<Professor> ListeProfessor(){return professorRepository.findAll();}
 
     @GetMapping(value = "/Professors/{id}")
     public Professor afficherProfessor(@PathVariable int id){
-        Professor professeur =professorDao.findById(id);
+        Professor professeur = professorRepository.findById(id);
 
         if(professeur==null)throw new ProfessorIntrouvableException("Le professeur avec l'id" + id + " est introuvable.");
 
@@ -34,14 +33,14 @@ public class ProfesseurController {
 
     @GetMapping(value = "/Professors/Matiere/{matiere}")
     public List<Professor> afficherProfParMatiere(@PathVariable String matiere){
-        return professorDao.findByMatiere(matiere);
+        return professorRepository.findByMatiere(matiere);
     }
 
 
 
     @PostMapping(value = "/Professors")
     public ResponseEntity<Void> AddProfessor(@RequestBody Professor teacher){
-        Professor teacherAdded  =   professorDao.save(teacher);
+        Professor teacherAdded  =   professorRepository.save(teacher);
         if(teacherAdded==null){
             return ResponseEntity.noContent().build();
         }
@@ -56,12 +55,12 @@ public class ProfesseurController {
 
     @DeleteMapping(value = "/Professors/{id}")
     public void deleteProfesseur(@PathVariable int id){
-         professorDao.deleteById(id);
+         professorRepository.deleteById(id);
     }
 
     @PutMapping(value = "/Professors")
     public void updateProfessor(@RequestBody Professor professor){
-        professorDao.save(professor);
+        professorRepository.save(professor);
     }
 
 
