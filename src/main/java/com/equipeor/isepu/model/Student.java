@@ -18,6 +18,7 @@ public class Student extends User {
             inverseJoinColumns = @JoinColumn(name = "course_id"))
     Set<Course> courses;
 
+    public Student(){}
     public Student(String firstName, String lastName, int age, String promo) {
         super(firstName, lastName);
         this.age = age;

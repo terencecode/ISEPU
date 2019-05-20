@@ -17,6 +17,8 @@ public class Subject {
     @OneToMany(mappedBy = "subject")
     private Collection<Course> courses;
 
+    public Subject(){}
+
     public Subject(String name) {
         this.name = name;
     }

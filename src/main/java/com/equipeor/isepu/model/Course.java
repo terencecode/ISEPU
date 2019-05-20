@@ -36,6 +36,8 @@ public class Course {
     @JoinColumn(nullable = false)
     private Professor professor;
 
+
+    public Course(){}
     public Course(String name, String description, Instant startingTime, Instant finishingTime, Subject subject, Professor professor) {
         this.name = name;
         this.description = description;

@@ -10,6 +10,7 @@ public class Professor extends User {
     @OneToMany(mappedBy = "professor")
     private Collection<Course> courses;
 
+    public Professor(){}
     public Professor(String firstName, String lastName) {
         super(firstName, lastName);
         this.courses = courses;

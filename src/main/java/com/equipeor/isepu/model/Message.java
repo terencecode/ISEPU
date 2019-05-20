@@ -15,6 +15,8 @@ public class Message {
     @Column(name = "body", length = 40000)
     private String body;
 
+    public Message(){}
+
     public Message(String body) {
         this.body = body;
     }
