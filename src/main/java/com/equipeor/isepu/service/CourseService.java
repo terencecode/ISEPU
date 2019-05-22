@@ -13,9 +13,11 @@ import java.util.List;
 
 public class CourseService {
 
+
     @Autowired
     private CourseRepository courseRepository;
 
+    public CourseService(){}
 
     public List<Course> listCourses() {
         return courseRepository.findAll();

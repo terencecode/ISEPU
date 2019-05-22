@@ -1,16 +1,14 @@
 package com.equipeor.isepu.controller;
 
 
-import com.equipeor.isepu.repository.CourseRepository;
+
 import com.equipeor.isepu.model.Course;
 import com.equipeor.isepu.service.CourseService;
-import net.bytebuddy.asm.Advice;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
