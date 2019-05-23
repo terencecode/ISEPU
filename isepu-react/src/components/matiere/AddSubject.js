@@ -2,39 +2,32 @@ import React, { Component } from 'react'
 import {Link} from "react-router-dom";
 import PropTypes from"prop-types";
 import {connect} from "react-redux";
-import {addCourse} from "../../actions/CourseAction";
+import {addSubject} from "../../actions/SubjectAction";
 
 
- class AddCourse extends Component {
+ class AddSubject extends Component {
      constructor(){
          super();
          this.state={
-            "name":"",
-            "description":"",
-            "professor_id":"",
-            "subject_id":""
-
-
+            "name":""
+    
          };
          this.onChange=this.onChange.bind(this);
          this.onSubmit=this.onSubmit.bind(this);
 
      }
      onChange(e){
+         const state=this.state;
          this.setState({[e.target.name]:e.target.value})
      }
 
      onSubmit(e){
          e.preventDefault();
-         const newCourse={
-             "name":this.state.name,
-             "description":this.state.description,
-             "professor_id":1,
-             "subject_id":1
-
+         const newSubject={
+             "name":this.state.name   
          };
-         console.log(newCourse);
-         //this.props.addCourse(newCourse,this.props.history);
+         console.log(newSubject);
+         this.props.addSubject(newSubject,this.props.history);
         }
     render() {
         return (
@@ -45,14 +38,14 @@ import {addCourse} from "../../actions/CourseAction";
                     <Link to="/" className="btn btn-light">
                         Back to Board
                     </Link>
-                    <h4 className="display-4 text-center">Add /Update Project Task</h4>
+                    <h4 className="display-4 text-center">Ajouter une matière</h4>
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">
-                            <input type="text" className="form-control form-control-lg" name="name" value={this.state.name} placeholder="Project Task name" onChange={this.onChange} />
+                            <input type="text" className="form-control form-control-lg" name="name" value={this.state.name} placeholder="" onChange={this.onChange} />
                         </div>
-                        <div className="form-group">
+                        {/* <div className="form-group">
                             <textarea className="form-control form-control-lg" placeholder="Acceptance Criteria" value={this.state.description} name="description" onChange={this.onChange}></textarea>
-                        </div>
+                        </div> */}
                         {/* <div className="form-group">
                             <select className="form-control form-control-lg" name="status" value={this.state.status} onChange={this.onChange}>
                                 <option value="">Select Status</option>
@@ -71,12 +64,12 @@ import {addCourse} from "../../actions/CourseAction";
     }
 }
 
-addCourse.prototype= {
-    addCourse: PropTypes.func.isRequired,
+addSubject.prototype= {
+    addSubject: PropTypes.func.isRequired,
     error:PropTypes.object.isRequired
 }
 
 const mapStateToProps =state => ({
     errors: state.errors
 });
-export default connect(null, {addCourse}) (AddCourse);
+export default connect(null, {addSubject}) (AddSubject);

@@ -4,9 +4,9 @@ import {GET_ERRORS} from "./types";
 
 
 
-export const addCourse =(course,history)=> async dispatch => {
+export const addSubject =(Subject,history)=> async dispatch => {
     try {
-        await axios.post("http://localhost:8080/Course", course);
+        await axios.post("http://localhost:8080/Subject",Subject);
     history.push("/");
     dispatch({
         type:GET_ERRORS,
