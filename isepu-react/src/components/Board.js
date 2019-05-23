@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-
+import {Link} from "react-router-dom";
+import CourseItem from './cours/CourseItem';
  class Board extends Component {
     render() {
         return (
             <div className="container">
-        <a href="form.html" className="btn btn-primary mb-3">
+        <Link to="/addCourse" className="btn btn-primary mb-3">
             <i className="fas fa-plus-circle"> Create Project Task</i>
-        </a>
+        </Link>
         <br />
         <hr />
         <div className="container">
@@ -20,26 +21,7 @@ import React, { Component } from 'react'
 
                     {//<!-- SAMPLE PROJECT TASK STARTS HERE -->
                     }
-                    <div className="card mb-1 bg-light">
-
-                        <div className="card-header text-primary">
-                            ID: projectSequence
-                        </div>
-                        <div className="card-body bg-light">
-                            <h5 className="card-title">summary</h5>
-                            <p className="card-text text-truncate ">
-                                acceptanceCriteria
-                            </p>
-                            <a  className="btn btn-primary">
-                                View / Update
-                            </a>
-
-                            <button className="btn btn-danger ml-4">
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-
+                    <CourseItem />
                     {
                         //<!-- SAMPLE PROJECT TASK ENDS HERE -->
                     }
@@ -52,9 +34,11 @@ import React, { Component } from 'react'
                     </div>
                     {
                         //<!-- SAMPLE PROJECT TASK STARTS HERE -->
-
+                        
                     //<!-- SAMPLE PROJECT TASK ENDS HERE -->
                     }
+
+                    <CourseItem/>
                 </div>
                 <div className="col-md-4">
                     <div className="card text-center mb-2">

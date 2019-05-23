@@ -5,11 +5,12 @@ import com.equipeor.isepu.model.User;
 import com.equipeor.isepu.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-
+@Service
 public class MessageService {
 
     @Autowired
