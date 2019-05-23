@@ -5,7 +5,7 @@ export default class ListOfSubject extends Component {
     constructor(props){
         super(props);
         this.state={
-            name:""
+            name:[]
         }
         this.headers=[
             {key:'id',label:'Id'},
@@ -26,10 +26,11 @@ export default class ListOfSubject extends Component {
     }
     render() {
         return (
-            <div id="container">
-				<Link to="/create">Add Website</Link>
-				
-				<table>
+            <div className="container">
+				<Link to="/addSubject">Add Subject</Link>
+                <div className="tab-content" id="nav-tabContent">
+                <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+				<table className="table" cellspacing="0">
 					<thead>
 						<tr>
 						{
@@ -51,7 +52,7 @@ export default class ListOfSubject extends Component {
 								  <td>{item.name}</td>
 								  
 								  <td>
-										<Link to={`/update/${item.id}`}>Edit</Link>
+										<Link className="btn btn-primary" to={`/update/${item.id}`}>Edit</Link>
 										&nbsp;
 										
 								  </td>
@@ -62,6 +63,8 @@ export default class ListOfSubject extends Component {
 					</tbody>
 				</table>
 			</div>
+            </div>
+            </div>
         )
     }
 }
