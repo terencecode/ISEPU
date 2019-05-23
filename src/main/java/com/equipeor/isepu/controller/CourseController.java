@@ -45,6 +45,7 @@ public class CourseController {
 
 
     //ajouter un cours
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(value="/Course")
     public ResponseEntity<Void> ajouterCours(@RequestBody Course coursname){
         return courseService.ajouterCourse(coursname);
