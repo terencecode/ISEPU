@@ -7,7 +7,7 @@ public class Message {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Long id;
 
     @Column(name = "body", length = 5000)
     private String body;
@@ -28,7 +28,7 @@ public class Message {
         this.receiver = receiver;
     }
 
-    public int getId() {
+    public long getId() {
         return this.id;
     }
 }
