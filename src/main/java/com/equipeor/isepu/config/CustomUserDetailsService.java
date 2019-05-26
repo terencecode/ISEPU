@@ -1,7 +1,8 @@
 package com.equipeor.isepu.config;
 
 import com.equipeor.isepu.model.User;
-import com.equipeor.isepu.repository.UserRepository;
+import com.equipeor.isepu.repository.ProfessorRepository;
+import com.equipeor.isepu.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,17 +14,28 @@ import org.springframework.transaction.annotation.Transactional;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    UserRepository userRepository;
+    StudentRepository studentRepository;
+
+    @Autowired
+    ProfessorRepository professorRepository;
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String username)
+    public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
         // Let people login with either username or email
-        User user = userRepository.findByEmail(username)
-                .orElseThrow(() ->
-                        new UsernameNotFoundException("User not found with email : " + username)
-                );
+        User user;
+        try {
+            user = studentRepository.findByEmail(email)
+                    .orElseThrow(() ->
+                            new UsernameNotFoundException("User not found with email : " + email)
+                    );
+        } catch (UsernameNotFoundException e) {
+            user = professorRepository.findByEmail(email)
+                    .orElseThrow(() ->
+                            new UsernameNotFoundException("User not found with email : " + email)
+                    );
+        }
 
         return UserPrincipal.create(user);
     }
@@ -31,9 +43,19 @@ public class CustomUserDetailsService implements UserDetailsService {
     // This method is used by JWTAuthenticationFilter
     @Transactional
     public UserDetails loadUserById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(
-                () -> new UsernameNotFoundException("User not found with id : " + id)
-        );
+        User user;
+        try {
+            user = studentRepository.findById(id)
+                    .orElseThrow(
+                            () -> new UsernameNotFoundException("User not found with id : " + id)
+                    );
+        } catch (UsernameNotFoundException e) {
+            user = professorRepository.findById(id)
+                    .orElseThrow(
+                            () -> new UsernameNotFoundException("User not found with id : " + id)
+                    );
+        }
+
 
         return UserPrincipal.create(user);
     }

@@ -12,6 +12,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class ProfessorController {
@@ -24,11 +26,11 @@ public class ProfessorController {
 
     @GetMapping(value = "/professors/{id}")
     public Professor afficherProfessor(@PathVariable int id){
-        Professor professeur = professorRepository.findById(id);
+        Optional<Professor> professeur = professorRepository.findById(id);
 
-        if(professeur==null)throw new ProfessorIntrouvableException("Le professeur avec l'id" + id + " est introuvable.");
+        if(!professeur.isPresent())throw new ProfessorIntrouvableException("Le professeur avec l'id" + id + " est introuvable.");
 
-        return professeur;
+        return professeur.get();
     }
 
     @GetMapping(value = "/professors/subjects/{subjectName}")

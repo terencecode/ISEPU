@@ -11,7 +11,7 @@ public class Student extends User {
     private String promo;
 
     @ManyToMany
-    @JoinTable(joinColumns = @JoinColumn(name = "person_id"),
+    @JoinTable(joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))
     Collection<Course> courses;
 

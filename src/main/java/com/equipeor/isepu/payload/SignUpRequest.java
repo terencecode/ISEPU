@@ -22,6 +22,8 @@ public class SignUpRequest {
     @Size(min = 6, max = 20)
     private String password;
 
+    private String promo;
+
     public String getFirstName() {
         return firstName;
     }
@@ -52,5 +54,13 @@ public class SignUpRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPromo() {
+        return promo;
+    }
+
+    public void setPromo(String promo) {
+        this.promo = promo;
     }
 }

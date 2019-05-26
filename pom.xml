@@ -11,7 +11,7 @@
 	<groupId>com.equipeor</groupId>
 	<artifactId>isepu</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<firstName>isepu</firstName>
+	<name>isepu</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

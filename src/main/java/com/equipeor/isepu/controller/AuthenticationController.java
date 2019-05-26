@@ -24,8 +24,18 @@ public class AuthenticationController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(authenticationService.authenticateUser(loginRequest)));
     }
 
-    @PutMapping
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
+    @PutMapping("/professor")
+    public ResponseEntity<?> registerProfessor(@Valid @RequestBody SignUpRequest signUpRequest) {
+        URI location = null;
+        ApiResponse response = authenticationService.registerUser(signUpRequest, location);
+        if (!response.getSuccess()) {
+            return ResponseEntity.badRequest().body(response);
+        }
+        return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
+    }
+
+    @PutMapping("/student")
+    public ResponseEntity<?> registerStudent(@Valid @RequestBody SignUpRequest signUpRequest) {
         URI location = null;
         ApiResponse response = authenticationService.registerUser(signUpRequest, location);
         if (!response.getSuccess()) {
