@@ -6,7 +6,7 @@ import CourseItem from './cours/CourseItem';
         return (
             <div className="container">
         <Link to="/addCourse" className="btn btn-primary mb-3">
-            <i className="fas fa-plus-circle"> Create Project Task</i>
+            <i className="fas fa-plus-circle"> Ajouter un devoir</i>
         </Link>
         <br />
         <hr />

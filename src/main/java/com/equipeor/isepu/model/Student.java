@@ -21,4 +21,20 @@ public class Student extends User {
         super(firstName, lastName, email, password);
         this.promo = promo;
     }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getPromo() {
+        return promo;
+    }
+
+    public void setPromo(String promo) {
+        this.promo = promo;
+    }
 }
