@@ -11,8 +11,7 @@ public class Professor extends User {
     private Collection<Course> courses;
 
     public Professor(){}
-    public Professor(String firstName, String lastName) {
-        super(firstName, lastName);
-        this.courses = courses;
+    public Professor(String firstName, String lastName, String email, String password) {
+        super(firstName, lastName, email, password);
     }
 }

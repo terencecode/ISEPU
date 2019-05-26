@@ -11,7 +11,7 @@ public class Course {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -47,7 +47,7 @@ public class Course {
         this.professor = professor;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
