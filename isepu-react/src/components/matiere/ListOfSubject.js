@@ -62,7 +62,7 @@ export default class ListOfSubject extends Component {
 								  </td>
 								</tr>
 											)
-							}.bind(this))
+							})
 						}
 					</tbody>
 				</table>
