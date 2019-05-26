@@ -27,7 +27,10 @@ export default class ListOfSubject extends Component {
     render() {
         return (
             <div className="container">
-				<Link to="/addSubject">Add Subject</Link>
+			<div className="col-md-8 m-auto">
+				<Link to="/addSubject" className="btn btn-light">Add Subject</Link>
+
+
                 <div className="tab-content" id="nav-tabContent">
                 <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 				<table className="table" cellspacing="0">
@@ -65,6 +68,7 @@ export default class ListOfSubject extends Component {
 			</div>
             </div>
             </div>
+			</div>
         )
     }
 }

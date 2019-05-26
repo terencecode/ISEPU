@@ -6,12 +6,13 @@ class CourseItem extends Component {
             <div className="card mb-1 bg-light">
 
                         <div className="card-header text-primary">
-                            ID: projectSequence
+                            Devoirs GL
                         </div>
                         <div className="card-body bg-light">
-                            <h5 className="card-title">summary</h5>
+                            <h5 className="card-title">Livrable 1</h5>
                             <p className="card-text text-truncate ">
-                                acceptanceCriteria
+                                rendre le livrable 1 avec les <br></br>
+                                personas pour le 6 mai 
                             </p>
                             <Link   className="btn btn-primary">
                                 View / Update

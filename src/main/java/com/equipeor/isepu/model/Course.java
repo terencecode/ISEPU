@@ -50,4 +50,52 @@ public class Course {
     public int getId() {
         return id;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Instant getStartingTime() {
+        return startingTime;
+    }
+
+    public void setStartingTime(Instant startingTime) {
+        this.startingTime = startingTime;
+    }
+
+    public Instant getFinishingTime() {
+        return finishingTime;
+    }
+
+    public void setFinishingTime(Instant finishingTime) {
+        this.finishingTime = finishingTime;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
 }

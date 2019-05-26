@@ -33,8 +33,8 @@ import {addCourse} from "../../actions/CourseAction";
              "subject_id":1
 
          };
-         console.log(newCourse);
-         //this.props.addCourse(newCourse,this.props.history);
+         //console.log(newCourse);
+         this.props.addCourse(newCourse,this.props.history);
         }
     render() {
         return (
@@ -43,15 +43,15 @@ import {addCourse} from "../../actions/CourseAction";
             <div className="row">
                 <div className="col-md-8 m-auto">
                     <Link to="/" className="btn btn-light">
-                        Back to Board
+                        Retour Acceuil
                     </Link>
-                    <h4 className="display-4 text-center">Add /Update Project Task</h4>
+                    <h4 className="display-4 text-center">Ajouter un devoir</h4>
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">
-                            <input type="text" className="form-control form-control-lg" name="name" value={this.state.name} placeholder="Project Task name" onChange={this.onChange} />
+                            <input type="text" className="form-control form-control-lg" name="name" value={this.state.name} placeholder="Nom du devoir" onChange={this.onChange} />
                         </div>
                         <div className="form-group">
-                            <textarea className="form-control form-control-lg" placeholder="Acceptance Criteria" value={this.state.description} name="description" onChange={this.onChange}></textarea>
+                            <textarea className="form-control form-control-lg" placeholder="Description" value={this.state.description} name="description" onChange={this.onChange}></textarea>
                         </div>
                         {/* <div className="form-group">
                             <select className="form-control form-control-lg" name="status" value={this.state.status} onChange={this.onChange}>
