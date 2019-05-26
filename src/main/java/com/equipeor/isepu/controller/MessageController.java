@@ -9,34 +9,34 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
+@RequestMapping("/message")
 public class MessageController {
 
     @Autowired
     private MessageService messageService;
 
-    @GetMapping(value = "/Message")
-    public List<Message> afficherMessages(){
+    @GetMapping("/all")
+    public List<Message> getMessages() {
         return messageService.afficherMessage();
     }
 
-    @GetMapping(value = "/Message/{sender}")
-    public List<Message> afficherMessageBySender(@PathVariable User sender){
-        return messageService.afficherMessageBySender(sender);
+    @GetMapping(value = "/{sender}")
+    public List<Message> getMessageBySender(@PathVariable User sender) {
+        return messageService.getMessageBySender(sender);
     }
 
-    @GetMapping(value = "/Message/{receiver}")
-    public List<Message> afficherMessageByReceiver(@PathVariable User receiver){
-        return messageService.afficherMessageByReceiver(receiver);
+    @GetMapping(value = "/{receiver}")
+    public List<Message> getMessageByReceiver(@PathVariable User receiver) {
+        return messageService.getMessageByReceiver(receiver);
     }
 
-    @PostMapping(value = "/Message")
-    public ResponseEntity<Void> addMessage(@RequestBody Message message){
+    @PostMapping
+    public ResponseEntity<Void> addMessage(@RequestBody Message message) {
         return messageService.addMessage(message);
     }
-
-
 
 
 }

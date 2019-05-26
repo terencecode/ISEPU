@@ -1,69 +1,48 @@
 package com.equipeor.isepu.controller;
 
-import com.equipeor.isepu.repository.StudentRepository;
 import com.equipeor.isepu.exception.EleveIntrouvableException;
 import com.equipeor.isepu.model.Student;
+import com.equipeor.isepu.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
+@RequestMapping("/student")
 public class StudentController {
 
     @Autowired
     private StudentRepository studentRepository;
 
-    @GetMapping(value="/Eleves")
-    public List<Student> listeEleves() {
+    @GetMapping("/all")
+    public List<Student> getStudents() {
         return studentRepository.findAll();
     }
-    //Récupérer un eleve par son Id
-    @GetMapping(value = "/Eleves/{id}")
-    public Student afficherUnEleve(@PathVariable int id) {
-        Optional<Student> eleve= studentRepository.findById(id);
 
-        if(!eleve.isPresent())throw new EleveIntrouvableException("L'élève avec l'id" + id +" est introuvable.");
-        return eleve.get();
+    @GetMapping("/{id}")
+    public Student getStudent(@PathVariable int id) {
+        Optional<Student> student = studentRepository.findById(id);
+
+        if (!student.isPresent()) throw new EleveIntrouvableException("L'élève avec l'id" + id + " est introuvable.");
+        return student.get();
     }
 
-    @DeleteMapping(value = "Eleves/{id}")
-    public void supprimerEleve(@PathVariable int id){
-
-
+    @DeleteMapping("/{id}")
+    public void deleteStudent(@PathVariable int id) {
         studentRepository.deleteById(id);
     }
 
-    @GetMapping(value = "/Eleves/{promo}")
-    public List<Student> afficherPromo(@PathVariable String promo){
+    @GetMapping(value = "/all/{promo}")
+    public List<Student> getPromo(@PathVariable String promo) {
         return studentRepository.findByPromo(promo);
     }
-    //ajouter un Eleve
-    @PostMapping(value = "/Eleves")
-    public ResponseEntity<Void> ajouterEleve(@RequestBody Student product) {
 
-        Student eleveAdded =  studentRepository.save(product);
-
-        if (eleveAdded == null)
-            return ResponseEntity.noContent().build();
-
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(eleveAdded.getId())
-                .toUri();
-
-        return ResponseEntity.created(location).build();
-    }
-
-    @PutMapping(value = "/Eleves")
-    public void updateEleve(@RequestBody Student eleve){
-        studentRepository.save(eleve);
+    @PutMapping
+    public void updateStudent(@RequestBody Student student) {
+        studentRepository.save(student);
     }
 
 

@@ -20,11 +20,11 @@ public class MessageService {
         return messageRepository.findAll();
     }
 
-    public List<Message> afficherMessageBySender(User sender) {
+    public List<Message> getMessageBySender(User sender) {
         return messageRepository.findBySender(sender);
     }
 
-    public List<Message> afficherMessageByReceiver(User receiver) {
+    public List<Message> getMessageByReceiver(User receiver) {
         return messageRepository.findByReceiver(receiver);
     }
 

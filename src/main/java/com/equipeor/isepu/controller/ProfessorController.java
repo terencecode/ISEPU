@@ -1,7 +1,5 @@
 package com.equipeor.isepu.controller;
 
-
-
 import com.equipeor.isepu.repository.ProfessorRepository;
 import com.equipeor.isepu.exception.ProfessorIntrouvableException;
 import com.equipeor.isepu.model.Professor;
@@ -16,54 +14,55 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
+@RequestMapping("/professor")
 public class ProfessorController {
 
     @Autowired
     private ProfessorRepository professorRepository;
 
-    @GetMapping(value = "/professors")
-    public List<Professor> ListeProfessor(){return professorRepository.findAll();}
-
-    @GetMapping(value = "/professors/{id}")
-    public Professor afficherProfessor(@PathVariable int id){
-        Optional<Professor> professeur = professorRepository.findById(id);
-
-        if(!professeur.isPresent())throw new ProfessorIntrouvableException("Le professeur avec l'id" + id + " est introuvable.");
-
-        return professeur.get();
+    @GetMapping("/all")
+    public List<Professor> getProfessors() {
+        return professorRepository.findAll();
     }
 
-    @GetMapping(value = "/professors/subjects/{subjectName}")
-    public List<Professor> afficherProfParMatiere(@PathVariable String subjectName){
+    @GetMapping(value = "/{id}")
+    public Professor getProfessor(@PathVariable int id) {
+        Optional<Professor> professor = professorRepository.findById(id);
+
+        if (!professor.isPresent())
+            throw new ProfessorIntrouvableException("Le professeur avec l'id" + id + " est introuvable.");
+
+        return professor.get();
+    }
+
+    @GetMapping(value = "/subjects/{subjectName}")
+    public List<Professor> getProfessorBySubject(@PathVariable String subjectName) {
         return professorRepository.findByCoursesSubjectName(subjectName);
     }
 
 
-
-    @PostMapping(value = "/Professors")
-    public ResponseEntity<Void> AddProfessor(@RequestBody Professor teacher){
-        Professor teacherAdded  =   professorRepository.save(teacher);
-        if(teacherAdded==null){
+    @PostMapping
+    public ResponseEntity<Void> addProfessor(@RequestBody Professor teacher) {
+        Professor professorAdded = professorRepository.save(teacher);
+        if (professorAdded == null) {
             return ResponseEntity.noContent().build();
         }
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(teacherAdded.getId())
+                .buildAndExpand(professorAdded.getId())
                 .toUri();
 
         return ResponseEntity.created(location).build();
     }
 
-    @DeleteMapping(value = "/professors/{id}")
-    public void deleteProfesseur(@PathVariable int id){
-         professorRepository.deleteById(id);
+    @DeleteMapping(value = "/{id}")
+    public void deleteProfessor(@PathVariable int id) {
+        professorRepository.deleteById(id);
     }
 
-    @PutMapping(value = "/professors")
-    public void updateProfessor(@RequestBody Professor professor){
+    @PutMapping
+    public void updateProfessor(@RequestBody Professor professor) {
         professorRepository.save(professor);
     }
-
-
 }

@@ -25,7 +25,7 @@ public class CourseService {
         return courseRepository.findAll();
     }
 
-    public List<Course> afficherCourse(@PathVariable int prof){
+    public List<Course> getCourseByProfessor(@PathVariable int prof){
         return courseRepository.findByProfessorId(prof);
     }
 
@@ -52,11 +52,11 @@ public class CourseService {
     }
 
 
-    public List<Course> afficherCourseByName(String courseName) {
+    public List<Course> getCourseByName(String courseName) {
         return courseRepository.findByName(courseName);
     }
 
-    public Course afficherCourseByNameAndProf(String courseName, int prof) {
+    public Course getCourseByNameAndProf(String courseName, int prof) {
         return courseRepository.findByNameAndProfessorId(courseName,prof);
     }
 

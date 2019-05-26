@@ -1,7 +1,5 @@
 package com.equipeor.isepu.controller;
 
-
-
 import com.equipeor.isepu.model.Course;
 import com.equipeor.isepu.service.CourseService;
 
@@ -10,53 +8,43 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
+@RequestMapping("/course")
 public class CourseController {
 
     @Autowired
     private CourseService courseService;
 
-
-    @GetMapping(value="/Course")
-    public List<Course> listCours() {
+    @GetMapping
+    public List<Course> getCourses() {
         return courseService.listCourses();
     }
 
-    @GetMapping(value = "/Course/{prof}")
-    public List<Course> afficherCours(@PathVariable int prof){
-        return courseService.afficherCourse(prof);
+    @GetMapping(value = "/all/{professor}")
+    public List<Course> getCoursesByProfessor(@PathVariable int professor) {
+        return courseService.getCourseByProfessor(professor);
     }
 
-
-    @GetMapping(value = "/Course/{courseName}")
-    public List<Course> afficherCourseByName(@PathVariable String courseName){
-        return courseService.afficherCourseByName(courseName);
-
-    }
-
-    @GetMapping(value = "/Course/{courseName}/{prof}")
-    public Course afficherCourseByNameAndProf(@PathVariable String courseName,@PathVariable int prof){
-        return courseService.afficherCourseByNameAndProf(courseName,prof);
-    }
-
-
-
-
-
-    //ajouter un cours
-
-    @PostMapping(value="/Course")
-    public ResponseEntity<Void> ajouterCours(@RequestBody Course coursname){
-        return courseService.ajouterCourse(coursname);
+    @GetMapping(value = "/{courseName}")
+    public List<Course> getCourseByName(@PathVariable String courseName) {
+        return courseService.getCourseByName(courseName);
 
     }
 
+    @GetMapping(value = "/{courseName}/{professor}")
+    public Course getCourseByNameAndProf(@PathVariable String courseName, @PathVariable int professor) {
+        return courseService.getCourseByNameAndProf(courseName, professor);
+    }
 
-    @DeleteMapping(value = "/Course/{id}")
-    public void deleteCourse(@PathVariable int id){
+    @PostMapping
+    public ResponseEntity<Void> addCourse(@RequestBody Course courseName) {
+        return courseService.ajouterCourse(courseName);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public void deleteCourse(@PathVariable int id) {
         courseService.deleteCourse(id);
     }
-
-
 }
