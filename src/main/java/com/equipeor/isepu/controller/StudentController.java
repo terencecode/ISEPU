@@ -10,6 +10,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class StudentController {
@@ -24,10 +26,10 @@ public class StudentController {
     //Récupérer un eleve par son Id
     @GetMapping(value = "/Eleves/{id}")
     public Student afficherUnEleve(@PathVariable int id) {
-        Student eleve= studentRepository.findById(id);
+        Optional<Student> eleve= studentRepository.findById(id);
 
-        if(eleve==null)throw new EleveIntrouvableException("L'élève avec l'id" + id +" est introuvable.");
-        return eleve;
+        if(!eleve.isPresent())throw new EleveIntrouvableException("L'élève avec l'id" + id +" est introuvable.");
+        return eleve.get();
     }
 
     @DeleteMapping(value = "Eleves/{id}")

@@ -1,12 +1,14 @@
 package com.equipeor.isepu.repository;
 
-import com.equipeor.isepu.model.Course;
 import com.equipeor.isepu.model.Professor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProfessorRepository extends JpaRepository<Professor,Integer> {
-     Professor findById(int id);
+     Optional<Professor> findById(long id);
      List<Professor> findByCoursesSubjectName(String subjectName);
+     boolean existsByEmail(String email);
+     Optional<Professor> findByEmail(String email);
 }
