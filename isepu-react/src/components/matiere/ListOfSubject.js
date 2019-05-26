@@ -29,7 +29,8 @@ export default class ListOfSubject extends Component {
             <div className="container">
 			<div className="col-md-8 m-auto">
 				<Link to="/addSubject" className="btn btn-light">Add Subject</Link>
-
+				<br />
+        <hr />
 
                 <div className="tab-content" id="nav-tabContent">
                 <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
