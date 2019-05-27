@@ -2,7 +2,6 @@ package com.equipeor.isepu.model;
 
 
 import javax.persistence.*;
-import java.time.Instant;
 import java.util.Set;
 
 @Entity
@@ -19,12 +18,6 @@ public class Course {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "starting_time")
-    private Instant startingTime;
-
-    @Column(name = "finishing_time")
-    private Instant finishingTime;
-
     @ManyToMany(mappedBy = "courses")
     private Set<Student> students;
 
@@ -36,13 +29,13 @@ public class Course {
     @JoinColumn(nullable = false)
     private Professor professor;
 
+    @OneToMany(mappedBy = "course")
+    private Set<Session> sessions;
 
     public Course(){}
-    public Course(String name, String description, Instant startingTime, Instant finishingTime, Subject subject, Professor professor) {
+    public Course(String name, String description, Subject subject, Professor professor) {
         this.name = name;
         this.description = description;
-        this.startingTime = startingTime;
-        this.finishingTime = finishingTime;
         this.subject = subject;
         this.professor = professor;
     }
@@ -67,22 +60,6 @@ public class Course {
         this.description = description;
     }
 
-    public Instant getStartingTime() {
-        return startingTime;
-    }
-
-    public void setStartingTime(Instant startingTime) {
-        this.startingTime = startingTime;
-    }
-
-    public Instant getFinishingTime() {
-        return finishingTime;
-    }
-
-    public void setFinishingTime(Instant finishingTime) {
-        this.finishingTime = finishingTime;
-    }
-
     public Subject getSubject() {
         return subject;
     }
@@ -97,5 +74,21 @@ public class Course {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
+
+    public Set<Session> getSessions() {
+        return sessions;
+    }
+
+    public void setSessions(Set<Session> sessions) {
+        this.sessions = sessions;
     }
 }
