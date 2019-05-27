@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-//import { login } from '../../util/APIUtils';
-import './Login.css';
+import { login } from '../../utils/APIUtils';
+import './login.css';
 import { Link } from 'react-router-dom';
-//import { ACCESS_TOKEN } from '../../constants';
+import { ACCESS_TOKEN } from '../../constants';
 
 import { Form, Input, Button, Icon, notification } from 'antd';
 const FormItem = Form.Item;
@@ -20,36 +20,7 @@ class Login extends Component {
         );
     }
 }
-const request = (options) => {
-    const headers = new Headers({
-        'Content-Type': 'application/json',
-    })
-    
-    if(localStorage.getItem('access_token')) {
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
-    }
 
-    const defaults = {headers: headers};
-    options = Object.assign({}, defaults, options);
-
-    return fetch(options.url, options)
-    .then(response => 
-        response.json().then(json => {
-            if(!response.ok) {
-                return Promise.reject(json);
-            }
-            return json;
-        })
-    );
-};
-
-function login(loginRequest) {
-    return request({
-        url: 'http://localhost:8080/auth/student',
-        method: 'POST',
-        body: JSON.stringify(loginRequest)
-    });
-}
 class LoginForm extends Component {
     constructor(props) {
         super(props);
@@ -63,17 +34,17 @@ class LoginForm extends Component {
                 const loginRequest = Object.assign({}, values);
                 login(loginRequest)
                 .then(response => {
-                    localStorage.setItem('acces_token', response.accessToken);
+                    localStorage.setItem(ACCESS_TOKEN, response.accessToken);
                     this.props.onLogin();
                 }).catch(error => {
                     if(error.status === 401) {
                         notification.error({
-                            message: 'Polling App',
+                            message: 'ISEPU',
                             description: 'Your Username or Password is incorrect. Please try again!'
                         });                    
                     } else {
                         notification.error({
-                            message: 'Polling App',
+                            message: 'ISEPU',
                             description: error.message || 'Sorry! Something went wrong. Please try again!'
                         });                                            
                     }
@@ -87,14 +58,15 @@ class LoginForm extends Component {
         return (
             <Form onSubmit={this.handleSubmit} className="login-form">
                 <FormItem>
-                    {getFieldDecorator('usernameOrEmail', {
+                    {getFieldDecorator('email', {
                         rules: [{ required: true, message: 'Please input your username or email!' }],
                     })(
                     <Input 
                         prefix={<Icon type="user" />}
                         size="large"
-                        name="usernameOrEmail" 
-                        placeholder="Username or Email" />    
+                        name="email" 
+                        placeholder="email"
+                        className="form-control form-control-lg" />    
                     )}
                 </FormItem>
                 <FormItem>
@@ -106,7 +78,8 @@ class LoginForm extends Component {
                         size="large"
                         name="password" 
                         type="password" 
-                        placeholder="Password"  />                        
+                        placeholder="Password"
+                        className="form-control form-control-lg"  />                        
                 )}
                 </FormItem>
                 <FormItem>
