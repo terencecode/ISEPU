@@ -1,6 +1,6 @@
 package com.equipeor.isepu.model;
 
-public enum HomeWorkStatus {
+public enum HomeworkStatus {
     TO_DO,
     IN_PROGRESS,
     DONE

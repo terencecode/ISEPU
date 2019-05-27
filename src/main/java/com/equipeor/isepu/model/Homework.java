@@ -3,7 +3,7 @@ package com.equipeor.isepu.model;
 import javax.persistence.*;
 
 @Entity
-public class HomeWork {
+public class Homework {
 
     @Id
     @GeneratedValue
@@ -11,17 +11,17 @@ public class HomeWork {
     private Long id;
 
     @Column(name = "status")
-    private HomeWorkStatus status;
+    private HomeworkStatus status;
 
     @ManyToOne
     @JoinColumn(nullable = false)
     private Session session;
 
-    public HomeWork() {}
+    public Homework() {}
 
-    public HomeWork(Session session) {
+    public Homework(Session session) {
         this.session = session;
-        this.status = HomeWorkStatus.TO_DO;
+        this.status = HomeworkStatus.TO_DO;
     }
 
     public Session getSession() {
@@ -32,11 +32,11 @@ public class HomeWork {
         this.session = session;
     }
 
-    public HomeWorkStatus getStatus() {
+    public HomeworkStatus getStatus() {
         return status;
     }
 
-    public void setStatus(HomeWorkStatus status) {
+    public void setStatus(HomeworkStatus status) {
         this.status = status;
     }
 }
