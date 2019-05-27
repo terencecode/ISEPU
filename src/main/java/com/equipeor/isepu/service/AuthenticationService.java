@@ -69,6 +69,8 @@ public class AuthenticationService {
         Student student = new Student(signUpRequest.getFirstName(), signUpRequest.getLastName(),
                 signUpRequest.getEmail(), signUpRequest.getPassword(), signUpRequest.getPromo());
 
+        student.setPassword(passwordEncoder.encode(student.getPassword()));
+
         addRole(student, RoleName.ROLE_USER);
         Student result = studentRepository.save(student);
         return result.getId();
@@ -78,6 +80,8 @@ public class AuthenticationService {
 
         Professor professor = new Professor(signUpRequest.getFirstName(), signUpRequest.getLastName(),
                 signUpRequest.getEmail(), signUpRequest.getPassword());
+
+        professor.setPassword(passwordEncoder.encode(professor.getPassword()));
 
         addRole(professor, RoleName.ROLE_USER);
         addRole(professor, RoleName.ROLE_PROFESSOR);

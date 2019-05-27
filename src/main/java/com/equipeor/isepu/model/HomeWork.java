@@ -32,11 +32,11 @@ public class HomeWork {
         this.session = session;
     }
 
-    public HomeWorkStatus getProgression() {
-        return progression;
+    public HomeWorkStatus getStatus() {
+        return status;
     }
 
-    public void setProgression(HomeWorkStatus progression) {
-        this.progression = progression;
+    public void setStatus(HomeWorkStatus status) {
+        this.status = status;
     }
 }
