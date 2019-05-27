@@ -10,6 +10,7 @@ import {Provider}from "react-redux"
 import store from "./store"
 import AddSubject from './components/matiere/AddSubject';
 import ListOfSubject from './components/matiere/ListOfSubject';
+import Login from './components/user/login';
 
 
 
@@ -23,6 +24,7 @@ function App() {
       <Route exact path="/addCourse" component={AddCourse}/>
       <Route exact path="/addSubject" component={AddSubject}/>
       <Route exact path="/Subject" component={ListOfSubject}/>
+      <Route exact path="/Auth/Login" component={Login}/>
     </div>
     </Router>
     </Provider>
