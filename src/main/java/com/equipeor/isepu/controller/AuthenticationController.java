@@ -6,6 +6,7 @@ import com.equipeor.isepu.payload.LoginRequest;
 import com.equipeor.isepu.payload.SignUpRequest;
 import com.equipeor.isepu.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,6 +48,6 @@ public class AuthenticationController {
     @GetMapping("/{email}")
     public ResponseEntity<?> checkEmailAvailability (@PathVariable String email) {
         boolean available = authenticationService.checkEmailAvailability(email);
-        return available ? ResponseEntity.ok().body(available) : ResponseEntity.;
+        return available ? ResponseEntity.ok().body(available) : new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 }
