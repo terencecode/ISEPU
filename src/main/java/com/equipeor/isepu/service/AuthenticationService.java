@@ -105,4 +105,8 @@ public class AuthenticationService {
 
         return tokenProvider.generateToken(authentication);
     }
+
+    public boolean checkEmailAvailability (String email) {
+        return !professorRepository.findByEmail(email).isPresent() && !studentRepository.findByEmail(email).isPresent();
+    }
 }

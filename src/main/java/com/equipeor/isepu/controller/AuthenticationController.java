@@ -43,4 +43,10 @@ public class AuthenticationController {
         }
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }
+
+    @GetMapping("/{email}")
+    public ResponseEntity<?> checkEmailAvailability (@PathVariable String email) {
+        boolean available = authenticationService.checkEmailAvailability(email);
+        return available ? ResponseEntity.ok().body(available) : ResponseEntity.;
+    }
 }
