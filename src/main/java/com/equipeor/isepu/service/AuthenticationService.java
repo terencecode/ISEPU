@@ -1,6 +1,6 @@
 package com.equipeor.isepu.service;
 
-import com.equipeor.isepu.config.JwtTokenProvider;
+import com.equipeor.isepu.configuration.JwtTokenProvider;
 import com.equipeor.isepu.exception.AppException;
 import com.equipeor.isepu.model.*;
 import com.equipeor.isepu.payload.ApiResponse;

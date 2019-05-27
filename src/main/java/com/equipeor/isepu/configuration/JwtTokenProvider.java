@@ -1,4 +1,4 @@
-package com.equipeor.isepu.config;
+package com.equipeor.isepu.configuration;
 
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package com.equipeor.isepu.config;
+package com.equipeor.isepu.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -66,9 +66,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                .antMatchers( "/v2/api-docs",
+                        "/swagger-resources",
+                        "/swagger-resources/**",
+                        "/configuration/ui",
+                        "/configuration/security",
+                        "/swagger-ui.html",
+                        "/webjars/**")
+                .permitAll()
                 .antMatchers("/auth/**")
                 .permitAll()
-                .antMatchers("/")
+                .antMatchers("/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated();

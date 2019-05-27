@@ -1,4 +1,4 @@
-package com.equipeor.isepu.config;
+package com.equipeor.isepu.configuration;
 
 import com.equipeor.isepu.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;

@@ -1,6 +1,5 @@
 package com.equipeor.isepu.controller;
 
-
 import com.equipeor.isepu.model.Message;
 import com.equipeor.isepu.model.User;
 import com.equipeor.isepu.service.MessageService;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/message")
 public class MessageController {
