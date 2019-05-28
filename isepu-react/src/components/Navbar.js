@@ -30,7 +30,7 @@ export default function Navbar() {
         </div>
       </li>
       <li className="nav-item">
-        <Link className="nav-link " to="/Profile">Profile</Link>
+        <Link className="nav-link " to="/Profile/:id">Profile</Link>
       </li>
     </ul>
     </div>

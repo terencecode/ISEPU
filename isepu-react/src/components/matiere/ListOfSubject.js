@@ -5,22 +5,24 @@ export default class ListOfSubject extends Component {
     constructor(props){
         super(props);
         this.state={
-            name:[]
-        }
+            data:[]
+        };
         this.headers=[
             {key:'id',label:'Id'},
             {key:'name',label:'Name'}
         ];
+
     }
 
     componentDidMount(){
-        fetch('http://localhost:8080/Subject')
-        .then(response=>{
-            return response.json();
-        }).then(result=>{
+        fetch('http://localhost:8080/subject/all')
+        .then(response=>
+             response.json()
+        ).then(result=>{
             console.log(result);
+
             this.setState({
-                name:result
+                data:result
             });
         });
     }
@@ -28,7 +30,7 @@ export default class ListOfSubject extends Component {
         return (
             <div className="container">
 			<div className="col-md-8 m-auto">
-				<Link to="/addSubject" className="btn btn-light">Add Subject</Link>
+				<Link to="/addSubject" className="btn btn-light">Ajouter une matière</Link>
 				<br />
         <hr />
 
@@ -49,7 +51,7 @@ export default class ListOfSubject extends Component {
 					</thead>
 					<tbody>
 						{
-							this.state.name.map(function(item, key) {
+							this.state.data.map(function(item, key) {
 							return (
 								<tr key = {key}>
 								  <td>{item.id}</td>

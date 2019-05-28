@@ -6,7 +6,7 @@ import {GET_ERRORS} from "./types";
 
 export const addSubject =(Subject,history)=> async dispatch => {
     try {
-        await axios.post("http://localhost:8080/Subject",Subject);
+        await axios.post("http://localhost:8080/subject",Subject);
     history.push("/Subject");
     dispatch({
         type:GET_ERRORS,

@@ -17,12 +17,14 @@ import AddSubject from './components/matiere/AddSubject';
 import ListOfSubject from './components/matiere/ListOfSubject';
 import Login from './components/user/login';
 import Signup from './components/user/signup';
+import Profile from './components/user/profile';
 import LoadingIndicator from './common/LoadingIndicator';
-
+import PrivateRoute from './common/PrivateRoute';
 import { getCurrentUser } from './utils/APIUtils';
 import { ACCESS_TOKEN } from './constants';
 
 import { Layout, notification } from 'antd';
+import UptadeSubject from "./components/matiere/UptadeSubject";
 const { Content } = Layout;
 class App extends Component{
 constructor(props) {
@@ -112,17 +114,21 @@ handleLogin() {
                 <Route path="/login" 
                   render={(props) => <Login onLogin={this.handleLogin} {...props} />}></Route>
                 <Route path="/signup" component={Signup}></Route>
-                
+                <Route path="/Profile/:id"
+                       render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
+                </Route>
+                <Provider store={store}>
+                <Router>
+                  <PrivateRoute authenticated={this.state.isAuthenticated}  path="/addCourse" component={AddCourse} handleLogout={this.handleLogout}/>
+                  <Route  path="/addSubject" component={AddSubject}/>
+                  <Route  path="/Subject" component={ListOfSubject}/>
+                  <Route  path="/Update/:id" component={UptadeSubject}/>
+
+
+                </Router>
+              </Provider>
               </Switch>
-              <Provider store={store}>
-    <Router>
-    <Route  path="/addCourse" component={AddCourse}/>
-      <Route  path="/addSubject" component={AddSubject}/>
-      <Route  path="/Subject" component={ListOfSubject}/>
-    
-              
-    </Router>
-    </Provider>
+
             </div>
           </Content>
         </Layout>

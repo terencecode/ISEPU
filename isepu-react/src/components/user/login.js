@@ -36,6 +36,7 @@ class LoginForm extends Component {
                 .then(response => {
                     localStorage.setItem(ACCESS_TOKEN, response.accessToken);
                     this.props.onLogin();
+                    this.props.history.push("/");
                 }).catch(error => {
                     if(error.status === 401) {
                         notification.error({

@@ -36,24 +36,14 @@ import {addSubject} from "../../actions/SubjectAction";
             <div className="row">
                 <div className="col-md-8 m-auto">
                     <Link to="/" className="btn btn-light">
-                        Back to Board
+                        Acceuil
                     </Link>
                     <h4 className="display-4 text-center">Ajouter une matière</h4>
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">
                             <input type="text" className="form-control form-control-lg" name="name" value={this.state.name} placeholder="" onChange={this.onChange} />
                         </div>
-                        {/* <div className="form-group">
-                            <textarea className="form-control form-control-lg" placeholder="Acceptance Criteria" value={this.state.description} name="description" onChange={this.onChange}></textarea>
-                        </div> */}
-                        {/* <div className="form-group">
-                            <select className="form-control form-control-lg" name="status" value={this.state.status} onChange={this.onChange}>
-                                <option value="">Select Status</option>
-                                <option value="TO_DO">TO DO</option>
-                                <option value="IN_PROGRESS">IN PROGRESS</option>
-                                <option value="DONE">DONE</option>
-                            </select>
-                        </div> */}
+
                         <input type="submit" className="btn btn-primary btn-block mt-4" />
                     </form>
                 </div>
