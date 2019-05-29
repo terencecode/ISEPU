@@ -14,7 +14,7 @@ public class Subject {
     @Column(name = "name", unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "subject")
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<Course> courses;
 
     public Subject(){}

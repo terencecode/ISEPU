@@ -7,7 +7,7 @@ import java.util.Collection;
 @Entity
 public class Professor extends User {
 
-    @OneToMany(mappedBy = "professor")
+    @OneToMany(mappedBy = "professor", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<Course> courses;
 
     public Professor(){}
