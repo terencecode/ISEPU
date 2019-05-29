@@ -1,7 +1,6 @@
 package com.equipeor.isepu.utils.converter;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -43,7 +42,7 @@ public class OneWayConverter<D, E> {
      * @return List of domain representation of provided entities retrieved by
      * mapping each of them with the conversion function
      */
-    public List<D> createFromEntities(final Collection<E> entities) {
+    public Collection<D> createFromEntities(final Collection<E> entities) {
         return entities.stream().map(this::convertFromEntity).collect(Collectors.toList());
     }
 

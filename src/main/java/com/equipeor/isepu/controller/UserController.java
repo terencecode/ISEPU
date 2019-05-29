@@ -2,7 +2,7 @@ package com.equipeor.isepu.controller;
 
 import com.equipeor.isepu.configuration.CurrentUser;
 import com.equipeor.isepu.configuration.UserPrincipal;
-import com.equipeor.isepu.payload.UserRequest;
+import com.equipeor.isepu.payload.request.UserRequest;
 import com.equipeor.isepu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

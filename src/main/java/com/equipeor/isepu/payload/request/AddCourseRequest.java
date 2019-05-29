@@ -1,4 +1,4 @@
-package com.equipeor.isepu.payload;
+package com.equipeor.isepu.payload.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

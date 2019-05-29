@@ -1,9 +1,9 @@
 package com.equipeor.isepu.controller;
 
-import com.equipeor.isepu.payload.ApiResponse;
-import com.equipeor.isepu.payload.JwtAuthenticationResponse;
-import com.equipeor.isepu.payload.LoginRequest;
-import com.equipeor.isepu.payload.SignUpRequest;
+import com.equipeor.isepu.payload.response.ApiResponse;
+import com.equipeor.isepu.payload.response.JwtAuthenticationResponse;
+import com.equipeor.isepu.payload.request.LoginRequest;
+import com.equipeor.isepu.payload.request.SignUpRequest;
 import com.equipeor.isepu.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

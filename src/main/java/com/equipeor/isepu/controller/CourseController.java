@@ -3,7 +3,7 @@ package com.equipeor.isepu.controller;
 import com.equipeor.isepu.configuration.CurrentUser;
 import com.equipeor.isepu.configuration.UserPrincipal;
 import com.equipeor.isepu.model.Course;
-import com.equipeor.isepu.payload.AddCourseRequest;
+import com.equipeor.isepu.payload.request.AddCourseRequest;
 import com.equipeor.isepu.service.CourseService;
 
 import org.springframework.beans.factory.annotation.Autowired;

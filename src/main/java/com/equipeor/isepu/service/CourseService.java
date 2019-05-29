@@ -7,7 +7,7 @@ import com.equipeor.isepu.exception.ProfessorNotFoundException;
 import com.equipeor.isepu.model.Course;
 import com.equipeor.isepu.model.Professor;
 import com.equipeor.isepu.model.Subject;
-import com.equipeor.isepu.payload.AddCourseRequest;
+import com.equipeor.isepu.payload.request.AddCourseRequest;
 import com.equipeor.isepu.repository.CourseRepository;
 import com.equipeor.isepu.repository.ProfessorRepository;
 import com.equipeor.isepu.repository.SubjectRepository;

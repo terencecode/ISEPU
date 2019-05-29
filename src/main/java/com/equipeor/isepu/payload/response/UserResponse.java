@@ -1,28 +1,29 @@
-package com.equipeor.isepu.payload;
+package com.equipeor.isepu.payload.response;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
-public class SignUpRequest {
-    @NotBlank
-    @Size(min = 4, max = 40)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public class UserResponse {
+
     private String firstName;
 
-    @NotBlank
-    @Size(min = 3, max = 15)
     private String lastName;
 
-    @NotBlank
-    @Size(max = 40)
-    @Email
     private String email;
 
-    @NotBlank
-    @Size(min = 6, max = 20)
-    private String password;
-
     private String promo;
+
+    public UserResponse(String firstName, String lastName, String email, String promo) {
+        this(firstName, lastName, email);
+        this.promo = promo;
+    }
+
+    public UserResponse(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.promo = null;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -46,14 +47,6 @@ public class SignUpRequest {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPromo() {
