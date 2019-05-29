@@ -4,8 +4,9 @@ import './login.css';
 import { Link } from 'react-router-dom';
 import { ACCESS_TOKEN } from '../../constants';
 
-import { Form, Input, Button, Icon, notification } from 'antd';
+import { Form, Input, Button, notification } from 'antd';
 const FormItem = Form.Item;
+
 
 class Login extends Component {
     render() {
@@ -63,7 +64,7 @@ class LoginForm extends Component {
                         rules: [{ required: true, message: 'Please input your username or email!' }],
                     })(
                     <Input 
-                        prefix={<Icon type="user" />}
+
                         size="large"
                         name="email" 
                         placeholder="email"
@@ -75,7 +76,7 @@ class LoginForm extends Component {
                     rules: [{ required: true, message: 'Please input your Password!' }],
                 })(
                     <Input 
-                        prefix={<Icon type="lock" />}
+
                         size="large"
                         name="password" 
                         type="password" 
@@ -84,7 +85,7 @@ class LoginForm extends Component {
                 )}
                 </FormItem>
                 <FormItem>
-                    <Button type="primary" htmlType="submit" size="large" className="login-form-button">Login</Button>
+                    <Button type="primary" htmlType="submit" size="large" className="btn btn-primary login-form-button">Login</Button>
                     Or <Link to="/signup">register now!</Link>
                 </FormItem>
             </Form>

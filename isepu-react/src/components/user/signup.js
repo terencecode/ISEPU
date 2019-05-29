@@ -150,7 +150,7 @@ class Signup extends Component {
                             <Button type="primary" 
                                 htmlType="submit" 
                                 size="large" 
-                                className="signup-form-button"
+                                className="signup-form-button btn btn-primary"
                                 disabled={this.isFormInvalid()}>Sign up</Button>
                             Already registed? <Link to="/login">Login now!</Link>
                         </FormItem>

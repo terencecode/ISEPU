@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import {Link} from "react-router-dom";
+import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 
-export default class ListOfSubject extends Component {
+ class ListOfSubject extends Component {
     constructor(props){
         super(props);
         this.state={
@@ -11,7 +12,7 @@ export default class ListOfSubject extends Component {
             {key:'id',label:'Id'},
             {key:'name',label:'Name'}
         ];
-
+        this.remove = this.remove.bind(this);
     }
 
     componentDidMount(){
@@ -26,6 +27,19 @@ export default class ListOfSubject extends Component {
             });
         });
     }
+    async remove(id) {
+        await fetch(`http://localhost:8080/subject/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(() => {
+            let updatedGroups = [...this.state.groups].filter(i => i.id !== id);
+            this.setState({data: updatedGroups});
+        });
+    }
+
     render() {
         return (
             <div className="container">
@@ -58,9 +72,13 @@ export default class ListOfSubject extends Component {
 								  <td>{item.name}</td>
 								  
 								  <td>
+                                      <ButtonGroup>
 										<Link className="btn btn-primary" to={`/update/${item.id}`}>Edit</Link>
+
+                                        <Button className="btn btn-danger" onClick={() => this.remove(item.id)}>Delete</Button>
+
 										&nbsp;
-										
+                                      </ButtonGroup>
 								  </td>
 								</tr>
 											)
@@ -75,3 +93,5 @@ export default class ListOfSubject extends Component {
         )
     }
 }
+
+export default ListOfSubject;

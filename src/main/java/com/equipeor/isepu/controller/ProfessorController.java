@@ -21,7 +21,21 @@ public class ProfessorController {
         return professorRepository.findAll();
     }
 
+<<<<<<< Updated upstream
     @Secured("ROLE_USER")
+=======
+    @GetMapping(value = "/{id}")
+    public Professor getProfessor(@PathVariable int id) {
+        Optional<Professor> professor = professorRepository.findById(id);
+
+        if (!professor.isPresent())
+            throw new ProfessorIntrouvableException("Le professeur avec l'id" + id + " est introuvable.");
+
+        return professor.get();
+    }
+
+
+>>>>>>> Stashed changes
     @GetMapping(value = "/subjects/{subjectName}")
     public List<Professor> getProfessorBySubject(@PathVariable String subjectName) {
         return professorRepository.findByCourses_Subject_Name(subjectName);

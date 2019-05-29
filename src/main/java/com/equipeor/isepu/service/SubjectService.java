@@ -14,7 +14,7 @@ public class SubjectService {
     @Autowired
     private SubjectRepository subjectRepository;
 
-    public Subject afficherSubjectById(int id) {
+    public Subject afficherSubjectById(Long id) {
         return subjectRepository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class SubjectService {
         return subjectRepository.findByName(name);
     }
 
-    public void deleteSubject(int id) {
+    public void deleteSubject(Long id) {
         subjectRepository.deleteById(id);
     }
 
