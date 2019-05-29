@@ -24,7 +24,7 @@ public class ProfessorController {
     @Secured("ROLE_USER")
     @GetMapping(value = "/subjects/{subjectName}")
     public List<Professor> getProfessorBySubject(@PathVariable String subjectName) {
-        return professorRepository.findByCoursesSubjectName(subjectName);
+        return professorRepository.findByCourses_Subject_Name(subjectName);
     }
 
     @Secured("ROLE_ADMIN")

@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface ProfessorRepository extends JpaRepository<Professor,Integer> {
      Optional<Professor> findById(long id);
-     List<Professor> findByCoursesSubjectName(String subjectName);
+     List<Professor> findByCourses_Subject_Name(String name);
      boolean existsByEmail(String email);
      Optional<Professor> findByEmail(String email);
 }
