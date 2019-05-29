@@ -36,4 +36,12 @@ public class Subject {
     public String getName() {
         return name;
     }
+
+    public Collection<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Collection<Course> courses) {
+        this.courses = courses;
+    }
 }

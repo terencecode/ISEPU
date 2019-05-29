@@ -3,7 +3,7 @@ package com.equipeor.isepu.converter;
 import com.equipeor.isepu.model.Course;
 import com.equipeor.isepu.model.Professor;
 import com.equipeor.isepu.model.Subject;
-import com.equipeor.isepu.payload.AddCourseRequest;
+import com.equipeor.isepu.payload.request.AddCourseRequest;
 import com.equipeor.isepu.utils.converter.OneWayConverter;
 
 public class CourseRequestToCourseConverter extends OneWayConverter<Course, AddCourseRequest> {

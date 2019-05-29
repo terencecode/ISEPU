@@ -29,4 +29,14 @@ public class Student extends User {
     public void setPromo(String promo) {
         this.promo = promo;
     }
+
+    @Override
+    public Collection<Course> getCourses() {
+        return courses;
+    }
+
+    @Override
+    public void setCourses(Collection<Course> courses) {
+        this.courses = courses;
+    }
 }

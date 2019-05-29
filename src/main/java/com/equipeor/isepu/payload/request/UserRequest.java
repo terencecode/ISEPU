@@ -1,9 +1,9 @@
-package com.equipeor.isepu.payload;
+package com.equipeor.isepu.payload.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class UserResponse {
+public class UserRequest {
 
     private String firstName;
 
@@ -11,18 +11,11 @@ public class UserResponse {
 
     private String email;
 
+    private String password;
+
     private String promo;
 
-    public UserResponse(String firstName, String lastName, String email, String promo) {
-        this(firstName, lastName, email);
-        this.promo = promo;
-    }
-
-    public UserResponse(String firstName, String lastName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.promo = null;
+    public UserRequest() {
     }
 
     public String getFirstName() {
@@ -47,6 +40,14 @@ public class UserResponse {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPromo() {

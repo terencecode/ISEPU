@@ -14,4 +14,14 @@ public class Professor extends User {
     public Professor(String firstName, String lastName, String email, String password) {
         super(firstName, lastName, email, password);
     }
+
+    @Override
+    public Collection<Course> getCourses() {
+        return courses;
+    }
+
+    @Override
+    public void setCourses(Collection<Course> courses) {
+        this.courses = courses;
+    }
 }

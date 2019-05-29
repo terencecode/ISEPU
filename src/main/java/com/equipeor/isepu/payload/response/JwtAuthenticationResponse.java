@@ -1,4 +1,4 @@
-package com.equipeor.isepu.payload;
+package com.equipeor.isepu.payload.response;
 
 public class JwtAuthenticationResponse {
     private String accessToken;

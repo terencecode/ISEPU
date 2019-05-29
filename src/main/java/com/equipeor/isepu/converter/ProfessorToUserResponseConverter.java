@@ -1,7 +1,7 @@
 package com.equipeor.isepu.converter;
 
 import com.equipeor.isepu.model.Professor;
-import com.equipeor.isepu.payload.UserResponse;
+import com.equipeor.isepu.payload.response.UserResponse;
 import com.equipeor.isepu.utils.converter.OneWayConverter;
 
 public class ProfessorToUserResponseConverter extends OneWayConverter<UserResponse, Professor> {
