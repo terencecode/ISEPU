@@ -47,7 +47,7 @@ public class CourseService {
     public URI addCourse(@RequestBody AddCourseRequest addCourseRequest, UserPrincipal userPrincipal){
         Optional<Professor> professor = professorRepository.findById(userPrincipal.getId());
         if (professor.isPresent()) {
-            Optional<Subject> subject = subjectRepository.findByName(addCourseRequest.getSubjectName());
+            Optional<Subject> subject = Optional.ofNullable(subjectRepository.findByName(addCourseRequest.getSubjectName()));
             if (subject.isPresent()) {
                 CourseRequestToCourseConverter converter = new CourseRequestToCourseConverter(subject.get(), professor.get());
                 Course course = converter.convertFromEntity(addCourseRequest);

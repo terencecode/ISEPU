@@ -1,7 +1,7 @@
 package com.equipeor.isepu.controller;
 
 import com.equipeor.isepu.repository.ProfessorRepository;
-import com.equipeor.isepu.exception.ProfessorIntrouvableException;
+import com.equipeor.isepu.exception.ProfessorNotFoundException;
 import com.equipeor.isepu.model.Professor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +29,7 @@ public class ProfessorController {
         Optional<Professor> professor = professorRepository.findById(id);
 
         if (!professor.isPresent())
-            throw new ProfessorIntrouvableException("Le professeur avec l'id" + id + " est introuvable.");
+            throw new ProfessorNotFoundException("Le professeur avec l'id" + id + " est introuvable.");
 
         return professor.get();
     }
@@ -37,7 +37,7 @@ public class ProfessorController {
 
     @GetMapping(value = "/subjects/{subjectName}")
     public List<Professor> getProfessorBySubject(@PathVariable String subjectName) {
-        return professorRepository.findByCoursesSubjectName(subjectName);
+        return professorRepository.findByCourses_Subject_Name(subjectName);
     }
 
 
