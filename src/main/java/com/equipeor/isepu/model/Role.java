@@ -13,7 +13,7 @@ public class Role {
 
     @Enumerated(EnumType.STRING)
     @NaturalId
-    @Column(length = 60)
+    @Column(length = 60, unique = true)
     private RoleName name;
 
     public Role() {

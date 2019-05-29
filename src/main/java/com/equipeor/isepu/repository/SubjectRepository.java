@@ -4,12 +4,13 @@ import com.equipeor.isepu.model.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface SubjectRepository extends JpaRepository<Subject,Integer> {
-    Subject findById(int id);
+    Subject findById(long id);
     List<Subject> findAll();
 
-    Subject findByName(String name);
+    Optional<Subject> findByName(String name);
 
     void deleteByName(String name);
 }
