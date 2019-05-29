@@ -1,12 +1,16 @@
 package com.equipeor.isepu.controller;
 
-import com.equipeor.isepu.model.Professor;
 import com.equipeor.isepu.repository.ProfessorRepository;
+import com.equipeor.isepu.exception.ProfessorIntrouvableException;
+import com.equipeor.isepu.model.Professor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/professor")
@@ -15,15 +19,11 @@ public class ProfessorController {
     @Autowired
     private ProfessorRepository professorRepository;
 
-    @Secured("ROLE_USER")
     @GetMapping("/all")
     public List<Professor> getProfessors() {
         return professorRepository.findAll();
     }
 
-<<<<<<< Updated upstream
-    @Secured("ROLE_USER")
-=======
     @GetMapping(value = "/{id}")
     public Professor getProfessor(@PathVariable int id) {
         Optional<Professor> professor = professorRepository.findById(id);
@@ -35,20 +35,33 @@ public class ProfessorController {
     }
 
 
->>>>>>> Stashed changes
     @GetMapping(value = "/subjects/{subjectName}")
     public List<Professor> getProfessorBySubject(@PathVariable String subjectName) {
-        return professorRepository.findByCourses_Subject_Name(subjectName);
+        return professorRepository.findByCoursesSubjectName(subjectName);
     }
 
-    @Secured("ROLE_ADMIN")
+
+    @PostMapping
+    public ResponseEntity<Void> addProfessor(@RequestBody Professor teacher) {
+        Professor professorAdded = professorRepository.save(teacher);
+        if (professorAdded == null) {
+            return ResponseEntity.noContent().build();
+        }
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(professorAdded.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
     @DeleteMapping(value = "/{id}")
     public void deleteProfessor(@PathVariable int id) {
         professorRepository.deleteById(id);
     }
 
-    @Secured("ROLE_ADMIN")
-    @PutMapping("/{id}")
+    @PutMapping
     public void updateProfessor(@RequestBody Professor professor) {
         professorRepository.save(professor);
     }
