@@ -32,6 +32,7 @@ class Profile extends Component {
                     user: response,
                     isLoading: false
                 });
+                console.log(this.state.user);
             }).catch(error => {
             if(error.status === 404) {
                 this.setState({
@@ -76,39 +77,67 @@ class Profile extends Component {
         };
 
         return (
-            <div className="profile">
+            <div className="row profile">
+                <div className="col-md-3">
                 {
                     this.state.user ? (
-                        <div className="user-profile">
-                            <div className="user-details">
-                                <div className="user-avatar">
-                                    <Avatar className="user-avatar-circle" style={{ backgroundColor: getAvatarColor(this.state.user.name)}}>
-                                        {this.state.user.name[0].toUpperCase()}
-                                    </Avatar>
-                                </div>
-                                <div className="user-summary">
-                                    <div className="full-name">{this.state.user.first_name}</div>
-                                    <div className="username">@{this.state.user.last_name}</div>
+                        <div className="profile-sidebar">
 
+                            <div className="profile-userpic">
+                                <img
+                                    src="./img/Student.svg"
+                                    className="img-responsive" alt=""/>
+                            </div>
+
+                            <div className="profile-usertitle">
+                                <div className="profile-usertitle-name">
+                                    {this.state.user.firstName} {this.state.user.lastName}
+                                </div>
+                                <div className="profile-usertitle-job">
+                                    Developer
                                 </div>
                             </div>
-                            <div className="user-poll-details">
-                                <Tabs defaultActiveKey="1"
-                                      animated={false}
-                                      tabBarStyle={tabBarStyle}
-                                      size="large"
-                                      className="profile-tabs">
-                                    <TabPane tab={`${this.state.user.pollCount} Polls`} key="1">
-                                        {/*<PollList username={this.props.match.params.username} type="USER_CREATED_POLLS" />*/}
-                                    </TabPane>
-                                    <TabPane tab={`${this.state.user.voteCount} Votes`}  key="2">
-                                        {/*<PollList username={this.props.match.params.username} type="USER_VOTED_POLLS" />*/}
-                                    </TabPane>
-                                </Tabs>
+
+                            <div className="profile-userbuttons">
+                                <button type="button" className="btn btn-success btn-sm">Follow</button>
+                                <button type="button" className="btn btn-danger btn-sm">Message</button>
                             </div>
+
+                            <div className="profile-usermenu">
+                                <ul className="nav">
+                                    <li className="active">
+                                        <a href="#">
+                                            <i className="glyphicon glyphicon-home"></i>
+                                            Overview </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i className="glyphicon glyphicon-user"></i>
+                                            Account Settings </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" target="_blank">
+                                            <i className="glyphicon glyphicon-ok"></i>
+                                            Tasks </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i className="glyphicon glyphicon-flag"></i>
+                                            Help </a>
+                                    </li>
+                                </ul>
+                            </div>
+
                         </div>
-                    ): null
+                    ):null
                 }
+
+            </div>
+                <div className="col-md-9">
+                    <div className="profile-content">
+                        Some user related content goes here...
+                    </div>
+                </div>
             </div>
         );
     }

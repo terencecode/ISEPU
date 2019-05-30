@@ -86,14 +86,14 @@ export function getCurrentUser() {
     }
 
     return request({
-        url: API_BASE_URL + "/professor/me",
+        url: API_BASE_URL + "/user",
         method: 'GET'
     });
 }
 
 export function getUserProfile(id) {
     return request({
-        url: API_BASE_URL + "/professor/" + id,
+        url: API_BASE_URL + "/user",
         method: 'GET'
     });
 }
