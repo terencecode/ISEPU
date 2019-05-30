@@ -45,11 +45,7 @@
 
 .user-summary .full-name {
     font-size: 30px;
-    font-weight: 600;
-    color: rgba(0,0,0,0.85);
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+
 }
 
 .user-summary .username {
@@ -60,6 +56,11 @@
     margin-top: 5px;
 }
 
+@media (max-width: 768px) {
+    .user-summary .full-name {
+        font-size: 24px;
+    }
+}
 
 body {
     background: #F1F3FA;

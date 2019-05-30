@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { getUserProfile } from '../../utils/APIUtils';
 import { Avatar, Tabs } from 'antd';
-
+import { getAvatarColor } from '../../utils/Colors';
 import { formatDate } from '../../utils/Helper';
 import LoadingIndicator  from '../../common/LoadingIndicator';
 import './Profile.css';
@@ -32,6 +32,7 @@ class Profile extends Component {
                     user: response,
                     isLoading: false
                 });
+                console.log(this.state.user);
             }).catch(error => {
             if(error.status === 404) {
                 this.setState({
@@ -78,7 +79,6 @@ class Profile extends Component {
         return (
             <div className="row profile">
                 <div className="col-md-3">
-
                 {
                     this.state.user ? (
                         <div className="profile-sidebar">
@@ -102,6 +102,7 @@ class Profile extends Component {
                                 <button type="button" className="btn btn-success btn-sm">Follow</button>
                                 <button type="button" className="btn btn-danger btn-sm">Message</button>
                             </div>
+
                             <div className="profile-usermenu">
                                 <ul className="nav">
                                     <li className="active">
@@ -128,12 +129,15 @@ class Profile extends Component {
                             </div>
 
                         </div>
-
-
-
-                    ): null
+                    ):null
                 }
+
             </div>
+                <div className="col-md-9">
+                    <div className="profile-content">
+                        Some user related content goes here...
+                    </div>
+                </div>
             </div>
         );
     }

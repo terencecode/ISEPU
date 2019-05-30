@@ -114,11 +114,12 @@ handleLogin() {
                 <Route path="/login" 
                   render={(props) => <Login onLogin={this.handleLogin} {...props} />}></Route>
                 <Route path="/signup" component={Signup}></Route>
-                <Route path="/Profile/:id"
+                <Route path="/Profile"
                        render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
                 </Route>
                 <Provider store={store}>
                 <Router>
+                  <Route path="/Course" />
                   <PrivateRoute authenticated={this.state.isAuthenticated}  path="/addCourse" component={AddCourse} handleLogout={this.handleLogout}/>
                   <Route  path="/addSubject" component={AddSubject}/>
                   <Route  path="/Subject" component={ListOfSubject}/>
