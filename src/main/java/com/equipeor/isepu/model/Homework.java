@@ -14,7 +14,7 @@ public class Homework {
     private HomeworkStatus status;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn
     private Session session;
 
     public Homework() {}

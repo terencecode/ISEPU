@@ -29,7 +29,7 @@ public class Course {
     @JoinColumn(nullable = false)
     private Professor professor;
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Session> sessions;
 
     public Course(){}

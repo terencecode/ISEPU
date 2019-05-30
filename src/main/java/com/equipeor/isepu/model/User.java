@@ -37,7 +37,7 @@ public abstract class User {
     Collection<Message> sent;
 
     @OneToMany(mappedBy = "receiver")
-    Collection<Message> receiver;
+    Collection<Message> received;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -96,12 +96,12 @@ public abstract class User {
         this.sent = sent;
     }
 
-    public Collection<Message> getReceiver() {
-        return receiver;
+    public Collection<Message> getReceived() {
+        return received;
     }
 
-    public void setReceiver(Collection<Message> receiver) {
-        this.receiver = receiver;
+    public void setReceived(Collection<Message> received) {
+        this.received = received;
     }
 
     public Set<Role> getRoles() {
