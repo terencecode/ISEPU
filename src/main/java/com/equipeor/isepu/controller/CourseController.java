@@ -2,16 +2,15 @@ package com.equipeor.isepu.controller;
 
 import com.equipeor.isepu.configuration.CurrentUser;
 import com.equipeor.isepu.configuration.UserPrincipal;
-import com.equipeor.isepu.model.Course;
 import com.equipeor.isepu.payload.request.AddCourseRequest;
+import com.equipeor.isepu.payload.response.CourseResponse;
 import com.equipeor.isepu.service.CourseService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/course")
@@ -22,27 +21,26 @@ public class CourseController {
 
     @Secured("ROLE_USER")
     @GetMapping
-    public List<Course> getCourses() {
-        return courseService.getAllCourses();
-    }
-
-    @Secured("ROLE_USER")
-    @GetMapping(value = "/all/{professor}")
-    public List<Course> getCoursesByProfessor(@PathVariable int professor) {
-        return courseService.getCourseByProfessor(professor);
+    public ResponseEntity<Collection<CourseResponse>> getCourses() {
+        return ResponseEntity.ok(courseService.getAllCourses());
     }
 
     @Secured("ROLE_USER")
     @GetMapping(value = "/{courseName}")
-    public List<Course> getCourseByName(@PathVariable String courseName) {
-        return courseService.getCourseByName(courseName);
-
+    public ResponseEntity<CourseResponse> getCourseByName(@PathVariable String courseName) {
+        return ResponseEntity.ok(courseService.getCourseByName(courseName));
     }
 
     @Secured("ROLE_USER")
-    @GetMapping(value = "/{courseName}/{professor}")
-    public Course getCourseByNameAndProf(@PathVariable String courseName, @PathVariable int professor) {
-        return courseService.getCourseByNameAndProf(courseName, professor);
+    @GetMapping(value = "/all/{professorEmail}")
+    public ResponseEntity<Collection<CourseResponse>> getCoursesByProfessorEmail(@PathVariable String professorEmail) {
+        return ResponseEntity.ok(courseService.getCoursesByProfessorEmail(professorEmail));
+    }
+
+    @Secured("ROLE_USER")
+    @GetMapping(value = "/all/{subjectName}")
+    public ResponseEntity<Collection<CourseResponse>> getCoursesBySubjectName(@PathVariable String subjectName) {
+        return ResponseEntity.ok(courseService.getCoursesBySubjectName(subjectName));
     }
 
     @Secured("ROLE_PROFESSOR")
@@ -55,7 +53,8 @@ public class CourseController {
 
     @Secured({"ROLE_PROFESSOR", "ROLE_ADMIN"})
     @DeleteMapping(value = "/{id}")
-    public void deleteCourse(@PathVariable int id) {
+    public ResponseEntity<Void> deleteCourse(@PathVariable int id) {
         courseService.deleteCourse(id);
+        return ResponseEntity.ok().build();
     }
 }

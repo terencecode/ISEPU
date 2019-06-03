@@ -2,12 +2,14 @@ package com.equipeor.isepu.service;
 
 import com.equipeor.isepu.configuration.UserPrincipal;
 import com.equipeor.isepu.converter.CourseRequestToCourseConverter;
+import com.equipeor.isepu.converter.CourseToCourseResponseConverter;
 import com.equipeor.isepu.exception.CourseNotFoundException;
 import com.equipeor.isepu.exception.ProfessorNotFoundException;
 import com.equipeor.isepu.model.Course;
 import com.equipeor.isepu.model.Professor;
 import com.equipeor.isepu.model.Subject;
 import com.equipeor.isepu.payload.request.AddCourseRequest;
+import com.equipeor.isepu.payload.response.CourseResponse;
 import com.equipeor.isepu.repository.CourseRepository;
 import com.equipeor.isepu.repository.ProfessorRepository;
 import com.equipeor.isepu.repository.SubjectRepository;
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
+import java.util.Collection;
 import java.util.Optional;
 
 @Service
@@ -36,12 +38,20 @@ public class CourseService {
 
     public CourseService(){}
 
-    public List<Course> getAllCourses() {
-        return courseRepository.findAll();
+    public Collection<CourseResponse> getAllCourses() {
+        return new CourseToCourseResponseConverter().createFromEntities(courseRepository.findAll());
     }
 
-    public List<Course> getCourseByProfessor(@PathVariable int prof){
-        return courseRepository.findByProfessorId(prof);
+    public CourseResponse getCourseByName(String courseName) {
+        Optional<Course> course = courseRepository.findByName(courseName);
+        if (!course.isPresent())
+            throw new CourseNotFoundException();
+        else
+            return new CourseToCourseResponseConverter().convertFromEntity(course.get());
+    }
+
+    public Collection<CourseResponse> getCoursesByProfessorEmail(@PathVariable String professorEmail){
+        return new CourseToCourseResponseConverter().createFromEntities(courseRepository.findByProfessorEmail(professorEmail));
     }
 
     public URI addCourse(@RequestBody AddCourseRequest addCourseRequest, UserPrincipal userPrincipal){
@@ -65,14 +75,7 @@ public class CourseService {
         courseRepository.deleteById(id);
     }
 
-
-    public List<Course> getCourseByName(String courseName) {
-        return courseRepository.findByName(courseName);
+    public Collection<CourseResponse> getCoursesBySubjectName(String subjectName) {
+        return new CourseToCourseResponseConverter().createFromEntities(courseRepository.findBySubjectName(subjectName));
     }
-
-    public Course getCourseByNameAndProf(String courseName, int prof) {
-        return courseRepository.findByNameAndProfessorId(courseName,prof);
-    }
-
-
 }
