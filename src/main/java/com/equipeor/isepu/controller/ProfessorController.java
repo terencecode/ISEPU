@@ -37,7 +37,7 @@ public class ProfessorController {
 
     @GetMapping(value = "/subjects/{subjectName}")
     public List<Professor> getProfessorBySubject(@PathVariable String subjectName) {
-        return professorRepository.findByCourses_Subject_Name(subjectName);
+        return null;
     }
 
 
