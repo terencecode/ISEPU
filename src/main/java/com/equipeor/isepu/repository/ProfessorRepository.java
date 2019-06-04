@@ -11,4 +11,5 @@ public interface ProfessorRepository extends JpaRepository<Professor,Integer> {
      Collection<Professor> findByCourses_Subject_Name(String name);
      boolean existsByEmail(String email);
      Optional<Professor> findByEmail(String email);
+     void deleteByEmail(String email);
 }
