@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Link} from "react-router-dom";
+import {ListOfSubjects} from '../../utils/APIUtils';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 
  class ListOfSubject extends Component {
@@ -16,16 +17,13 @@ import { Button, ButtonGroup, Container, Table } from 'reactstrap';
     }
 
     componentDidMount(){
-        fetch('http://localhost:8080/subject/all')
+        ListOfSubjects()
         .then(response=>
-             response.json()
-        ).then(result=>{
-            console.log(result);
 
             this.setState({
-                data:result
-            });
-        });
+                data:response
+            })
+        );
     }
     async remove(id) {
         await fetch(`http://localhost:8080/subject/${id}`, {
@@ -75,7 +73,7 @@ import { Button, ButtonGroup, Container, Table } from 'reactstrap';
                                       <ButtonGroup>
 										<Link className="btn btn-primary" to={`/update/${item.id}`}>Edit</Link>
 
-                                        <Button className="btn btn-danger" onClick={() => this.remove(item.id)}>Delete</Button>
+                                        <Button className="btn btn-danger" >Delete</Button>
 
 										&nbsp;
                                       </ButtonGroup>

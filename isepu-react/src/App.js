@@ -25,6 +25,7 @@ import { ACCESS_TOKEN } from './constants';
 
 import { Layout, notification } from 'antd';
 import UptadeSubject from "./components/matiere/UptadeSubject";
+import ListOfCourse from "./components/cours/ListOfCourse";
 const { Content } = Layout;
 class App extends Component{
 constructor(props) {
@@ -120,10 +121,12 @@ handleLogin() {
                 <Provider store={store}>
                 <Router>
                   <Route path="/Course" />
-                  <PrivateRoute authenticated={this.state.isAuthenticated}  path="/addCourse" component={AddCourse} handleLogout={this.handleLogout}/>
+                  {/*<PrivateRoute authenticated={this.state.isAuthenticated}  path="/addCourse" component={AddCourse} handleLogout={this.handleLogout}/>*/}
                   <Route  path="/addSubject" component={AddSubject}/>
                   <Route  path="/Subject" component={ListOfSubject}/>
                   <Route  path="/Update/:id" component={UptadeSubject}/>
+                  <Route path="/Course" component={ListOfCourse}/>
+                <Route path="/addCourse" component={AddCourse}/>
 
 
                 </Router>

@@ -100,7 +100,7 @@ class Profile extends Component {
 
                             <div className="profile-userbuttons">
                                 <button type="button" className="btn btn-success btn-sm">Follow</button>
-                                <button type="button" className="btn btn-danger btn-sm">Message</button>
+                                <button type="button" className="btn btn-danger btn-sm">Logout</button>
                             </div>
                             <div className="profile-usermenu">
                                 <ul className="nav">

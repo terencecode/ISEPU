@@ -5,19 +5,22 @@ import {getUserProfile} from "../../utils/APIUtils";
  import LoadingIndicator  from '../../common/LoadingIndicator';
 import NotFound from '../../common/NotFound';
 import ServerError from '../../common/ServerError';
-import { getUserProfile } from '../../utils/APIUtils';
+
 
 class ListOfCourse extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            data: [],
+            user:null,
+            isLoading:false
         };
         this.headers = [
             {key: 'id', label: 'Id'},
             {key: 'name', label: 'Name'}
         ];
         this.remove = this.remove.bind(this);
+        this.loadUserProfile=this.loadUserProfile.bind(this);
     }
         loadUserProfile(id){
             this.setState({
@@ -47,7 +50,9 @@ class ListOfCourse extends Component {
     }
 
     componentDidMount(){
-        fetch(`http://localhost:8080/course/all/${this.state.user}`)
+        const id = this.props.match.params.id;
+        this.loadUserProfile(id);
+        fetch(`http://localhost:8080/course/all/${id}`)
             .then(response=>
                 response.json()
             ).then(result=>{
@@ -72,6 +77,17 @@ class ListOfCourse extends Component {
     }
 
     render() {
+        if(this.state.isLoading) {
+            return <LoadingIndicator />;
+        }
+
+        if(this.state.notFound) {
+            return <NotFound />;
+        }
+
+        if(this.state.serverError) {
+            return <ServerError />;
+        }
         return (
             <div className="container">
                 <div className="col-md-8 m-auto">

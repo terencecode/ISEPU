@@ -3,7 +3,7 @@ import { API_BASE_URL, POLL_LIST_SIZE, ACCESS_TOKEN } from '../constants';
 const request = (options) => {
     const headers = new Headers({
         'Content-Type': 'application/json',
-    })
+    });
     
     if(localStorage.getItem(ACCESS_TOKEN)) {
         headers.append('Authorization', 'Bearer ' + localStorage.getItem(ACCESS_TOKEN))
@@ -56,7 +56,13 @@ export function login(loginRequest) {
         body: JSON.stringify(loginRequest)
     });
 }
+export function ListOfSubjects(){
+    return request({
+        url:API_BASE_URL+ "/subject/all",
+        method:'GET'
 
+    })
+}
 export function signup(signupRequest) {
     return request({
         url: API_BASE_URL + "/auth/professor",
@@ -64,7 +70,13 @@ export function signup(signupRequest) {
         body: JSON.stringify(signupRequest)
     });
 }
-
+export function signupEleve(signupRequest) {
+    return request({
+        url: API_BASE_URL + "/auth/student",
+        method: 'PUT',
+        body: JSON.stringify(signupRequest)
+    });
+}
 export function checklastNameAvailability(lastname) {
     return request({
         url: API_BASE_URL + "/user/checklastnameAvailability?lastname=" + lastname,
