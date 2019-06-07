@@ -21,7 +21,7 @@ class Signup extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            key:'professor',
+
 
             firstName: {
                 value: ''
@@ -35,6 +35,7 @@ class Signup extends Component {
             password: {
                 value: ''
             },
+
             promo:{
                 value:''
             }

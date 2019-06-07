@@ -35,7 +35,7 @@ public class SubjectService {
     }
 
     public SubjectResponse getSubjectByName(String name) {
-        return (new SubjectToSubjectResponseConverter()).convertFromEntity(subjectRepository.findByName(name));
+        return (new SubjectToSubjectResponseConverter()).convertFromEntity(subjectRepository.findByName(name).get());
     }
 
     public void deleteSubject(String name) {

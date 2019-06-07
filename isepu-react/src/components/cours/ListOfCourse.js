@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from "react-router-dom";
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
-import {getUserProfile} from "../../utils/APIUtils";
+import {getUserProfile,getCourseOfUser} from "../../utils/APIUtils";
  import LoadingIndicator  from '../../common/LoadingIndicator';
 import NotFound from '../../common/NotFound';
 import ServerError from '../../common/ServerError';
@@ -50,12 +50,10 @@ class ListOfCourse extends Component {
     }
 
     componentDidMount(){
-        const id = this.props.match.params.id;
-        this.loadUserProfile(id);
-        fetch(`http://localhost:8080/course/all/${id}`)
-            .then(response=>
-                response.json()
-            ).then(result=>{
+        const email = this.props.match.params.email;
+
+        getCourseOfUser(email)
+        .then(result=>{
             console.log(result);
 
             this.setState({
@@ -91,7 +89,7 @@ class ListOfCourse extends Component {
         return (
             <div className="container">
                 <div className="col-md-8 m-auto">
-                    <Link to="/addSubject" className="btn btn-light">Ajouter une matière</Link>
+                    <Link to="/addCourse" className="btn btn-light">Ajouter un Cours</Link>
                     <br />
                     <hr />
 

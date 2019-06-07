@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Link} from "react-router-dom";
-import {ListOfSubjects} from '../../utils/APIUtils';
+import {ListOfSubjects, RemoveItemSubject} from '../../utils/APIUtils';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 
  class ListOfSubject extends Component {
@@ -10,10 +10,10 @@ import { Button, ButtonGroup, Container, Table } from 'reactstrap';
             data:[]
         };
         this.headers=[
-            {key:'id',label:'Id'},
+
             {key:'name',label:'Name'}
         ];
-        this.remove = this.remove.bind(this);
+this.deleteSubject=this.deleteSubject.bind(this);
     }
 
     componentDidMount(){
@@ -25,17 +25,12 @@ import { Button, ButtonGroup, Container, Table } from 'reactstrap';
             })
         );
     }
-    async remove(id) {
-        await fetch(`http://localhost:8080/subject/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }).then(() => {
-            let updatedGroups = [...this.state.groups].filter(i => i.id !== id);
-            this.setState({data: updatedGroups});
-        });
+   deleteSubject(name) {
+        RemoveItemSubject(name)
+       .then(() => {
+           let updatedGroups = [...this.state.data].filter(i => i.name !== name);
+           this.setState({data: updatedGroups});
+       });
     }
 
     render() {
@@ -66,14 +61,14 @@ import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 							this.state.data.map(function(item, key) {
 							return (
 								<tr key = {key}>
-								  <td>{item.id}</td>
+
 								  <td>{item.name}</td>
 								  
 								  <td>
                                       <ButtonGroup>
-										<Link className="btn btn-primary" to={`/update/${item.id}`}>Edit</Link>
+										<Link className="btn btn-primary" to={`/update/${item.name}`}>Edit</Link>
 
-                                        <Button className="btn btn-danger" >Delete</Button>
+                                        <Button className="btn btn-danger" onClick={()=>this.deleteSubject(item.name)}>Delete</Button>
 
 										&nbsp;
                                       </ButtonGroup>

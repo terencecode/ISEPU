@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface SubjectRepository extends JpaRepository<Subject,Long> {
     Optional<Subject> findById(Long id);
     List<Subject> findAll();
-    Subject findByName(String name);
+    Optional<Subject> findByName(String name);
     void deleteByName(String name);
     void deleteById(Long id);
     Collection<Subject> findAllByCourses_Professor_Email(String email);

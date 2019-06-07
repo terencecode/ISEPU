@@ -63,6 +63,15 @@ export function ListOfSubjects(){
 
     })
 }
+export function RemoveItemSubject(id) {
+    return request(
+        {
+            url:API_BASE_URL+"/subject/"+{id},
+            method:"DELETE"
+
+        }
+    )
+}
 export function signup(signupRequest) {
     return request({
         url: API_BASE_URL + "/auth/professor",
@@ -102,7 +111,12 @@ export function getCurrentUser() {
         method: 'GET'
     });
 }
-
+export function getCourseOfUser(id) {
+    return request({
+        url:API_BASE_URL+"/course/all/"+id,
+        method:'GET'
+    })
+}
 export function getUserProfile(id) {
     return request({
         url: API_BASE_URL + "/user",

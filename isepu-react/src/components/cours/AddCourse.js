@@ -3,7 +3,8 @@ import {Link} from "react-router-dom";
 import PropTypes from"prop-types";
 import {connect} from "react-redux";
 import {addCourse} from "../../actions/CourseAction";
-
+import NotFound from '../../common/NotFound';
+import ServerError from '../../common/ServerError';
 
  class AddCourse extends Component {
      constructor(){
@@ -12,7 +13,7 @@ import {addCourse} from "../../actions/CourseAction";
             "name":"",
             "description":"",
             "professor_id":"",
-            "subject_id":""
+            "subjectName":""
 
 
          };
@@ -35,9 +36,14 @@ import {addCourse} from "../../actions/CourseAction";
          };
          //console.log(newCourse);
          this.props.addCourse(newCourse,this.props.history);
+         if(this.props.addCourse.errors===404){
+             return <NotFound/>;
+         }
         }
     render() {
+
         return (
+
             <div className="addProjectTask">
         <div className="container">
             <div className="row">
@@ -52,6 +58,9 @@ import {addCourse} from "../../actions/CourseAction";
                         </div>
                         <div className="form-group">
                             <textarea className="form-control form-control-lg" placeholder="Description" value={this.state.description} name="description" onChange={this.onChange}></textarea>
+                        </div>
+                        <div className="form-group">
+                            <textarea className="form-control form-control-lg" placeholder="matière" value={this.state.subjectName} name="subjectName" onChange={this.onChange}></textarea>
                         </div>
                         {/* <div className="form-group">
                             <select className="form-control form-control-lg" name="status" value={this.state.status} onChange={this.onChange}>
