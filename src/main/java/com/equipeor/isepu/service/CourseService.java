@@ -58,17 +58,24 @@ public class CourseService {
         Optional<Professor> professor = professorRepository.findById(userPrincipal.getId());
         if (professor.isPresent()) {
          Optional<Subject> subject = subjectRepository.findByName(addCourseRequest.getSubjectName());
+            CourseRequestToCourseConverter converter;
             if (subject.isPresent()) {
-                CourseRequestToCourseConverter converter = new CourseRequestToCourseConverter(subject.get(), professor.get());
-                Course course = converter.convertFromEntity(addCourseRequest);
-                course = courseRepository.save(course);
-                courseRepository.flush();
-                return ServletUriComponentsBuilder
-                        .fromCurrentRequest()
-                        .path("/{id}")
-                        .buildAndExpand(course.getId())
-                        .toUri();
-            } else throw new CourseNotFoundException();
+                converter = new CourseRequestToCourseConverter(subject.get(), professor.get());
+            } else {
+                Subject newSubject = new Subject(addCourseRequest.getSubjectName());
+                converter = new CourseRequestToCourseConverter(newSubject, professor.get());
+                subjectRepository.save(newSubject);
+                subjectRepository.flush();
+            }
+            Course course = converter.convertFromEntity(addCourseRequest);
+            course = courseRepository.save(course);
+            courseRepository.flush();
+            return ServletUriComponentsBuilder
+                    .fromCurrentRequest()
+                    .path("/{id}")
+                    .buildAndExpand(course.getId())
+                    .toUri();
+
         } else throw new ProfessorNotFoundException("The current user doesn't seem to be a professor");
     }
 
