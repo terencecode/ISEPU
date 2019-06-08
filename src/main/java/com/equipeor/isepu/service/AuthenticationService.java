@@ -73,6 +73,7 @@ public class AuthenticationService {
 
         addRole(student, RoleName.ROLE_USER);
         Student result = studentRepository.save(student);
+        studentRepository.flush();
         return result.getId();
     }
 
@@ -86,6 +87,7 @@ public class AuthenticationService {
         addRole(professor, RoleName.ROLE_USER);
         addRole(professor, RoleName.ROLE_PROFESSOR);
         Professor result = professorRepository.save(professor);
+        professorRepository.flush();
         return result.getId();
     }
 

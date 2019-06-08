@@ -87,6 +87,7 @@ public class MessageService {
         } else throw new UserNotFoundException();
 
         Message messageAdded = messageRepository.save(message);
+        messageRepository.flush();
         if (messageAdded == null)
             throw new MessageNotSentException();
 

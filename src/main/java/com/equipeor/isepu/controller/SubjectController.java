@@ -2,7 +2,7 @@ package com.equipeor.isepu.controller;
 
 import com.equipeor.isepu.configuration.CurrentUser;
 import com.equipeor.isepu.configuration.UserPrincipal;
-import com.equipeor.isepu.model.Subject;
+import com.equipeor.isepu.payload.request.SubjectRequest;
 import com.equipeor.isepu.payload.response.SubjectResponse;
 import com.equipeor.isepu.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,14 +44,14 @@ public class SubjectController {
     }
 
     @Secured("ROLE_PROFESSOR")
-    @PutMapping(value = "/{id}")
-    public void updateSubject(@RequestBody Subject subject) {
-        subjectService.updateSubject(subject);
+    @PutMapping(value = "/{name}")
+    public void renameSubject(@PathVariable String name, @RequestBody SubjectRequest subjectRequest) {
+        subjectService.updateSubject(name, subjectRequest);
     }
 
     @Secured("ROLE_PROFESSOR")
     @PostMapping
-    public ResponseEntity<Void> addSubject(@RequestBody Subject subject) {
-        return subjectService.addSubject(subject);
+    public ResponseEntity<Void> addSubject(@RequestBody SubjectRequest subjectRequest) {
+        return ResponseEntity.created(subjectService.addSubject(subjectRequest)).build();
     }
 }
