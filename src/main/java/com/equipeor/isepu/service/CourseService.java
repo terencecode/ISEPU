@@ -61,7 +61,8 @@ public class CourseService {
             if (subject.isPresent()) {
                 CourseRequestToCourseConverter converter = new CourseRequestToCourseConverter(subject.get(), professor.get());
                 Course course = converter.convertFromEntity(addCourseRequest);
-                course=courseRepository.save(course);
+                course = courseRepository.save(course);
+                courseRepository.flush();
                 return ServletUriComponentsBuilder
                         .fromCurrentRequest()
                         .path("/{id}")
@@ -71,7 +72,7 @@ public class CourseService {
         } else throw new ProfessorNotFoundException("The current user doesn't seem to be a professor");
     }
 
-    public void deleteCourse(int id) {
+    public void deleteCourse(Long id) {
         courseRepository.deleteById(id);
     }
 
