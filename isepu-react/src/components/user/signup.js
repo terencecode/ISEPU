@@ -37,10 +37,11 @@ class Signup extends Component {
             },
 
             promo:{
-                value:''
+                value:'P2'
             }
         };
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleInputEleveChange=this.handleInputEleveChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.validatelastNameAvailability = this.validatelastNameAvailability.bind(this);
         this.validateEmailAvailability = this.validateEmailAvailability.bind(this);
@@ -62,16 +63,13 @@ class Signup extends Component {
             }
         });
     }
-    handleInputEleveChange(event, validationFun) {
-        const target = event.target;
-        const inputName = target.name;
-        const inputValue = target.value;
+    handleInputEleveChange(event) {
+
 
 
         this.setState({
-            [inputName] : {
-                value: inputValue,
-                ...validationFun(inputValue)
+            promo: {
+                value: event.target.value
             }
         });
     }
@@ -128,8 +126,7 @@ class Signup extends Component {
         return !(this.state.firstName.validateStatus === 'success' &&
             this.state.lastName.validateStatus === 'success' &&
             this.state.email.validateStatus === 'success' &&
-            this.state.password.validateStatus === 'success'&&
-                this.state.promo.validateStatus==='success'
+            this.state.password.validateStatus === 'success'
         );
     }
 
@@ -271,7 +268,7 @@ class Signup extends Component {
                                 name="promo"
 
                                 value={this.state.promo.value}
-                                onChange={(event)=>this.handleInputChange(event, this.validatePromo)}>
+                                onChange={(event)=>this.handleInputEleveChange(event)}>
 
 
 

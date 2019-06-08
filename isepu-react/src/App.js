@@ -102,7 +102,7 @@ handleLogin() {
 <div className="App">
     <Layout className="app-container">
           <Navbar isAuthenticated={this.state.isAuthenticated} 
-            currentUser={this.state.currentUser} 
+            currentUser={this.state.currentUser}
             onLogout={this.handleLogout} />
 
           <Content className="app-content">

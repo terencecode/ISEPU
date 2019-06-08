@@ -8,6 +8,8 @@ import LoadingIndicator  from '../../common/LoadingIndicator';
 import './Profile.css';
 import NotFound from '../../common/NotFound';
 import ServerError from '../../common/ServerError';
+import {ACCESS_TOKEN} from "../../constants";
+import {Redirect} from "react-router-dom";
 
 const TabPane = Tabs.TabPane;
 
@@ -45,6 +47,10 @@ class Profile extends Component {
                 });
             }
         });
+    }
+    handleLogout(){
+        localStorage.removeItem(ACCESS_TOKEN);
+        return <Redirect to='/signup'/>
     }
 
     componentDidMount() {
@@ -100,7 +106,7 @@ class Profile extends Component {
 
                             <div className="profile-userbuttons">
                                 <button type="button" className="btn btn-success btn-sm">Follow</button>
-                                <button type="button" className="btn btn-danger btn-sm">Logout</button>
+                                <button type="button" className="btn btn-danger btn-sm" onClick={this.handleLogout}>Logout</button>
                             </div>
                             <div className="profile-usermenu">
                                 <ul className="nav">
