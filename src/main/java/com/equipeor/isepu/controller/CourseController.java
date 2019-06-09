@@ -32,7 +32,7 @@ public class CourseController {
     }
 
     @Secured("ROLE_USER")
-    @GetMapping(value = "/all/{professorEmail}")
+    @GetMapping(value = "/all/email/{professorEmail}")
     public ResponseEntity<Collection<CourseResponse>> getCoursesByProfessorEmail(@PathVariable String professorEmail) {
         return ResponseEntity.ok(courseService.getCoursesByProfessorEmail(professorEmail));
     }

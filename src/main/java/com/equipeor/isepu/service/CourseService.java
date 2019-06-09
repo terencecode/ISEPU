@@ -67,6 +67,7 @@ public class CourseService {
                 subjectRepository.save(newSubject);
                 subjectRepository.flush();
             }
+            
             Course course = converter.convertFromEntity(addCourseRequest);
             course = courseRepository.save(course);
             courseRepository.flush();

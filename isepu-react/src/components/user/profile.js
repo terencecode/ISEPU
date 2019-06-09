@@ -97,7 +97,7 @@ class Profile extends Component {
 
                             <div className="profile-usertitle">
                                 <div className="profile-usertitle-name">
-                                    {this.state.user.firstName} {this.state.user.lastName}
+                                    {this.state.user.firstName} {this.state.user.lastName} {this.state.user.email}
                                 </div>
                                 <div className="profile-usertitle-job">
                                     Developer

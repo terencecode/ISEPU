@@ -111,13 +111,13 @@ export function getCurrentUser() {
         method: 'GET'
     });
 }
-export function getCourseOfUser(id) {
+export function getCourseOfUser(email) {
     return request({
-        url:API_BASE_URL+"/course/all/"+id,
+        url:API_BASE_URL+"/course/all/email/"+email,
         method:'GET'
     })
 }
-export function getUserProfile(id) {
+export function getUserProfile() {
     return request({
         url: API_BASE_URL + "/user",
         method: 'GET'

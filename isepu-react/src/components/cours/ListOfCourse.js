@@ -21,18 +21,27 @@ class ListOfCourse extends Component {
         ];
         this.remove = this.remove.bind(this);
         this.loadUserProfile=this.loadUserProfile.bind(this);
+
     }
-        loadUserProfile(id){
+        loadUserProfile(){
             this.setState({
                 isLoading: true
             });
 
-            getUserProfile(id)
+            getUserProfile()
                 .then(response => {
                     this.setState({
                         user: response,
                         isLoading: false
                     });
+                    getCourseOfUser(this.state.user.email)
+                        .then(result => {
+
+                                this.setState({
+                                    data: result
+                                });
+                            }
+                        );
                     console.log(this.state.user);
                 }).catch(error => {
                 if(error.status === 404) {
@@ -46,20 +55,26 @@ class ListOfCourse extends Component {
                         isLoading: false
                     });
                 }
+
             });
+
+
     }
 
+
+
+
+
+
     componentDidMount(){
-        const email = this.props.match.params.email;
 
-        getCourseOfUser(email)
-        .then(result=>{
-            console.log(result);
 
-            this.setState({
-                data:result
-            });
-        });
+        this.loadUserProfile();
+        console.log(this.state);
+
+
+
+
     }
     async remove(id) {
         await fetch(`http://localhost:8080/course/${id}`, {
@@ -75,6 +90,8 @@ class ListOfCourse extends Component {
     }
 
     render() {
+       console.log(this.state.user);
+
         if(this.state.isLoading) {
             return <LoadingIndicator />;
         }
@@ -86,14 +103,18 @@ class ListOfCourse extends Component {
         if(this.state.serverError) {
             return <ServerError />;
         }
+
         return (
+
+
             <div className="container">
                 <div className="col-md-8 m-auto">
-                    <Link to="/addCourse" className="btn btn-light">Ajouter un Cours</Link>
-                    <br />
-                    <hr />
 
-                    <div className="tab-content" id="nav-tabContent">
+                        <Link to="/addCourse" className="btn btn-light">Ajouter un Cours</Link>
+                        <br />
+                        <hr />
+
+                        <div className="tab-content" id="nav-tabContent">
                         <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                             <table className="table" cellspacing="0">
                                 <thead>
@@ -131,11 +152,15 @@ class ListOfCourse extends Component {
                                 }
                                 </tbody>
                             </table>
+
+
                         </div>
                     </div>
+
                 </div>
             </div>
-        )
+        );
+
     }
 }
 

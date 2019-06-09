@@ -1,6 +1,47 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {Link} from "react-router-dom"
-export default function Navbar() {
+import {getUserProfile, ListOfSubjects} from "../utils/APIUtils";
+class Navbar extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            user:''
+        };
+        this.loadUserProfile=this.loadUserProfile.bind(this);
+    }
+
+    loadUserProfile() {
+        this.setState({
+            isLoading: true
+        });
+
+        getUserProfile()
+            .then(response => {
+                this.setState({
+                    user: response,
+                    isLoading: false
+                });
+            }).catch(error => {
+            if(error.status === 404) {
+                this.setState({
+                    notFound: true,
+                    isLoading: false
+                });
+            } else {
+                this.setState({
+                    serverError: true,
+                    isLoading: false
+                });
+            }
+        });
+    }
+
+
+    componentDidMount()
+    {
+        ListOfSubjects()
+    }
+    render(){
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-primary mb-4">
         <div className="container">
@@ -38,3 +79,6 @@ export default function Navbar() {
     </nav>
     )
 }
+}
+
+export default Navbar;
