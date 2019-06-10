@@ -1,5 +1,10 @@
 package com.equipeor.isepu.payload.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import java.util.Collection;
+
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class CourseResponse {
 
     private String name;
@@ -10,11 +15,26 @@ public class CourseResponse {
 
     private UserResponse professor;
 
+    private Collection<SessionResponse> sessions;
+
+    public CourseResponse(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public CourseResponse(String name, String description, SubjectResponse subject, UserResponse professor) {
         this.name = name;
         this.description = description;
         this.subject = subject;
         this.professor = professor;
+    }
+
+    public CourseResponse(String name, String description, SubjectResponse subject, UserResponse professor, Collection<SessionResponse> sessions) {
+        this.name = name;
+        this.description = description;
+        this.subject = subject;
+        this.professor = professor;
+        this.sessions = sessions;
     }
 
     public String getName() {
@@ -47,5 +67,13 @@ public class CourseResponse {
 
     public void setProfessor(UserResponse professor) {
         this.professor = professor;
+    }
+
+    public Collection<SessionResponse> getSessions() {
+        return sessions;
+    }
+
+    public void setSessions(Collection<SessionResponse> sessions) {
+        this.sessions = sessions;
     }
 }

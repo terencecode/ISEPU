@@ -13,6 +13,9 @@ public class Homework {
     @Column(name = "status")
     private HomeworkStatus status;
 
+    @Column(name = "description", length = 5000)
+    private  String description;
+
     @ManyToOne
     @JoinColumn
     private Session session;
@@ -38,5 +41,13 @@ public class Homework {
 
     public void setStatus(HomeworkStatus status) {
         this.status = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

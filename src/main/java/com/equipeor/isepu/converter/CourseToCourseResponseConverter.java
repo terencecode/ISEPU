@@ -9,7 +9,7 @@ import com.equipeor.isepu.payload.response.UserResponse;
 import com.equipeor.isepu.utils.converter.OneWayConverter;
 
 public class CourseToCourseResponseConverter extends OneWayConverter<CourseResponse, Course> {
-    public CourseToCourseResponseConverter() {
+    public CourseToCourseResponseConverter(boolean includeSessions) {
         super(course -> {
             if (course == null) {
                 return null;
@@ -25,7 +25,8 @@ public class CourseToCourseResponseConverter extends OneWayConverter<CourseRespo
             ProfessorToUserResponseConverter professorConverter = new ProfessorToUserResponseConverter();
             UserResponse professorResponse = professorConverter.convertFromEntity(professor);
 
-            return new CourseResponse(name, description, subjectResponse, professorResponse);
+            return includeSessions ? new CourseResponse(name, description, subjectResponse, professorResponse) :
+                    new CourseResponse(name, description, subjectResponse, professorResponse, new SessionToSessionResponseConverter(true).createFromEntities(course.getSessions()));
         });
     }
 }
