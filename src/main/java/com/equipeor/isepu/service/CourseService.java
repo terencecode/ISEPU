@@ -39,7 +39,7 @@ public class CourseService {
     public CourseService(){}
 
     public Collection<CourseResponse> getAllCourses() {
-        return new CourseToCourseResponseConverter().createFromEntities(courseRepository.findAll());
+        return new CourseToCourseResponseConverter(true).createFromEntities(courseRepository.findAll());
     }
 
     public CourseResponse getCourseByName(String courseName) {
@@ -47,11 +47,11 @@ public class CourseService {
         if (!course.isPresent())
             throw new CourseNotFoundException();
         else
-            return new CourseToCourseResponseConverter().convertFromEntity(course.get());
+            return new CourseToCourseResponseConverter(true).convertFromEntity(course.get());
     }
 
     public Collection<CourseResponse> getCoursesByProfessorEmail(@PathVariable String professorEmail){
-        return new CourseToCourseResponseConverter().createFromEntities(courseRepository.findByProfessorEmail(professorEmail));
+        return new CourseToCourseResponseConverter(true).createFromEntities(courseRepository.findByProfessorEmail(professorEmail));
     }
 
     public URI addCourse(@RequestBody AddCourseRequest addCourseRequest, UserPrincipal userPrincipal){
@@ -85,6 +85,6 @@ public class CourseService {
     }
 
     public Collection<CourseResponse> getCoursesBySubjectName(String subjectName) {
-        return new CourseToCourseResponseConverter().createFromEntities(courseRepository.findBySubjectName(subjectName));
+        return new CourseToCourseResponseConverter(true).createFromEntities(courseRepository.findBySubjectName(subjectName));
     }
 }
