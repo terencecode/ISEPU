@@ -26,6 +26,12 @@ public class CourseController {
     }
 
     @Secured("ROLE_USER")
+    @GetMapping("/user")
+    public ResponseEntity<Collection<CourseResponse>> getCurrentUserCourses(@CurrentUser UserPrincipal userPrincipal) {
+        return ResponseEntity.ok(courseService.getCurrentUserCourses(userPrincipal));
+    }
+
+    @Secured("ROLE_USER")
     @GetMapping(value = "/{courseName}")
     public ResponseEntity<CourseResponse> getCourseByName(@PathVariable String courseName) {
         return ResponseEntity.ok(courseService.getCourseByName(courseName));
