@@ -12,6 +12,7 @@ import java.util.Collection;
 
 @Service
 public class SessionService {
+
     @Autowired
     private SessionRepository sessionRepository;
 

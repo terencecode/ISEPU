@@ -5,13 +5,16 @@ import com.equipeor.isepu.converter.CourseRequestToCourseConverter;
 import com.equipeor.isepu.converter.CourseToCourseResponseConverter;
 import com.equipeor.isepu.exception.CourseNotFoundException;
 import com.equipeor.isepu.exception.ProfessorNotFoundException;
+import com.equipeor.isepu.exception.UserNotFoundException;
 import com.equipeor.isepu.model.Course;
 import com.equipeor.isepu.model.Professor;
+import com.equipeor.isepu.model.Student;
 import com.equipeor.isepu.model.Subject;
 import com.equipeor.isepu.payload.request.AddCourseRequest;
 import com.equipeor.isepu.payload.response.CourseResponse;
 import com.equipeor.isepu.repository.CourseRepository;
 import com.equipeor.isepu.repository.ProfessorRepository;
+import com.equipeor.isepu.repository.StudentRepository;
 import com.equipeor.isepu.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +37,9 @@ public class CourseService {
     private ProfessorRepository professorRepository;
 
     @Autowired
+    private StudentRepository studentRepository;
+
+    @Autowired
     private SubjectRepository subjectRepository;
 
     public CourseService(){}
@@ -52,6 +58,18 @@ public class CourseService {
 
     public Collection<CourseResponse> getCoursesByProfessorEmail(@PathVariable String professorEmail){
         return new CourseToCourseResponseConverter(true).createFromEntities(courseRepository.findByProfessorEmail(professorEmail));
+    }
+
+    public Collection<CourseResponse> getCurrentUserCourses(UserPrincipal userPrincipal) {
+        Optional<Student> student = studentRepository.findById(userPrincipal.getId());
+        Optional<Professor> professor = professorRepository.findById(userPrincipal.getId());
+        if (student.isPresent()) {
+            Student currentStudent = student.get();
+            return new CourseToCourseResponseConverter(true).createFromEntities(currentStudent.getCourses());
+        } else if (professor.isPresent()) {
+            Professor currentProfessor = professor.get();
+            return new CourseToCourseResponseConverter(true).createFromEntities(currentProfessor.getCourses());
+        } else throw new UserNotFoundException();
     }
 
     public URI addCourse(@RequestBody AddCourseRequest addCourseRequest, UserPrincipal userPrincipal){
