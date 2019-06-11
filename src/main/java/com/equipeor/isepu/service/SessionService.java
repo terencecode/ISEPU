@@ -1,6 +1,8 @@
 package com.equipeor.isepu.service;
 
 import com.equipeor.isepu.configuration.UserPrincipal;
+import com.equipeor.isepu.converter.SessionToSessionResponseConverter;
+import com.equipeor.isepu.exception.CourseNotFoundException;
 import com.equipeor.isepu.exception.ProfessorNotFoundException;
 import com.equipeor.isepu.exception.UserNotFoundException;
 import com.equipeor.isepu.model.Course;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -41,20 +44,46 @@ public class SessionService {
         Optional<Student> student = studentRepository.findById(userPrincipal.getId());
         Optional<Professor> professor = professorRepository.findById(userPrincipal.getId());
         if (student.isPresent()) {
+            Collection<Session> sessions = new ArrayList<>();
             Student currentStudent = student.get();
-            return null;
+            for(Course course : currentStudent.getCourses()) {
+                sessions.addAll(course.getSessions());
+            }
+            return new SessionToSessionResponseConverter(true).createFromEntities(sessions);
         } else if (professor.isPresent()) {
             Professor currentProfessor = professor.get();
-            return null;
+            Collection<Session> sessions = new ArrayList<>();
+            for(Course course : currentProfessor.getCourses()) {
+                sessions.addAll(course.getSessions());
+            }
+            return new SessionToSessionResponseConverter(true).createFromEntities(sessions);
         } else throw new UserNotFoundException();
     }
 
     public Collection<SessionResponse> getCourseSessions(String courseName, UserPrincipal userPrincipal) {
-        return null;
-    }
-
-    public SessionResponse getSession(SessionRequest sessionRequest, UserPrincipal userPrincipal) {
-        return null;
+        Optional<Student> student = studentRepository.findById(userPrincipal.getId());
+        Optional<Professor> professor = professorRepository.findById(userPrincipal.getId());
+        if (student.isPresent()) {
+            Collection<Session> sessions = new ArrayList<>();
+            Student currentStudent = student.get();
+            for(Course course : currentStudent.getCourses()) {
+                if (course.getName() == courseName) {
+                    sessions.addAll(course.getSessions());
+                }
+            }
+            if (sessions.isEmpty()) throw new CourseNotFoundException();
+            return new SessionToSessionResponseConverter(true).createFromEntities(sessions);
+        } else if (professor.isPresent()) {
+            Professor currentProfessor = professor.get();
+            Collection<Session> sessions = new ArrayList<>();
+            for(Course course : currentProfessor.getCourses()) {
+                if (course.getName() == courseName) {
+                    sessions.addAll(course.getSessions());
+                }
+            }
+            if (sessions.isEmpty()) throw new CourseNotFoundException();
+            return new SessionToSessionResponseConverter(true).createFromEntities(sessions);
+        } else throw new UserNotFoundException();
     }
 
     public URI addSession(SessionRequest sessionRequest, UserPrincipal userPrincipal) {
