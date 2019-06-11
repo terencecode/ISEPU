@@ -28,7 +28,8 @@ class AddSession extends Component {
             startingTime:date[0]._d,
             finishingTime:date[1]._d
         });
-
+        const date1=new Date(this.state.startingTime);
+        console.log(date1);
     }
 
     onSubmit(e){
