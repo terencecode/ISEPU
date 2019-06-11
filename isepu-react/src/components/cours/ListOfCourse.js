@@ -40,9 +40,10 @@ class ListOfCourse extends Component {
                                 this.setState({
                                     data: result
                                 });
-                            }
+                                console.log(this.state.data);
+;                            }
                         );
-                    console.log(this.state.user);
+
                 }).catch(error => {
                 if(error.status === 404) {
                     this.setState({
@@ -139,7 +140,7 @@ class ListOfCourse extends Component {
 
                                                 <td>
                                                     <ButtonGroup>
-                                                        <Link className="btn btn-primary" to={`/update/${item.id}`}>Edit</Link>
+                                                        <Link className="btn btn-primary" to={`/addSession/${item.name}`}>Ajouter une session</Link>
 
                                                         <Button className="btn btn-danger" onClick={() => this.remove(item.id)}>Delete</Button>
 

@@ -39,7 +39,10 @@ class Navbar extends Component {
 
     componentDidMount()
     {
-        ListOfSubjects()
+        this.loadUserProfile();
+        if(this.state.notFound===true){
+            this.props.history.push('/login');
+        }
     }
     render(){
     return (
@@ -54,13 +57,13 @@ class Navbar extends Component {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <Link className="nav-link" to="/">Home <span class="sr-only">(current)</span></Link>
+        <Link className="nav-link" to="/">Board <span class="sr-only">(current)</span></Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to="/Subject">Subject</Link>
+        <Link className="nav-link" to="/Subject">Matière</Link>
       </li>
       <li className="nav-item dropdown">
-        <Link className="nav-link dropdown-toggle" to="/Course" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <Link className="nav-link dropdown-toggle" to='#' id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Dropdown
         </Link>
         <div className="dropdown-menu" aria-labelledby="navbarDropdown">

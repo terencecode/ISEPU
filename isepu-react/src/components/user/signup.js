@@ -36,7 +36,7 @@ class Signup extends Component {
                 value: ''
             },
 
-            promo: 'P2'
+            promo: ''
 
         };
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -268,7 +268,7 @@ class Signup extends Component {
                                     <Option value="P2">P2</Option>
                                     <Option value="I1">I1</Option>
                                     <Option value="I2">I2</Option>
-                                    <Option value="A1">A1</Option>
+                                    <Option selected={"selected"} value="A1">A1</Option>
                                     <Option value="A2">A2</Option>
                                     <Option value="A3">A3</Option>
 

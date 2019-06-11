@@ -50,11 +50,13 @@ class Profile extends Component {
     }
     handleLogout(){
         localStorage.removeItem(ACCESS_TOKEN);
+
         return <Redirect to='/signup'/>
     }
 
     componentDidMount() {
         const id = this.props.match.params.id;
+
         this.loadUserProfile(id);
     }
 

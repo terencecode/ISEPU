@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   Route,
   withRouter,
-  Switch
+  Switch, Redirect
 } from 'react-router-dom';
 
 import './App.css';
@@ -26,13 +26,16 @@ import { ACCESS_TOKEN } from './constants';
 import { Layout, notification } from 'antd';
 import UptadeSubject from "./components/matiere/UptadeSubject";
 import ListOfCourse from "./components/cours/ListOfCourse";
+import AddSession from "./components/Session/AddSession";
 const { Content } = Layout;
 class App extends Component{
+
 constructor(props) {
   super(props);
   this.state = {
     currentUser: null,
     isAuthenticated: false,
+    isStudent:false,
     isLoading: false
   }
   this.handleLogout = this.handleLogout.bind(this);
@@ -57,6 +60,12 @@ loadCurrentUser() {
       isAuthenticated: true,
       isLoading: false
     });
+    console.log(this.state.currentUser);
+    if(this.state.currentUser.promo !== undefined){
+      this.setState({
+        isStudent:true
+      })
+    }
   }).catch(error => {
     this.setState({
       isLoading: false
@@ -66,9 +75,10 @@ loadCurrentUser() {
 
 componentDidMount() {
   this.loadCurrentUser();
+
 }
 
-handleLogout(redirectTo="/", notificationType="success", description="You're successfully logged out.") {
+handleLogout(redirectTo="/login", notificationType="success", description="You're successfully logged out.") {
   localStorage.removeItem(ACCESS_TOKEN);
 
   this.setState({
@@ -121,12 +131,14 @@ handleLogin() {
                 <Provider store={store}>
                 <Router>
                   <Route path="/Course" />
-                  {/*<PrivateRoute authenticated={this.state.isAuthenticated}  path="/addCourse" component={AddCourse} handleLogout={this.handleLogout}/>*/}
+                  <PrivateRoute authenticated={this.state.isAuthenticated && !this.state.isStudent}  path="/addCourse" component={AddCourse} handleLogout={this.handleLogout} >
+                  </PrivateRoute>
                   <Route  path="/addSubject" component={AddSubject}/>
                   <Route  path="/Subject" component={ListOfSubject}/>
                   <Route  path="/Update/:id" component={UptadeSubject}/>
                   <Route path="/Course" component={ListOfCourse}/>
                 <Route path="/addCourse" component={AddCourse}/>
+                <Route path="/addSession/:courseName" component={AddSession}/>
 
 
                 </Router>
