@@ -1,20 +1,21 @@
 package com.equipeor.isepu.payload.request;
 
-import java.time.Instant;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class SessionRequest {
 
-    private Instant startingTime;
+    private Long startingTime;
 
     private Long finishingTime;
 
-    private Long courseName;
+    private String courseName;
 
-    public Instant getStartingTime() {
+    public Long getStartingTime() {
         return startingTime;
     }
 
-    public void setStartingTime(Instant startingTime) {
+    public void setStartingTime(Long startingTime) {
         this.startingTime = startingTime;
     }
 
@@ -26,11 +27,11 @@ public class SessionRequest {
         this.finishingTime = finishingTime;
     }
 
-    public Long getCourseName() {
+    public String getCourseName() {
         return courseName;
     }
 
-    public void setCourseName(Long courseName) {
+    public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
 }
