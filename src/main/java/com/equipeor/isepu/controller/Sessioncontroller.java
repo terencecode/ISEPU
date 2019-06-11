@@ -21,26 +21,26 @@ public class Sessioncontroller {
 
     @Secured("ROLE_USER")
     @GetMapping("/all")
-    public ResponseEntity<Collection<SessionResponse>> getUserSessions(@CurrentUser UserPrincipal userPrincipal) {
-        return ResponseEntity.ok(sessionService.getAllUserSessions(userPrincipal));
+    public ResponseEntity<Collection<SessionResponse>> getCurrentUserSessions(@CurrentUser UserPrincipal userPrincipal) {
+        return ResponseEntity.ok(sessionService.getCurrentUserSessions(userPrincipal));
     }
 
-    @Secured("ROLE_USER")
+    /*@Secured("ROLE_USER")
     @GetMapping("/{courseName}")
     public ResponseEntity<Collection<SessionResponse>> getCourseSessions(@PathVariable String courseName, @CurrentUser UserPrincipal userPrincipal) {
-        return ResponseEntity.ok(sessionService.getAllCourseSessions(courseName, userPrincipal));
-    }
+        return ResponseEntity.ok(sessionService.getCourseSessions(courseName, userPrincipal));
+    }*/
 
-    @Secured("ROLE_USER")
+    /*@Secured("ROLE_USER")
     @GetMapping
     public ResponseEntity<SessionResponse> getSession(@RequestBody SessionRequest sessionRequest, @CurrentUser UserPrincipal userPrincipal) {
         return ResponseEntity.ok(sessionService.getSession(sessionRequest, userPrincipal));
-    }
+    }*/
 
     @Secured("ROLE_PROFESSOR")
     @PostMapping
     public ResponseEntity<Void> addSession(@RequestBody SessionRequest sessionRequest, @CurrentUser UserPrincipal userPrincipal) {
-        return ResponseEntity.created(sessionService.addCourse(sessionRequest, userPrincipal)).build();
+        return ResponseEntity.created(sessionService.addSession(sessionRequest, userPrincipal)).build();
     }
 
     //TODO: addCourse via admin and professorId
