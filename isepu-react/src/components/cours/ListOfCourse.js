@@ -16,8 +16,9 @@ class ListOfCourse extends Component {
             isLoading:false
         };
         this.headers = [
-            {key: 'id', label: 'Id'},
-            {key: 'name', label: 'Name'}
+
+            {key: 'name', label: 'Name'},
+            {key: 'description', label: 'Description'}
         ];
         this.remove = this.remove.bind(this);
         this.loadUserProfile=this.loadUserProfile.bind(this);
@@ -135,8 +136,8 @@ class ListOfCourse extends Component {
                                     this.state.data.map(function(item, key) {
                                         return (
                                             <tr key = {key}>
-                                                <td>{item.id}</td>
                                                 <td>{item.name}</td>
+                                                <td>{item.description}</td>
 
                                                 <td>
                                                     <ButtonGroup>

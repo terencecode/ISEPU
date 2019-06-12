@@ -12,8 +12,7 @@ import ServerError from '../../common/ServerError';
          this.state={
             "name":"",
             "description":"",
-            "professor_id":"",
-            "subjectName":""
+
 
 
          };
@@ -30,8 +29,7 @@ import ServerError from '../../common/ServerError';
          const newCourse={
              "name":this.state.name,
              "description":this.state.description,
-             "professor_id":1,
-             "subject_id":1
+
 
          };
          //console.log(newCourse);
@@ -51,10 +49,10 @@ import ServerError from '../../common/ServerError';
                     <Link to="/" className="btn btn-light">
                         Retour Acceuil
                     </Link>
-                    <h4 className="display-4 text-center">Ajouter un devoir</h4>
+                    <h4 className="display-4 text-center">Ajouter un cours</h4>
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">
-                            <input type="text" className="form-control form-control-lg" name="name" value={this.state.name} placeholder="Nom du devoir" onChange={this.onChange} />
+                            <input type="text" className="form-control form-control-lg" name="name" value={this.state.name} placeholder="Nom du cours" onChange={this.onChange} />
                         </div>
                         <div className="form-group">
                             <textarea className="form-control form-control-lg" placeholder="Description" value={this.state.description} name="description" onChange={this.onChange}></textarea>
