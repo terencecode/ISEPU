@@ -11,7 +11,6 @@ import com.equipeor.isepu.model.Session;
 import com.equipeor.isepu.model.Student;
 import com.equipeor.isepu.payload.request.SessionRequest;
 import com.equipeor.isepu.payload.response.SessionResponse;
-import com.equipeor.isepu.repository.CourseRepository;
 import com.equipeor.isepu.repository.ProfessorRepository;
 import com.equipeor.isepu.repository.SessionRepository;
 import com.equipeor.isepu.repository.StudentRepository;
@@ -27,9 +26,6 @@ import java.util.Optional;
 
 @Service
 public class SessionService {
-
-    @Autowired
-    private CourseRepository courseRepository;
 
     @Autowired
     private SessionRepository sessionRepository;
@@ -103,6 +99,30 @@ public class SessionService {
                             .toUri();
                 }
             }
+        }
+        throw new ProfessorNotFoundException("The current user doesn't seem to be a professor");
+    }
+
+    public URI updateSession(SessionRequest sessionRequest, UserPrincipal userPrincipal) {
+        Optional<Professor> professor = professorRepository.findById(userPrincipal.getId());
+        if (professor.isPresent()) {
+            Professor currentProfessor = professor.get();
+            Optional<Session> session = sessionRepository.findSessionById(sessionRequest.getId());
+            if (session.isPresent()) {
+                Session updatedSession = session.get();
+                if (currentProfessor.getCourses().contains(updatedSession.getCourse())) {
+                    updatedSession.setStartingTime(sessionRequest.getStartingTime() == null ? updatedSession.getStartingTime() : Instant.ofEpochMilli(sessionRequest.getStartingTime()));
+                    updatedSession.setFinishingTime(sessionRequest.getFinishingTime() == null ? updatedSession.getFinishingTime() : Instant.ofEpochMilli(sessionRequest.getFinishingTime()));
+                    sessionRepository.save(updatedSession);
+                    sessionRepository.flush();
+                    return ServletUriComponentsBuilder
+                            .fromCurrentRequest()
+                            .path("/{id}")
+                            .buildAndExpand(updatedSession.getId())
+                            .toUri();
+                }
+            }
+
         }
         throw new ProfessorNotFoundException("The current user doesn't seem to be a professor");
     }

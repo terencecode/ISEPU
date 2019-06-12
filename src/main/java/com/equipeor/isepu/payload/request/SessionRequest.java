@@ -5,11 +5,21 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class SessionRequest {
 
+    private Long id;
+
     private Long startingTime;
 
     private Long finishingTime;
 
     private String courseName;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getStartingTime() {
         return startingTime;
