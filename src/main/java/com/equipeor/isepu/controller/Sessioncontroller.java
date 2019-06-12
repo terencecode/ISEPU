@@ -37,6 +37,12 @@ public class Sessioncontroller {
         return ResponseEntity.created(sessionService.addSession(sessionRequest, userPrincipal)).build();
     }
 
+    @Secured("ROLE_PROFESSOR")
+    @PutMapping
+    public ResponseEntity<Void> updateSession(@RequestBody SessionRequest sessionRequest, @CurrentUser UserPrincipal userPrincipal) {
+        return ResponseEntity.created(sessionService.updateSession(sessionRequest, userPrincipal)).build();
+    }
+
     //TODO: addCourse via admin and professorId
 
     @Secured({"ROLE_PROFESSOR", "ROLE_ADMIN"})

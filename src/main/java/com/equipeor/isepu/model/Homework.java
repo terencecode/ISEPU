@@ -1,6 +1,7 @@
 package com.equipeor.isepu.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Homework {
@@ -10,9 +11,6 @@ public class Homework {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "status")
-    private HomeworkStatus status;
-
     @Column(name = "description", length = 5000)
     private  String description;
 
@@ -20,11 +18,28 @@ public class Homework {
     @JoinColumn
     private Session session;
 
+    @OneToMany(mappedBy = "homework", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<HomeworkState> HomeworkStates;
+
     public Homework() {}
+
+    public Homework(String description, Session session) {
+        this.description = description;
+        this.session = session;
+    }
+
+    public Homework(String description, Session session, Set<HomeworkState> homeworkStates) {
+        this.description = description;
+        this.session = session;
+        HomeworkStates = homeworkStates;
+    }
 
     public Homework(Session session) {
         this.session = session;
-        this.status = HomeworkStatus.TO_DO;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Session getSession() {
@@ -35,19 +50,19 @@ public class Homework {
         this.session = session;
     }
 
-    public HomeworkStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(HomeworkStatus status) {
-        this.status = status;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<HomeworkState> getHomeworkStates() {
+        return HomeworkStates;
+    }
+
+    public void setHomeworkStates(Set<HomeworkState> homeworkStates) {
+        HomeworkStates = homeworkStates;
     }
 }

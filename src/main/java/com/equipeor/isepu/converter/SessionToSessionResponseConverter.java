@@ -10,8 +10,8 @@ public class SessionToSessionResponseConverter extends OneWayConverter<SessionRe
             if (session == null) {
                 return null;
             }
-            return includeHomeworks ? new SessionResponse(session.getStartingTime(), session.getFinishingTime(), session.getCourse().getName(), new HomeworkToHomeworkResponseConverter(false) .createFromEntities(session.getHomework())) :
-                    new SessionResponse(session.getStartingTime(), session.getFinishingTime(), session.getCourse().getName());
+            return includeHomeworks ? new SessionResponse(session.getId(), session.getStartingTime(), session.getFinishingTime(), session.getCourse().getName(), new HomeworkToHomeworkResponseConverter(false) .createFromEntities(session.getHomework())) :
+                    new SessionResponse(session.getId(), session.getStartingTime(), session.getFinishingTime(), session.getCourse().getName());
         });
     }
 }
