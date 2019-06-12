@@ -88,7 +88,7 @@ public class SessionService {
             Professor currentProfessor = professor.get();
             Collection<Course> courses = currentProfessor.getCourses();
             for (Course course : courses) {
-                if (course.getName() == sessionRequest.getCourseName()) {
+                if (course.getName().equals(sessionRequest.getCourseName())) {
                     Session session = new Session(Instant.ofEpochMilli(sessionRequest.getStartingTime()), Instant.ofEpochMilli(sessionRequest.getFinishingTime()), course);
                     Session newSession = sessionRepository.save(session);
                     sessionRepository.flush();
