@@ -99,8 +99,8 @@ public class SessionService {
                             .toUri();
                 }
             }
-        }
-        throw new ProfessorNotFoundException("The current user doesn't seem to be a professor");
+            throw new CourseNotFoundException();
+        } throw new ProfessorNotFoundException("The current user doesn't seem to be a professor");
     }
 
     public URI updateSession(SessionRequest sessionRequest, UserPrincipal userPrincipal) {
