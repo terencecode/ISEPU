@@ -83,7 +83,7 @@ import ServerError from '../../common/ServerError';
 addCourse.prototype= {
     addCourse: PropTypes.func.isRequired,
     error:PropTypes.object.isRequired
-}
+};
 
 const mapStateToProps =state => ({
     errors: state.errors

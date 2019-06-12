@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link} from "react-router-dom"
+import {Link, withRouter} from "react-router-dom"
 import {getUserProfile, ListOfSubjects} from "../utils/APIUtils";
 class Navbar extends Component {
     constructor(props){
@@ -37,12 +37,13 @@ class Navbar extends Component {
     }
 
 
-    componentDidMount()
+    componentWillMount()
     {
         this.loadUserProfile();
-        if(this.state.notFound===true){
+        if(this.props.isAuthenticated===false){
             this.props.history.push('/login');
         }
+        console.log('props',this.props)
     }
     render(){
     return (
@@ -84,4 +85,4 @@ class Navbar extends Component {
 }
 }
 
-export default Navbar;
+export default withRouter(Navbar);

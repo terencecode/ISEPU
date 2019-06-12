@@ -75,6 +75,9 @@ loadCurrentUser() {
 
 componentDidMount() {
   this.loadCurrentUser();
+  if(this.props.isAuthenticated===false){
+    this.props.history.push('/login');
+  }
 
 }
 
@@ -111,7 +114,7 @@ handleLogin() {
 
 <div className="App">
     <Layout className="app-container">
-          <Navbar isAuthenticated={this.state.isAuthenticated} 
+          <Navbar isAuthenticated={this.state.isAuthenticated}
             currentUser={this.state.currentUser}
             onLogout={this.handleLogout} />
 
@@ -122,11 +125,11 @@ handleLogin() {
                   render={(props) => <Board isAuthenticated={this.state.isAuthenticated} 
                       currentUser={this.state.currentUser} handleLogout={this.handleLogout} {...props} />}>
                 </Route>
-                <Route path="/login" 
+                <Route path="/login"
                   render={(props) => <Login onLogin={this.handleLogin} {...props} />}></Route>
                 <Route path="/signup" component={Signup}></Route>
                 <Route path="/Profile"
-                       render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
+                       render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} onLogout={this.handleLogout} currentUser={this.state.currentUser} {...props}  />}>
                 </Route>
                 <Provider store={store}>
                 <Router>

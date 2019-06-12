@@ -50,8 +50,8 @@ class Profile extends Component {
     }
     handleLogout(){
         localStorage.removeItem(ACCESS_TOKEN);
-
-        return <Redirect to='/signup'/>
+        console.log(this.props);
+        this.props.history.push('/login');
     }
 
     componentDidMount() {
@@ -89,7 +89,7 @@ class Profile extends Component {
 
                 {
                     this.state.user ? (
-                        <div className="profile-sidebar">
+                        <div className="profile-sidebar swing-in-top-fwd">
 
                             <div className="profile-userpic">
                                 <img
