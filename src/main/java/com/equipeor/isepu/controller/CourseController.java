@@ -3,6 +3,7 @@ package com.equipeor.isepu.controller;
 import com.equipeor.isepu.configuration.CurrentUser;
 import com.equipeor.isepu.configuration.UserPrincipal;
 import com.equipeor.isepu.payload.request.AddCourseRequest;
+import com.equipeor.isepu.payload.request.RegisterStudentRequest;
 import com.equipeor.isepu.payload.response.CourseResponse;
 import com.equipeor.isepu.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,15 @@ public class CourseController {
     public ResponseEntity<Void> addCourse(@RequestBody AddCourseRequest courseName, @CurrentUser UserPrincipal userPrincipal) {
         return ResponseEntity.created(courseService.addCourse(courseName, userPrincipal)).build();
     }
+
+    @Secured("ROLE_PROFESSOR")
+    @PostMapping("/register")
+    public ResponseEntity<Void> registerStudent(@RequestBody RegisterStudentRequest registerStudentRequest, @CurrentUser UserPrincipal userPrincipal) {
+        courseService.registerStudents(registerStudentRequest, userPrincipal);
+        return ResponseEntity.ok().build();
+    }
+
+    //TODO: unregister students
 
     //TODO: addCourse via admin and professorId
 
