@@ -4,6 +4,7 @@ import PropTypes from"prop-types";
 import {connect} from "react-redux";
 import {addSession} from "../../actions/SessionAction";
 import {DatePicker} from "antd";
+import {formatDateTime} from "../../utils/Helper";
 const {RangePicker} =DatePicker;
 
 class AddSession extends Component {
@@ -18,18 +19,16 @@ class AddSession extends Component {
 
 
         };
-        console.log(this.props);
         this.onChange=this.onChange.bind(this);
         this.onSubmit=this.onSubmit.bind(this);
 
     }
     onChange(date,dateString){
         this.setState({
-            startingTime:date[0]._d,
-            finishingTime:date[1]._d
+            startingTime:date[0].unix(),
+            finishingTime:date[1].unix()
         });
-        const date1=new Date(this.state.startingTime);
-        console.log(date1);
+        console.log(date[0].unix());
     }
 
     onSubmit(e){

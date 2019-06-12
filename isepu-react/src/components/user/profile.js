@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { getUserProfile } from '../../utils/APIUtils';
 import { Avatar, Tabs } from 'antd';
-
+import {Link} from "react-router-dom";
 import { formatDate } from '../../utils/Helper';
 import LoadingIndicator  from '../../common/LoadingIndicator';
 import './Profile.css';
@@ -50,8 +50,7 @@ class Profile extends Component {
     }
     handleLogout(){
         localStorage.removeItem(ACCESS_TOKEN);
-        console.log(this.props);
-        this.props.history.push('/login');
+
     }
 
     componentDidMount() {
@@ -92,9 +91,7 @@ class Profile extends Component {
                         <div className="profile-sidebar swing-in-top-fwd">
 
                             <div className="profile-userpic">
-                                <img
-                                    src="./img/Student.svg"
-                                    className="img-responsive" alt=""/>
+                                <Avatar size="large" style={{ backgroundColor: '#87d068' }} icon="user" />
                             </div>
 
                             <div className="profile-usertitle">
@@ -108,7 +105,7 @@ class Profile extends Component {
 
                             <div className="profile-userbuttons">
                                 <button type="button" className="btn btn-success btn-sm">Follow</button>
-                                <button type="button" className="btn btn-danger btn-sm" onClick={this.handleLogout}>Logout</button>
+                                <Link to='/login'> <button type="button" className="btn btn-danger btn-sm" onClick={this.handleLogout}>Logout</button></Link>
                             </div>
                             <div className="profile-usermenu">
                                 <ul className="nav">

@@ -60,7 +60,6 @@ loadCurrentUser() {
       isAuthenticated: true,
       isLoading: false
     });
-    console.log(this.state.currentUser);
     if(this.state.currentUser.promo !== undefined){
       this.setState({
         isStudent:true
@@ -73,9 +72,10 @@ loadCurrentUser() {
   });
 }
 
-componentDidMount() {
+componentWillMount() {
   this.loadCurrentUser();
   if(this.props.isAuthenticated===false){
+    console.log('redirect');
     this.props.history.push('/login');
   }
 
@@ -121,12 +121,12 @@ handleLogin() {
           <Content className="app-content">
             <div className="container">
               <Switch>      
-                <Route exact path="/" 
-                  render={(props) => <Board isAuthenticated={this.state.isAuthenticated} 
+                <Route exact path="/"
+                  render={(props) => <Board isAuthenticated={this.state.isAuthenticated}
                       currentUser={this.state.currentUser} handleLogout={this.handleLogout} {...props} />}>
                 </Route>
                 <Route path="/login"
-                  render={(props) => <Login onLogin={this.handleLogin} {...props} />}></Route>
+    render={(props) => <Login onLogin={this.handleLogin} {...props} />}/>
                 <Route path="/signup" component={Signup}></Route>
                 <Route path="/Profile"
                        render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} onLogout={this.handleLogout} currentUser={this.state.currentUser} {...props}  />}>
@@ -134,8 +134,7 @@ handleLogin() {
                 <Provider store={store}>
                 <Router>
                   <Route path="/Course" />
-                  <PrivateRoute authenticated={this.state.isAuthenticated && !this.state.isStudent}  path="/addCourse" component={AddCourse} handleLogout={this.handleLogout} >
-                  </PrivateRoute>
+
                   <Route  path="/addSubject" component={AddSubject}/>
                   <Route  path="/Subject" component={ListOfSubject}/>
                   <Route  path="/Update/:id" component={UptadeSubject}/>
