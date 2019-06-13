@@ -11,6 +11,7 @@ import com.equipeor.isepu.model.Professor;
 import com.equipeor.isepu.model.Student;
 import com.equipeor.isepu.model.Subject;
 import com.equipeor.isepu.payload.request.AddCourseRequest;
+import com.equipeor.isepu.payload.request.RegisterStudentRequest;
 import com.equipeor.isepu.payload.response.CourseResponse;
 import com.equipeor.isepu.repository.CourseRepository;
 import com.equipeor.isepu.repository.ProfessorRepository;
@@ -94,6 +95,18 @@ public class CourseService {
                     .buildAndExpand(course.getId())
                     .toUri();
 
+        } else throw new ProfessorNotFoundException("The current user doesn't seem to be a professor");
+    }
+
+    public void registerStudents(RegisterStudentRequest registerStudentRequest,  UserPrincipal userPrincipal) {
+        Optional<Professor> professor = professorRepository.findById(userPrincipal.getId());
+        if (professor.isPresent()) {
+            Optional<Course> course =  courseRepository.findByName(registerStudentRequest.getCourseName());
+            if (course.isPresent()) {
+                Course currentCourse = course.get();
+                currentCourse.setStudents(studentRepository.findAllByEmailIn(registerStudentRequest.getStudentEmails()));
+                courseRepository.save(currentCourse);
+            } else throw new CourseNotFoundException();
         } else throw new ProfessorNotFoundException("The current user doesn't seem to be a professor");
     }
 
