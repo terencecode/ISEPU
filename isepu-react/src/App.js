@@ -133,6 +133,7 @@ handleLogin() {
                          render={(props) => <Board isAuthenticated={this.state.isAuthenticated}
                                                    currentUser={this.state.currentUser} handleLogout={this.handleLogout} {...props} />}>
                   </Route>
+
                   <Route  path="/addSubject" component={AddSubject}/>
                   <Route  path="/Subject" component={ListOfSubject}/>
                   <Route  path="/Update/:id" component={UptadeSubject}/>

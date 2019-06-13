@@ -71,7 +71,7 @@ export function checklastNameAvailability(lastname) {
 
 export function checkEmailAvailability(email) {
     return request({
-        url: API_BASE_URL + "/user/checkEmailAvailability?email=" + email,
+        url: API_BASE_URL + "/auth/" + email,
         method: 'GET'
     });
 }

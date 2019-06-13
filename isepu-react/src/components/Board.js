@@ -70,9 +70,9 @@ class Board extends Component {
 }
 Board.propTypes={
     getHomework:PropTypes.func.isRequired,
-    Homework: PropTypes.object.isRequired
+    Homeworks: PropTypes.object.isRequired
 };
 const mapStateToProps =state => ({
-    Homework:state.Homework
+    Homeworks:state.Homework
 });
 export default connect(null,{getHomework}) (Board);

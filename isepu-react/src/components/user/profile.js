@@ -9,7 +9,7 @@ import './Profile.css';
 import NotFound from '../../common/NotFound';
 import ServerError from '../../common/ServerError';
 import {ACCESS_TOKEN} from "../../constants";
-import {Redirect} from "react-router-dom";
+import ProfileNotReady from './img/profile_notReady.svg';
 
 const TabPane = Tabs.TabPane;
 
@@ -34,6 +34,15 @@ class Profile extends Component {
                     user: response,
                     isLoading: false
                 });
+                if(this.state.user.promo===undefined){
+                    this.setState({
+                        Type:'professeur'
+                    })
+                }else{
+                    this.setState({
+                        Type:'Eleve'
+                    })
+                }
             }).catch(error => {
             if(error.status === 404) {
                 this.setState({
@@ -99,38 +108,14 @@ class Profile extends Component {
                                     {this.state.user.firstName} {this.state.user.lastName} {this.state.user.email}
                                 </div>
                                 <div className="profile-usertitle-job">
-                                    Developer
+                                    {this.state.Type}
                                 </div>
                             </div>
 
                             <div className="profile-userbuttons">
-                                <button type="button" className="btn btn-success btn-sm">Follow</button>
                                 <Link to='/login'> <button type="button" className="btn btn-danger btn-sm" onClick={this.handleLogout}>Logout</button></Link>
                             </div>
-                            <div className="profile-usermenu">
-                                <ul className="nav">
-                                    <li className="active">
-                                        <a href="#">
-                                            <i className="glyphicon glyphicon-home"></i>
-                                            Overview </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i className="glyphicon glyphicon-user"></i>
-                                            Account Settings </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <i className="glyphicon glyphicon-ok"></i>
-                                            Tasks </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i className="glyphicon glyphicon-flag"></i>
-                                            Help </a>
-                                    </li>
-                                </ul>
-                            </div>
+
 
                         </div>
 
@@ -140,7 +125,13 @@ class Profile extends Component {
                 }
             </div>
                 <div className='col-md-9'>
-                    <NotFound/>
+                    <div className="profile-content swing-in-top-fwd">
+                        <img src={ProfileNotReady} alt="ProfileNotReady" className="profileSVG"/>
+                        <div className="desc">
+                            We have to get homeWork and Courses and displays them here
+                        </div>
+                    </div>
+
                 </div>
             </div>
         );

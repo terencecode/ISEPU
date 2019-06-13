@@ -455,15 +455,7 @@ class Signup extends Component {
 
         checkEmailAvailability(emailValue)
         .then(response => {
-            if(response.available) {
-                this.setState({
-                    email: {
-                        value: emailValue,
-                        validateStatus: 'success',
-                        errorMsg: null
-                    }
-                });
-            } else {
+            if(response===409) {
                 this.setState({
                     email: {
                         value: emailValue,
@@ -471,6 +463,15 @@ class Signup extends Component {
                         errorMsg: 'This Email is already registered'
                     }
                 });
+            } else {
+                this.setState({
+                    email: {
+                        value: emailValue,
+                        validateStatus: 'success',
+                        errorMsg: null
+                    }
+                });
+
             }
         }).catch(error => {
             // Marking validateStatus as success, Form will be recchecked at server

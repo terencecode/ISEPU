@@ -38,7 +38,7 @@ this.deleteSubject=this.deleteSubject.bind(this);
 				<br />
         <hr />
 
-                <div className="tab-content" id="nav-tabContent">
+                <div className="tab-content swing-in-top-fwd" id="nav-tabContent">
                 <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 				<table className="table" cellSpacing="0">
 					<thead>
