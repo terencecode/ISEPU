@@ -17,7 +17,7 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "ROLE_PROFESSOR"})
     @GetMapping("/all")
     public ResponseEntity<Collection<UserResponse>> getStudents() {
         return ResponseEntity.ok(studentService.getStudents());
