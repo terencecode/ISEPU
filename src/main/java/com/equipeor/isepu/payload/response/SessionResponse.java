@@ -14,23 +14,36 @@ public class SessionResponse {
 
     private Instant finishingTime;
 
-    private String courseName;
+    private CourseResponse course;
 
-    private Collection<HomeworkResponse> homework;
+    private Collection<HomeworkResponse> homeworks;
 
-    public SessionResponse(Long id, Instant startingTime, Instant finishingTime, String courseName) {
+    public SessionResponse(Long id, Instant startingTime, Instant finishingTime) {
         this.id = id;
         this.startingTime = startingTime;
         this.finishingTime = finishingTime;
-        this.courseName = courseName;
     }
 
-    public SessionResponse(Long id, Instant startingTime, Instant finishingTime, String courseName, Collection<HomeworkResponse> homework) {
+    public SessionResponse(Long id, Instant startingTime, Instant finishingTime, CourseResponse course) {
         this.id = id;
         this.startingTime = startingTime;
         this.finishingTime = finishingTime;
-        this.courseName = courseName;
-        this.homework = homework;
+        this.course = course;
+    }
+
+    public SessionResponse(Long id, Instant startingTime, Instant finishingTime, Collection<HomeworkResponse> homeworks) {
+        this.id = id;
+        this.startingTime = startingTime;
+        this.finishingTime = finishingTime;
+        this.homeworks = homeworks;
+    }
+
+    public SessionResponse(Long id, Instant startingTime, Instant finishingTime, CourseResponse course, Collection<HomeworkResponse> homeworks) {
+        this.id = id;
+        this.startingTime = startingTime;
+        this.finishingTime = finishingTime;
+        this.course = course;
+        this.homeworks = homeworks;
     }
 
     public Long getId() {
@@ -57,19 +70,19 @@ public class SessionResponse {
         this.finishingTime = finishingTime;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public CourseResponse getCourse() {
+        return course;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+    public void setCourse(CourseResponse courseName) {
+        this.course = courseName;
     }
 
-    public Collection<HomeworkResponse> getHomework() {
-        return homework;
+    public Collection<HomeworkResponse> getHomeworks() {
+        return homeworks;
     }
 
-    public void setHomework(Collection<HomeworkResponse> homework) {
-        this.homework = homework;
+    public void setHomeworks(Collection<HomeworkResponse> homeworks) {
+        this.homeworks = homeworks;
     }
 }

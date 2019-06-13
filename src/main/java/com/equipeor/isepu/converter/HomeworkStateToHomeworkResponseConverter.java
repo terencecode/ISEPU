@@ -10,7 +10,8 @@ public class HomeworkStateToHomeworkResponseConverter extends OneWayConverter<Ho
             if (homeworkState == null) {
                 return null;
             }
-            return new HomeworkResponse(homeworkState.getHomework().getId(), homeworkState.getHomework().getDescription(), homeworkState.getStatus().toString());
+            return includeSession ? new HomeworkResponse(homeworkState.getHomework().getId(), homeworkState.getHomework().getDescription(), homeworkState.getStatus().toString(), new SessionToSessionResponseConverter(false, true).convertFromEntity(homeworkState.getHomework().getSession()))
+                    : new HomeworkResponse(homeworkState.getHomework().getId(), homeworkState.getHomework().getDescription(), homeworkState.getStatus().toString());
         });
     }
 }
