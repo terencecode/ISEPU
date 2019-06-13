@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import './NotFound.css';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
+import NotFoundSVG from'./404.svg';
 
 class NotFound extends Component {
 
     render() {
         return (
             <div className="page-not-found">
-                <h1 className="title">
-                    404
-                </h1>
+                <img src={NotFoundSVG} alt='404' className='notfoundSVG'/>
+
                 <div className="desc">
                     The Page you're looking for was not found.
                 </div>

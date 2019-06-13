@@ -4,7 +4,9 @@ import PropTypes from"prop-types";
 import {connect} from "react-redux";
 import {addSession} from "../../actions/SessionAction";
 import {DatePicker} from "antd";
-import {formatDateTime} from "../../utils/Helper";
+import Moment from 'react-moment';
+import moment from 'moment';
+
 const {RangePicker} =DatePicker;
 
 class AddSession extends Component {
@@ -23,12 +25,12 @@ class AddSession extends Component {
         this.onSubmit=this.onSubmit.bind(this);
 
     }
-    onChange(date,dateString){
+    onChange(date){
         this.setState({
-            startingTime:date[0].unix(),
-            finishingTime:date[1].unix()
+            startingTime:new Date(date[0]._d).getTime(),
+            finishingTime:new Date(date[1]._d).getTime()
         });
-        console.log(date[0].unix());
+        console.log('test',new Date(date[0]._d).toISOString());
     }
 
     onSubmit(e){

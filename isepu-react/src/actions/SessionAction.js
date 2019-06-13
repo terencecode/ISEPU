@@ -19,4 +19,20 @@ export const addSession =(session,history)=> async dispatch => {
             payload:error.response.data
         })
     }
-}
+};
+export const getSession=()=> async dispatch => {
+    try{
+        await axios.get("http://localhost:8080/session/all",{headers:{Authorization:"Bearer "+ localStorage.getItem(ACCESS_TOKEN)}})
+        dispatch({
+            type:GET_ERRORS,
+            payload:{}
+        })
+    }catch (e) {
+        dispatch({
+            type:GET_ERRORS,
+            payload:e.response.data
+        })
+
+
+    }
+};

@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import './ServerError.css';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
-
+import ServerErrorSVG from './serverError.svg';
 class ServerError extends Component {
     render() {
         return (
             <div className="server-error-page">
-                <h1 className="server-error-title">
-                    500
-                </h1>
+                <img src={ServerErrorSVG} alt='ServeurError' className='serverErrorSVG'/>
                 <div className="server-error-desc">
                     Oops! Something went wrong at our Server. Why don't you go back?
                 </div>

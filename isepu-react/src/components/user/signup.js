@@ -13,6 +13,7 @@ import Tabs from 'react-bootstrap/Tabs';
 
 import {Form, Input, Button, notification, Select} from 'antd';
 import "antd/dist/antd.css";
+import loginSVG from "./img/login.svg";
 const FormItem = Form.Item;
 const Option=Select.Option;
 
@@ -130,6 +131,7 @@ class Signup extends Component {
     render() {
 
         return <div className="signup-container">
+            <img src={loginSVG} alt="login" className='loginSVG'/>
             <h1 className="page-title">S'enregistrer</h1>
             <Tabs id="Signup-tab"
                   activeKey={this.state.key}

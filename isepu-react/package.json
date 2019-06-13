@@ -16,7 +16,9 @@
     "reactstrap": "^8.0.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "typescript": "^3.4.5"
+    "typescript": "^3.4.5",
+    "react-moment": "latest",
+    "moment": "latest"
   },
   "scripts": {
     "start": "react-scripts start",

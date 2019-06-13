@@ -37,7 +37,10 @@ import ServerError from '../../common/ServerError';
          if(this.props.addCourse.errors===404){
              return <NotFound/>;
          }
-        }
+         if (!(this.props.addCourse.errors === 500 || this.props.addCourse.errors === 401)) {
+             return <ServerError/>;
+         }
+     }
     render() {
 
         return (

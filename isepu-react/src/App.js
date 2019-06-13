@@ -19,10 +19,9 @@ import Login from './components/user/login';
 import Signup from './components/user/signup';
 import Profile from './components/user/profile';
 import LoadingIndicator from './common/LoadingIndicator';
-import PrivateRoute from './common/PrivateRoute';
 import { getCurrentUser } from './utils/APIUtils';
 import { ACCESS_TOKEN } from './constants';
-
+import ListOfSession from './components/Session/ListSession';
 import { Layout, notification } from 'antd';
 import UptadeSubject from "./components/matiere/UptadeSubject";
 import ListOfCourse from "./components/cours/ListOfCourse";
@@ -141,7 +140,7 @@ handleLogin() {
                   <Route path="/Course" component={ListOfCourse}/>
                 <Route path="/addCourse" component={AddCourse}/>
                 <Route path="/addSession/:courseName" component={AddSession}/>
-
+                <Route path="/listSession" component={ListOfSession}/>
 
                 </Router>
               </Provider>

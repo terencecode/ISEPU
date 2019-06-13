@@ -139,6 +139,9 @@ class Profile extends Component {
                     ): null
                 }
             </div>
+                <div className='col-md-9'>
+                    <NotFound/>
+                </div>
             </div>
         );
     }

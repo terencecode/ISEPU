@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import PropTypes from"prop-types";
 import {connect} from "react-redux";
 import {updateSubject} from "../../actions/SubjectUptade";
+import {ACCESS_TOKEN} from "../../constants";
 
 
 class UpdateSubject extends Component {
@@ -21,7 +22,11 @@ class UpdateSubject extends Component {
 
     async componentDidMount() {
         if (this.props.match.params.id !== 'new') {
-            const name = await (await fetch(`http://localhost:8080/subject/get/${this.props.match.params.id}`)).json();
+            const name = await (await fetch(`http://localhost:8080/subject/${this.props.match.params.id}`,{
+                headers:{
+                    'Authorisation': 'Bearer '+ ACCESS_TOKEN
+                }
+            })).json();
             this.setState({item: name});
         }
     }
@@ -43,7 +48,9 @@ class UpdateSubject extends Component {
             method:  'PUT' ,
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorisation': 'Bearer '+ ACCESS_TOKEN
+
             },
             body: JSON.stringify(item),
         });

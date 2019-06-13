@@ -3,6 +3,7 @@ import { login } from '../../utils/APIUtils';
 import './login.css';
 import {Link, withRouter} from 'react-router-dom';
 import { ACCESS_TOKEN } from '../../constants';
+import loginSVG from './img/login.svg';
 
 import { Form, Input, Button, notification } from 'antd';
 const FormItem = Form.Item;
@@ -14,8 +15,10 @@ class Login extends Component {
         const AntWrappedLoginForm = Form.create()(LoginForm);
         return (
             <div className="login-container">
+                <img src={loginSVG} alt="login" className='loginSVG'/>
                 <h1 className="page-title">Login</h1>
                 <div className="login-content">
+
                     <AntWrappedLoginForm onLogin={this.props.onLogin} />
                 </div>
             </div>
@@ -59,6 +62,7 @@ class LoginForm extends Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
+
             <Form onSubmit={this.handleSubmit} className="login-form">
                 <FormItem>
                     {getFieldDecorator('email', {

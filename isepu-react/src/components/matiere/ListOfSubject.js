@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from "react-router-dom";
 import {ListOfSubjects, RemoveItemSubject} from '../../utils/APIUtils';
-import { Button, ButtonGroup, Container, Table } from 'reactstrap';
+import { Button, ButtonGroup } from 'reactstrap';
 
  class ListOfSubject extends Component {
     constructor(props){
@@ -25,15 +25,12 @@ this.deleteSubject=this.deleteSubject.bind(this);
             })
         );
     }
-   deleteSubject(name) {
-        RemoveItemSubject(name)
-       .then(() => {
-           let updatedGroups = [...this.state.data].filter(i => i.name !== name);
-           this.setState({data: updatedGroups});
-       });
-    }
+    deleteSubject(name){
+         RemoveItemSubject(name);
+     }
 
-    render() {
+
+     render() {
         return (
             <div className="container">
 			<div className="col-md-8 m-auto">
@@ -43,7 +40,7 @@ this.deleteSubject=this.deleteSubject.bind(this);
 
                 <div className="tab-content" id="nav-tabContent">
                 <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-				<table className="table" cellspacing="0">
+				<table className="table" cellSpacing="0">
 					<thead>
 						<tr>
 						{
@@ -68,7 +65,7 @@ this.deleteSubject=this.deleteSubject.bind(this);
                                       <ButtonGroup>
 										<Link className="btn btn-primary" to={`/update/${item.name}`}>Edit</Link>
 
-                                        <Button className="btn btn-danger" onClick={()=>this.deleteSubject(item.name)}>Delete</Button>
+                                        <Button className="btn btn-danger">Delete</Button>
 
 										&nbsp;
                                       </ButtonGroup>

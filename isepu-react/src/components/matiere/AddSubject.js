@@ -3,6 +3,8 @@ import {Link} from "react-router-dom";
 import PropTypes from"prop-types";
 import {connect} from "react-redux";
 import {addSubject} from "../../actions/SubjectAction";
+import NotFound from "../../common/NotFound";
+import ServerError from "../../common/ServerError";
 
 
  class AddSubject extends Component {
@@ -17,7 +19,6 @@ import {addSubject} from "../../actions/SubjectAction";
 
      }
      onChange(e){
-         const state=this.state;
          this.setState({[e.target.name]:e.target.value})
      }
 
@@ -28,8 +29,15 @@ import {addSubject} from "../../actions/SubjectAction";
          };
          console.log(newSubject);
          this.props.addSubject(newSubject,this.props.history);
+         if(this.props.addSubject.errors===404){
+             return <NotFound/>;
+         }
+         if (!(this.props.addSubject.errors === 500 || this.props.addCourse.errors === 401)) {
+             return <ServerError/>;
+         }
         }
     render() {
+
         return (
             <div className="addProjectTask">
         <div className="container">
