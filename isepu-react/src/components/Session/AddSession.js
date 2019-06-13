@@ -4,8 +4,6 @@ import PropTypes from"prop-types";
 import {connect} from "react-redux";
 import {addSession} from "../../actions/SessionAction";
 import {DatePicker} from "antd";
-import Moment from 'react-moment';
-import moment from 'moment';
 
 const {RangePicker} =DatePicker;
 

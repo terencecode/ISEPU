@@ -1,7 +1,16 @@
 import React, { Component } from 'react'
 import {Link} from "react-router-dom";
 import CourseItem from './cours/CourseItem';
- class Board extends Component {
+import {connect} from "react-redux";
+import PropTypes from 'prop-types';
+import {getHomework} from '../actions/HomeworkAction';
+
+class Board extends Component {
+
+    componentDidMount() {
+        this.props.getHomework();
+    }
+
     render() {
         return (
             <div className="container">
@@ -59,5 +68,11 @@ import CourseItem from './cours/CourseItem';
         );    
     }
 }
-
-export default Board;
+Board.propTypes={
+    getHomework:PropTypes.func.isRequired,
+    Homework: PropTypes.object.isRequired
+};
+const mapStateToProps =state => ({
+    Homework:state.Homework
+});
+export default connect(null,{getHomework}) (Board);

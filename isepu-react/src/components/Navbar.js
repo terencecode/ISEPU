@@ -28,7 +28,8 @@ class Navbar extends Component {
                 if (this.state.user.promo!== undefined) {
                     this.setState({
                         prof:true
-                    })
+                    });
+                    console.log(this.state);
                 }
 
             }).catch(error => {

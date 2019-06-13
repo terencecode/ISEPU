@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import {
   Route,
-  withRouter,
-  Switch, Redirect
+  Switch
 } from 'react-router-dom';
-
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from './components/Navbar';
@@ -26,6 +24,7 @@ import { Layout, notification } from 'antd';
 import UptadeSubject from "./components/matiere/UptadeSubject";
 import ListOfCourse from "./components/cours/ListOfCourse";
 import AddSession from "./components/Session/AddSession";
+import AddHomework from "./components/devoirs/AddHomework";
 const { Content } = Layout;
 class App extends Component{
 
@@ -120,10 +119,7 @@ handleLogin() {
           <Content className="app-content">
             <div className="container">
               <Switch>      
-                <Route exact path="/"
-                  render={(props) => <Board isAuthenticated={this.state.isAuthenticated}
-                      currentUser={this.state.currentUser} handleLogout={this.handleLogout} {...props} />}>
-                </Route>
+
                 <Route path="/login"
     render={(props) => <Login onLogin={this.handleLogin} {...props} />}/>
                 <Route path="/signup" component={Signup}></Route>
@@ -133,7 +129,10 @@ handleLogin() {
                 <Provider store={store}>
                 <Router>
                   <Route path="/Course" />
-
+                  <Route exact path="/"
+                         render={(props) => <Board isAuthenticated={this.state.isAuthenticated}
+                                                   currentUser={this.state.currentUser} handleLogout={this.handleLogout} {...props} />}>
+                  </Route>
                   <Route  path="/addSubject" component={AddSubject}/>
                   <Route  path="/Subject" component={ListOfSubject}/>
                   <Route  path="/Update/:id" component={UptadeSubject}/>
@@ -141,6 +140,7 @@ handleLogin() {
                 <Route path="/addCourse" component={AddCourse}/>
                 <Route path="/addSession/:courseName" component={AddSession}/>
                 <Route path="/listSession" component={ListOfSession}/>
+                <Route path="/AddHomework/:courseName/:sessionId" component={AddHomework}/>
 
                 </Router>
               </Provider>

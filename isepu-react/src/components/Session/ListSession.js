@@ -141,7 +141,7 @@ class ListOfSession extends Component {
 
                                                 <td>
                                                     <ButtonGroup>
-                                                        <Link className="btn btn-primary" to={`/addHomework/${item.courseName}`}>Ajouter un devoir</Link>
+                                                        <Link className="btn btn-primary" to={`/addHomework/${item.courseName}/${item.id}`}>Ajouter un devoir</Link>
 
                                                         <Button className="btn btn-danger" onClick={() => this.remove(item.id)}>Supprimer</Button>
 
