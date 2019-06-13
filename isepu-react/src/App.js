@@ -25,6 +25,7 @@ import UptadeSubject from "./components/matiere/UptadeSubject";
 import ListOfCourse from "./components/cours/ListOfCourse";
 import AddSession from "./components/Session/AddSession";
 import AddHomework from "./components/devoirs/AddHomework";
+import AddStudent from "./components/cours/AddStudent";
 const { Content } = Layout;
 class App extends Component{
 
@@ -142,7 +143,7 @@ handleLogin() {
                 <Route path="/addSession/:courseName" component={AddSession}/>
                 <Route path="/listSession" component={ListOfSession}/>
                 <Route path="/AddHomework/:courseName/:sessionId" component={AddHomework}/>
-
+                <Route path="/AddStudent/:courseName" component={AddStudent}/>
                 </Router>
               </Provider>
               </Switch>

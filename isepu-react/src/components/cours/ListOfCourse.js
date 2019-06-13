@@ -142,8 +142,8 @@ class ListOfCourse extends Component {
                                                 <td>
                                                     <ButtonGroup>
                                                         <Link className="btn btn-primary" to={`/addSession/${item.name}`}>Ajouter une session</Link>
+                                                        <Link className="btn btn-success" to={`/addStudent/${item.name}`}> Ajouter un eleve</Link>
 
-                                                        <Button className="btn btn-danger" onClick={() => this.remove(item.id)}>Delete</Button>
 
                                                         &nbsp;
                                                     </ButtonGroup>

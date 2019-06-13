@@ -93,6 +93,12 @@ export function getCourseOfUser(email) {
         method:'GET'
     })
 }
+export function getAllStudent(){
+    return request({
+        url:API_BASE_URL+"/student/all",
+        method:'GET'
+    })
+}
 export function getUserProfile() {
     return request({
         url: API_BASE_URL + "/user",
