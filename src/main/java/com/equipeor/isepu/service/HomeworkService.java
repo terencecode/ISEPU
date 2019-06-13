@@ -43,7 +43,7 @@ public class HomeworkService {
             Student currentStudent = student.get();
             List<HomeworkState> homeworkStates = homeworkStateRepository.findAllByStudentId(currentStudent.getId());
             return new HomeworkStateToHomeworkResponseConverter(false).createFromEntities(homeworkStates);
-        } else throw new UserNotFoundException();
+        } else throw new UserNotFoundException("The user doesn't seem to be a student");
     }
 
     public URI addHomework(AddHomeworkRequest homeworkRequest, UserPrincipal userPrincipal) {
