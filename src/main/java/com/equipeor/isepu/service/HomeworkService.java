@@ -2,6 +2,7 @@ package com.equipeor.isepu.service;
 
 import com.equipeor.isepu.configuration.UserPrincipal;
 import com.equipeor.isepu.converter.HomeworkStateToHomeworkResponseConverter;
+import com.equipeor.isepu.converter.HomeworkToHomeworkResponseConverter;
 import com.equipeor.isepu.exception.ProfessorNotFoundException;
 import com.equipeor.isepu.exception.UserNotFoundException;
 import com.equipeor.isepu.model.*;
@@ -39,10 +40,20 @@ public class HomeworkService {
 
     public Collection<HomeworkResponse> getCurrentUserHomeWorks(UserPrincipal userPrincipal) {
         Optional<Student> student = studentRepository.findById(userPrincipal.getId());
+        Optional<Professor> professor = professorRepository.findById(userPrincipal.getId());
         if (student.isPresent()) {
             Student currentStudent = student.get();
             List<HomeworkState> homeworkStates = homeworkStateRepository.findAllByStudentId(currentStudent.getId());
             return new HomeworkStateToHomeworkResponseConverter(false).createFromEntities(homeworkStates);
+        } else if (professor.isPresent()) {
+            Professor currentProfessor = professor.get();
+            List<Homework> homeworks = new ArrayList<>();
+            for (Course course : currentProfessor.getCourses()) {
+                for (Session session : course.getSessions()) {
+                    homeworks.addAll(session.getHomeworks());
+                }
+            }
+            return new HomeworkToHomeworkResponseConverter(false).createFromEntities(homeworks);
         } else throw new UserNotFoundException("The user doesn't seem to be a student");
     }
 

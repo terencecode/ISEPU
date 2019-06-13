@@ -11,7 +11,7 @@ public class HomeworkToHomeworkResponseConverter extends OneWayConverter<Homewor
                 return null;
             }
             return includeSession ?  new HomeworkResponse(homework.getId(), homework.getDescription(),
-                    new SessionToSessionResponseConverter(false).convertFromEntity(homework.getSession())) :
+                    new SessionToSessionResponseConverter(false, true).convertFromEntity(homework.getSession())) :
                     new HomeworkResponse(homework.getId(), homework.getDescription());
         });
     }

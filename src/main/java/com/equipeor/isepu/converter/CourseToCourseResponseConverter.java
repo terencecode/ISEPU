@@ -26,7 +26,7 @@ public class CourseToCourseResponseConverter extends OneWayConverter<CourseRespo
             UserResponse professorResponse = professorConverter.convertFromEntity(professor);
 
             return includeSessions ? new CourseResponse(name, description, subjectResponse, professorResponse) :
-                    new CourseResponse(name, description, subjectResponse, professorResponse, new SessionToSessionResponseConverter(true).createFromEntities(course.getSessions()));
+                    new CourseResponse(name, description, subjectResponse, professorResponse, new SessionToSessionResponseConverter(true, false).createFromEntities(course.getSessions()));
         });
     }
 }

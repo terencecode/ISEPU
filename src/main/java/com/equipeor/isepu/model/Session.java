@@ -22,7 +22,7 @@ public class Session {
     private Course course;
 
     @OneToMany(mappedBy = "session")
-    private Set<Homework> homework;
+    private Set<Homework> homeworks;
 
     public Session() {}
 
@@ -60,11 +60,11 @@ public class Session {
         this.course = course;
     }
 
-    public Set<Homework> getHomework() {
-        return homework;
+    public Set<Homework> getHomeworks() {
+        return homeworks;
     }
 
-    public void setHomework(Set<Homework> homework) {
-        this.homework = homework;
+    public void setHomeworks(Set<Homework> homeworks) {
+        this.homeworks = homeworks;
     }
 }

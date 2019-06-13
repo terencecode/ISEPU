@@ -30,6 +30,13 @@ public class HomeworkResponse {
         this.session = session;
     }
 
+    public HomeworkResponse(Long id, String description, String status, SessionResponse session) {
+        this.id = id;
+        this.description = description;
+        this.status = status;
+        this.session = session;
+    }
+
     public Long getId() {
         return id;
     }

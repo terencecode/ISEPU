@@ -5,13 +5,19 @@ import com.equipeor.isepu.payload.response.SessionResponse;
 import com.equipeor.isepu.utils.converter.OneWayConverter;
 
 public class SessionToSessionResponseConverter extends OneWayConverter<SessionResponse, Session> {
-    public SessionToSessionResponseConverter(boolean includeHomeworks) {
+    public SessionToSessionResponseConverter(boolean includeHomeworks, boolean includeCourse) {
         super(session -> {
             if (session == null) {
                 return null;
             }
-            return includeHomeworks ? new SessionResponse(session.getId(), session.getStartingTime(), session.getFinishingTime(), session.getCourse().getName(), new HomeworkToHomeworkResponseConverter(false) .createFromEntities(session.getHomework())) :
-                    new SessionResponse(session.getId(), session.getStartingTime(), session.getFinishingTime(), session.getCourse().getName());
+            SessionResponse response = new SessionResponse(session.getId(), session.getStartingTime(), session.getFinishingTime());
+            if (includeHomeworks) {
+                response.setHomeworks(new HomeworkToHomeworkResponseConverter(false).createFromEntities(session.getHomeworks()));
+            }
+            if (includeCourse) {
+                response.setCourse(new CourseToCourseResponseConverter(false).convertFromEntity(session.getCourse()));
+            }
+            return response;
         });
     }
 }
