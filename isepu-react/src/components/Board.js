@@ -12,6 +12,26 @@ class Board extends Component {
     }
 
     render() {
+       /* const {sessions}=this.props.Sessions;
+        let BoardContent;
+        let todoItems=[];
+        let inProgressItems =[];
+        let doneItems=[];
+        const BoardAlgorith = sessions => {
+            if (sessions.length<1){
+                return <div className="alert alert-info text-center" role="alert">
+                    No Sessions on this board
+                </div>
+            }else{
+                const homework=sessions.map( session =>{
+                   // <CourseItem key={session.id} session={session}/>
+                });
+                for(let i=0;i<sessions.length;i++){
+                    console.log(sessions[i]);
+                }
+
+            }
+        }*/
         return (
             <div className="container">
         <Link to="/addCourse" className="btn btn-primary mb-3">
@@ -70,9 +90,9 @@ class Board extends Component {
 }
 Board.propTypes={
     getHomework:PropTypes.func.isRequired,
-    Homeworks: PropTypes.object.isRequired
+    Sessions: PropTypes.object.isRequired
 };
 const mapStateToProps =state => ({
-    Homeworks:state.Homework
+    Sessions:state.Homework
 });
 export default connect(null,{getHomework}) (Board);

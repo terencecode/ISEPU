@@ -1,7 +1,7 @@
 import {GET_HOMEWORK} from "../actions/types";
 
 const initialState={
-    Homeworks:[]
+    Sessions:[]
 };
 
 export default function (state=initialState,action) {
@@ -10,7 +10,7 @@ export default function (state=initialState,action) {
         case GET_HOMEWORK:
             return {
                 ...state,
-                Homeworks:action.payload
+                Sessions:action.payload
             };
         default:
             return state;
