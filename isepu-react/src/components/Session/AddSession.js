@@ -4,6 +4,8 @@ import PropTypes from"prop-types";
 import {connect} from "react-redux";
 import {addSession} from "../../actions/SessionAction";
 import {DatePicker} from "antd";
+import NotFound from "../../common/NotFound";
+import ServerError from "../../common/ServerError";
 
 const {RangePicker} =DatePicker;
 
@@ -38,8 +40,13 @@ class AddSession extends Component {
             startingTime:this.state.startingTime,
             finishingTime:this.state.finishingTime
         };
-        console.log(newSession);
         this.props.addSession(newSession,this.props.history);
+        if(this.props.addSession.errors===404){
+            return <NotFound/>;
+        }
+        if (!(this.props.addSession.errors === 500 || this.props.addSession.errors === 401||this.props.addSession.errors===403)) {
+            return <ServerError/>;
+        }
     }
     render() {
         return (

@@ -11,31 +11,45 @@ class Board extends Component {
         this.props.getHomework();
     }
 
+
+
     render() {
-       /* const {sessions}=this.props.Sessions;
+
+        const devoirs = this.props.Homeworks;
         let BoardContent;
-        let todoItems=[];
-        let inProgressItems =[];
-        let doneItems=[];
-        const BoardAlgorith = sessions => {
-            if (sessions.length<1){
+        let todoItems = [];
+        let inProgressItems = [];
+        let doneItems = [];
+
+
+       function BoardAlgorith(){
+            if (devoirs.length < 1) {
                 return <div className="alert alert-info text-center" role="alert">
                     No Sessions on this board
                 </div>
-            }else{
-                const homework=sessions.map( session =>{
-                   // <CourseItem key={session.id} session={session}/>
+            } else {
+                const task = devoirs.map(homeworks => {
+                     //<CourseItem key={homeworks.id}/>
                 });
-                for(let i=0;i<sessions.length;i++){
-                    console.log(sessions[i]);
+                for (let i = 0; i < task.length; i++) {
+                    if (task[i].props.Homework.status === "TO DO") {
+                        todoItems.push(task[i]);
+                    }
+                    if (task[i].props.Homework.status === "IN PROGRESS") {
+                        inProgressItems.push(task[i]);
+                    }
+                    if (task[i].props.Homework.status === "DONE") {
+                        doneItems.push(task[i]);
+                    }
                 }
 
             }
-        }*/
+        }
+
         return (
             <div className="container">
-        <Link to="/addCourse" className="btn btn-primary mb-3">
-            <i className="fas fa-plus-circle"> Ajouter un devoir</i>
+        <Link to="/addCourse" className="btn btn-light mb-3">
+            Ajouter un devoir
         </Link>
         <br />
         <hr />
@@ -49,8 +63,10 @@ class Board extends Component {
                     </div>
 
                     {//<!-- SAMPLE PROJECT TASK STARTS HERE -->
+
                     }
-                    <CourseItem />
+                    {console.log(todoItems)}
+
                     {
                         //<!-- SAMPLE PROJECT TASK ENDS HERE -->
                     }
@@ -90,9 +106,9 @@ class Board extends Component {
 }
 Board.propTypes={
     getHomework:PropTypes.func.isRequired,
-    Sessions: PropTypes.object.isRequired
+    Homeworks: PropTypes.object.isRequired
 };
 const mapStateToProps =state => ({
-    Sessions:state.Homework
+    Homework:state.Homeworks
 });
 export default connect(null,{getHomework}) (Board);

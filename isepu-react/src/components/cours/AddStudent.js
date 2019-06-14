@@ -121,7 +121,7 @@ class AddStudent extends Component {
                             <Link to="/" className="btn btn-light">
                                 Retour Acceuil
                             </Link>
-                            <h4 className="display-4 text-center">Ajouter un devoir pour le cours de {this.props.match.params.courseName}</h4>
+                            <h4 className="display-4 text-center">Ajouter un Eleve(email) au cours de {this.props.match.params.courseName}</h4>
                             <form onSubmit={this.onSubmit}>
 
                                 <div className="form-group">

@@ -41,7 +41,6 @@ class ListOfCourse extends Component {
                                 this.setState({
                                     data: result
                                 });
-                                console.log(this.state.data);
 ;                            }
                         );
 
@@ -72,7 +71,6 @@ class ListOfCourse extends Component {
 
 
         this.loadUserProfile();
-        console.log(this.state);
 
 
 
@@ -92,7 +90,6 @@ class ListOfCourse extends Component {
     }
 
     render() {
-       console.log(this.state.user);
 
         if(this.state.isLoading) {
             return <LoadingIndicator />;

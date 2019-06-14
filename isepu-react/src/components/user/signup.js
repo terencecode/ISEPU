@@ -107,13 +107,13 @@ class Signup extends Component {
         signupEleve(signupRequestEleve)
             .then(response => {
                 notification.success({
-                    message: 'Polling App',
+                    message: 'ISEPU',
                     description: "Thank you! You're successfully registered. Please Login to continue!",
                 });
                 this.props.history.push("/login");
             }).catch(error => {
             notification.error({
-                message: 'Polling App',
+                message: 'ISEPU',
                 description: error.message || 'Sorry! Something went wrong. Please try again!'
             });
         });

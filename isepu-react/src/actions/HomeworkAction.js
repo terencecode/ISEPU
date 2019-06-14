@@ -21,7 +21,7 @@ export const addHomework =(homework,history)=> async dispatch => {
 };
 
 export const getHomework = () => async dispatch => {
-    const res = await axios.get('http://localhost:8080/session/all',{headers:{Authorization:"Bearer "+ localStorage.getItem(ACCESS_TOKEN)}});
+    const res = await axios.get('http://localhost:8080/homework/all',{headers:{Authorization:"Bearer "+ localStorage.getItem(ACCESS_TOKEN)}});
     dispatch({
         type:GET_HOMEWORK,
         payload:res.data

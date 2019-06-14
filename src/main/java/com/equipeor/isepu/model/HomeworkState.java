@@ -21,6 +21,9 @@ public class HomeworkState {
     @JoinColumn(nullable = false)
     private  Student student;
 
+    public HomeworkState(){
+
+    }
     public HomeworkState(HomeworkStatus status, Homework homework, Student student) {
         this.status = status;
         this.homework = homework;

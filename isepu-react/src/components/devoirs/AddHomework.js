@@ -60,14 +60,7 @@ class AddHomework extends Component {
                                 <div className="form-group">
                                     <textarea className="form-control form-control-lg" placeholder="Description" value={this.state.description} name="description" onChange={this.onChange}/>
                                 </div>
-                                 <div className="form-group">
-                            <select className="form-control form-control-lg" name="status" value={this.state.status} onChange={this.onChange}>
-                                <option value="">Select Status</option>
-                                <option value={1}>TO DO</option>
-                                <option value={2}>IN PROGRESS</option>
-                                <option value={3}>DONE</option>
-                            </select>
-                        </div>
+
                                 <input type="submit" className="btn btn-primary btn-block mt-4" />
                             </form>
                         </div>

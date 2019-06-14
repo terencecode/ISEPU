@@ -17,7 +17,7 @@ class ListOfSession extends Component {
         };
         this.headers = [
 
-            {key: 'courseName', label: 'Nom du cours'},
+            {key: 'name', label: 'Nom du cours'},
             {key: 'startingTime', label: 'Debut de la session'},
             {key: 'finishingTime', label: 'Fin de la session'}
         ];
@@ -44,6 +44,7 @@ class ListOfSession extends Component {
                         });
                     }
                     );
+                console.log(this.state.data);
 
             }).catch(error => {
             if(error.status === 404) {
@@ -135,13 +136,13 @@ class ListOfSession extends Component {
                                     this.state.data.map(function(item, key) {
                                         return (
                                             <tr key = {key}>
-                                                <td>{item.courseName}</td>
+                                                <td>{item.course.name}</td>
                                                 <td><Moment format="DD/MM/YYYY" date={item.startingTime}/></td>
                                                 <td><Moment format="DD/MM/YYYY" date={item.finishingTime}/></td>
 
                                                 <td>
                                                     <ButtonGroup>
-                                                        <Link className="btn btn-primary" to={`/addHomework/${item.courseName}/${item.id}`}>Ajouter un devoir</Link>
+                                                        <Link className="btn btn-primary" to={`/addHomework/${item.course.name}/${item.id}`}>Ajouter un devoir</Link>
 
                                                         <Button className="btn btn-danger" onClick={() => this.remove(item.id)}>Supprimer</Button>
 
