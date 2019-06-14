@@ -78,6 +78,7 @@ public class HomeworkService {
                             homework.setHomeworkStates(homeworkStates);
                             homeworkRepository.save(homework);
                             homeworkRepository.flush();
+                            homeworkStateRepository.saveAll(homeworkStates);
                             return ServletUriComponentsBuilder
                                     .fromCurrentRequest()
                                     .path("/{id}")
