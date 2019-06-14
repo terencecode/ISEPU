@@ -35,7 +35,7 @@ class ListOfCourse extends Component {
                         user: response,
                         isLoading: false
                     });
-                    getCourseOfUser(this.state.user.email)
+                    getCourseOfUser()
                         .then(result => {
 
                                 this.setState({

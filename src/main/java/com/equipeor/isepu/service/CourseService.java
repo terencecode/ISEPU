@@ -25,7 +25,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class CourseService {
@@ -104,7 +106,12 @@ public class CourseService {
             Optional<Course> course =  courseRepository.findByName(registerStudentRequest.getCourseName());
             if (course.isPresent()) {
                 Course currentCourse = course.get();
-                currentCourse.setStudents(studentRepository.findAllByEmailIn(registerStudentRequest.getStudentEmails()));
+                Set<Student> students = studentRepository.findAllByEmailIn(registerStudentRequest.getStudentEmails());
+                currentCourse.setStudents(students);
+                for (Student student : students) {
+                    student.addCourse(currentCourse);
+                    studentRepository.save(student);
+                }
                 courseRepository.save(currentCourse);
             } else throw new CourseNotFoundException();
         } else throw new ProfessorNotFoundException("The current user doesn't seem to be a professor");

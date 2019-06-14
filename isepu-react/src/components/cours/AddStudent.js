@@ -6,7 +6,9 @@ import {addStudent} from "../../actions/CourseAction";
 import NotFound from '../../common/NotFound';
 import ServerError from '../../common/ServerError';
 import {getAllStudent,  getUserProfile} from "../../utils/APIUtils";
-
+import {Select} from "antd";
+import TextInput from 'react-autocomplete-input';
+import Input from "antd/es/input";
 class AddStudent extends Component {
     constructor() {
         super();
@@ -15,13 +17,13 @@ class AddStudent extends Component {
             studentEmails: "",
             data: [],
             user:null,
-            isLoading:false
+            isLoading:false,
+            selectedOption:''
 
 
         };
         this.headers=[
             {key:"firstName",label:"Name"},
-            {key:"lastName",label:"last name"}
 
         ];
         this.onChange = this.onChange.bind(this);
@@ -85,23 +87,26 @@ class AddStudent extends Component {
         }
 
     onChange(e){
-        this.setState({[e.target.name]:e.target.value})
+      
+            this.setState({[e.target.name]:e.target.value})
+
     }
+
 
     onSubmit(e){
         e.preventDefault();
         const newCourse={
             courseName:this.props.match.params.courseName,
-            studentEmails: this.state.studentEmails
+            studentEmails: [this.state.studentEmails]
 
 
         };
 
-        this.props.addHomework(newCourse,this.props.history);
-        if(this.props.addHomework.errors===404){
+        this.props.addStudent(newCourse,this.props.history);
+        if(this.props.addStudent.errors===404){
             return <NotFound/>;
         }
-        if (!(this.props.addHomework.errors === 500 || this.props.addHomework.errors === 401)) {
+        if (!(this.props.addStudent.errors === 500 || this.props.addStudent.errors === 401)) {
             return <ServerError/>;
         }
     }
@@ -121,9 +126,9 @@ class AddStudent extends Component {
 
                                 <div className="form-group">
 
-                                    <select className="form-control form-control-lg" name="status" value={this.state.studentEmails} onChange={this.onChange}>
-                                        {this.state.data.map((key,item)=><option key={key} value={item.email}>{item.firstName}</option>)}
-                                    </select>
+                                    <input className="form-control form-control-lg" name="studentEmails" value={this.state.studentEmails} onChange={this.onChange}
+                                    />
+
                                 </div>
                                 <input type="submit" className="btn btn-primary btn-block mt-4" />
                             </form>

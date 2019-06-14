@@ -7,18 +7,19 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
+    "moment": "latest",
     "react": "^16.8.6",
+    "react-autocomplete-input": "^1.0.10",
     "react-bootstrap": "^1.0.0-beta.8",
     "react-dom": "^16.8.6",
+    "react-moment": "latest",
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
     "reactstrap": "^8.0.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "typescript": "^3.4.5",
-    "react-moment": "latest",
-    "moment": "latest"
+    "typescript": "^3.4.5"
   },
   "scripts": {
     "start": "react-scripts start",

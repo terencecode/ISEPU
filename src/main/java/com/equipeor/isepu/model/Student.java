@@ -39,4 +39,8 @@ public class Student extends User {
     public void setCourses(Collection<Course> courses) {
         this.courses = courses;
     }
+
+    public void addCourse(Course course) {
+        this.courses.add(course);
+    }
 }

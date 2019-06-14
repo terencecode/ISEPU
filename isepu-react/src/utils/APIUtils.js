@@ -87,9 +87,9 @@ export function getCurrentUser() {
         method: 'GET'
     });
 }
-export function getCourseOfUser(email) {
+export function getCourseOfUser() {
     return request({
-        url:API_BASE_URL+"/course/all/email/"+email,
+        url:API_BASE_URL+"/course/user",
         method:'GET'
     })
 }
