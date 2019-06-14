@@ -44,7 +44,7 @@ public class HomeworkService {
         if (student.isPresent()) {
             Student currentStudent = student.get();
             List<HomeworkState> homeworkStates = homeworkStateRepository.findAllByStudentId(currentStudent.getId());
-            return new HomeworkStateToHomeworkResponseConverter(false).createFromEntities(homeworkStates);
+            return new HomeworkStateToHomeworkResponseConverter(true).createFromEntities(homeworkStates);
         } else if (professor.isPresent()) {
             Professor currentProfessor = professor.get();
             List<Homework> homeworks = new ArrayList<>();
@@ -53,7 +53,7 @@ public class HomeworkService {
                     homeworks.addAll(session.getHomeworks());
                 }
             }
-            return new HomeworkToHomeworkResponseConverter(false).createFromEntities(homeworks);
+            return new HomeworkToHomeworkResponseConverter(true).createFromEntities(homeworks);
         } else throw new UserNotFoundException("The user doesn't seem to be a student");
     }
 
